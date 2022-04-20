@@ -1,3 +1,5 @@
+package practice;
+
 //循环示例
 public class Loopy {
     public static void main(String[] args) {

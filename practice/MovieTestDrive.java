@@ -1,3 +1,5 @@
+package practice;
+
 class Movie {
 
     String title;

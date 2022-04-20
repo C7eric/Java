@@ -1,3 +1,5 @@
+package practice;
+
 import java.util.Scanner; //表示把 java.util 下的 Scanner 类 导入
 
 public class Input {
@@ -18,6 +20,6 @@ public class Input {
         double mySalary = myScanner.nextDouble(); // 接受用户输入
         System.out.println("人的信息如下");
         System.out.println("name = " + myName + "age = " + myAge + "薪资 = " + mySalary);
-
+        myScanner.close();
     }
 }

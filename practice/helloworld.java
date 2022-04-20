@@ -1,3 +1,4 @@
+package practice;
 
 //第一个Java程序
 //1.public class helloworld 表示hello是一个类,是一个public【共有】的类

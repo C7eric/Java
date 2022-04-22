@@ -1,4 +1,4 @@
-package projects;
+package Java.projects;
 
 public class SimpleDotComTestDrive {
     public static void main(String[] args) {

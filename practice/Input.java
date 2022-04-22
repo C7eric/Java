@@ -1,4 +1,4 @@
-package practice;
+package Java.practice;
 
 import java.util.Scanner; //表示把 java.util 下的 Scanner 类 导入
 

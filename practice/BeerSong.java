@@ -1,4 +1,4 @@
-package practice;
+package Java.practice;
 
 public class BeerSong {
 

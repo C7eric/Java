@@ -1,4 +1,4 @@
-package practice;
+package Java.practice;
 
 //循环示例
 public class Loopy {

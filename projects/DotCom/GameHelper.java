@@ -1,4 +1,4 @@
-package DotCom;
+package Java.projects.DotCom;
 
 import java.io.*;
 import java.util.*;

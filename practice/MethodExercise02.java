@@ -1,5 +1,8 @@
 package Java.practice;
 
+/**
+ * @author CSQ-PC
+ */
 public class MethodExercise02 {
 
      public static void main(String[] args) {

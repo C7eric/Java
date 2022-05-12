@@ -10,6 +10,9 @@ public class Encapsulation01 {
         Person obj = new Person();
         obj.setName("sdsadasdsad");
         obj.setAge(177);
+        Person person02 = new Person("CSQ",19,500000);
+        System.out.println("---------------------");
+        System.out.println(person02.info());
     }
 }
 
@@ -29,6 +32,17 @@ public class Encapsulation01 {
 
         public int getAge() {
             return age;
+        }
+        public Person (){}
+
+        public Person(String name, int age, double salary) {
+//            this.name = name;
+//            this.age = age;
+//            this.salary = salary;
+            //我们可以将set方法写在构造器中，这样仍然可以验证
+            setAge(age);
+            setName(name);
+            setSalary(salary);
         }
 
         public void setAge(int age) {
@@ -56,6 +70,6 @@ public class Encapsulation01 {
         }
 
         public String info() {
-            return name + "为" + age + "岁" + "月薪为" + salary;
+            return "信息为 name=" + name + " age=" + age + "薪水=" + salary;
         }
     }

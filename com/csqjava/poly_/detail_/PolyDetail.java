@@ -22,7 +22,7 @@ public class PolyDetail {
         animal.show();
         animal.sleep();
         System.out.println("____________________________");
-        
+
         /**
          * 希望调用Cat 的 catchMouse 方法
          * 多态的向下转型

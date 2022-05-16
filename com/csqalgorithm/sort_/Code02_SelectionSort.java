@@ -1,6 +1,6 @@
 package Java.com.csqalgorithm.sort_;
 
-public class SelectionSort {
+public class Code02_SelectionSort {
     public static void selectionSort(int[] arr){
 
         if(arr == null || arr.length < 2){

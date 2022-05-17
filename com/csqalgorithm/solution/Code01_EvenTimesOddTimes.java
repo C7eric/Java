@@ -1,6 +1,6 @@
 package Java.com.csqalgorithm.solution;
 
-public class Code_EvenTimesOddTimes {
+public class Code01_EvenTimesOddTimes {
     public static void printOddTimesNum1(int[] arr){
 
         int eor = 0;

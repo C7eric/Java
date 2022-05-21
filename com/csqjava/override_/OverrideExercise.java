@@ -42,6 +42,7 @@ class Student extends Person{
         this.id = id;
         this.score = score;
     }
+    @Override
     public String say(){
         return super.say() + "ID:" + id + "分数" + score;
     }

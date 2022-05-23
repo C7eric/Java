@@ -1,4 +1,4 @@
-package Java.homeworks;
+package Java.com.csqhomeworks;
 
 public class Homework01 {
     public static void main(String[] args){

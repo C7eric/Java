@@ -28,7 +28,9 @@ public class Utility {
             if (c != '1' && c != '2' &&
                     c != '3' && c != '4' && c != '5') {
                 System.out.print("选择错误，请重新输入：");
-            } else break;
+            } else {
+                break;
+            }
         }
         return c;
     }
@@ -158,8 +160,11 @@ public class Utility {
 
             //如果line.length=0, 即用户没有输入任何内容，直接回车
             if (line.length() == 0) {
-                if (blankReturn) return line;//如果blankReturn=true,可以返回空串
-                else continue; //如果blankReturn=false,不接受空串，必须输入内容
+                if (blankReturn) {
+                    return line;//如果blankReturn=true,可以返回空串
+                } else {
+                    continue; //如果blankReturn=false,不接受空串，必须输入内容
+                }
             }
 
             //如果用户输入的内容大于了 limit，就提示重写输入

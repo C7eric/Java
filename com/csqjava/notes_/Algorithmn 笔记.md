@@ -406,6 +406,24 @@ public static void heapSort(int[] arr){
 
 
 
+### **排序总结**
+
+|      | 时间复杂度 | 空间复杂度 | 稳定性 |
+| ---- | ---------- | ---------- | ------ |
+| 选择 | O(N^2)     | O(1)       | X      |
+| 冒泡 | O(N^2)     | O(1)       | ✓      |
+| 插入 | O(N^2)     | O()        | ✓      |
+| 归并 | O(N*logN)  | O(N)       | ✓      |
+| 快排 | O(N*logN)  | O(logN)    | X      |
+| 堆   | O(N*logN)  | O(1)       | X      |
+|      |            |            |        |
+|      |            |            |        |
+|      |            |            |        |
+
+> 1.基于比较的排序算法，时间复杂度在 O(N*logN)  以下的： **没有**
+>
+> 2.时间复杂度在  O(N*logN)  ，空间复杂度在 O(N)  以下，且有稳定性的排序算法 ： **没有**
+
 
 
 
@@ -571,3 +589,175 @@ PriorityQueue<Integer> heap = new Priority<>();
 > > > }
 > > > ```
 
+
+
+
+
+
+
+### **哈希表**
+
+> UnOrderedMap  UnSortedMap  -> C++
+>
+> **HashMap 在使用层面上可以理解为一种集合结构**
+>
+> **HsahMap 在使用过程（CRUD）中时间复杂度认为为常数级别**
+
+> **HashSet**
+>
+> >  有 key  无  value
+> >
+> > hashSet 的 key 是基础类型 -> int 类型
+> >
+> > ```java
+> > HashSet<String> hashSet1 = new HashSet<>();
+> > ```
+> >
+> > 
+> >
+> > ```java
+> > hashSet1.add("csq");
+> > ```
+> >
+> > > **hashSet.add();**  向 HashSet 中添加 csq
+> >
+> > ```java
+> > hashSet.cantains();
+> > ```
+> >
+> > > **hashSet.contains();**  确认 HashSet  中是否有 csq
+> >
+> > ```java
+> > hashSet.remove():
+> > ```
+> >
+> > > 移除 HashSet 中的 csq
+> >
+> > 
+>
+>   
+>
+> **HashMap**
+>
+> > key 伴随 value 
+> >
+> > ```java
+> > HashMap<Integer,String> hashMap = new HashMap<>();
+> > ```
+> >
+> > 
+> >
+> > ```java
+> > hashMap.put(1,"this is 1");
+> > ```
+> >
+> > > 向 HashMap 中添加 key = 1 ,String =  "this is 1" ;
+> >
+> > ```java
+> > hashMap1.get(1);
+> > ```
+> >
+> > > 获取 key =  1 ，get  **@return String**
+> >
+> > ```java
+> > System.out.println(hashMap1.containsKey(1));
+> > ```
+> >
+> > > **hashMap1.containsKey(1**) : 确认是否有 key = 1 的键值对， **@return boolean**
+
+
+
+
+
+### **有序表**
+
+
+
+> ```java
+> TreeSet<Integer> treeSet1 = new TreeSet<>(); 
+> ```
+>
+> TreeSet 的 CRUD 操作 的时间复杂度为 O(logn) 
+>
+> > 放入有序表中的东西，如果是基础类型，内部按值传递，内存占用就是这个东西的大小
+> >
+> > 放入有序表中的东西，如果不是基础类型，必须提供 比较器 ，内部按引用传递，内存占用是这个东西内存地址的大小
+> >
+> > > ``` java
+> > > treeSet = new TreeSet<>(new Comparator());
+> > > ```
+> > >
+> > > > **提供比较器**
+> > >
+> > >  
+> > >
+> > > ```java
+> > > System.out.println(treeMap.firstKey());
+> > > ```
+> > >
+> > > > 
+> > >
+> > > ```java
+> > > System.out.println(treeMap.lastKey());
+> > > ```
+> > >
+> > > > 
+> > >
+> > > ```java
+> > > System.out.println(treeMap.floorKey(4));
+> > > ```
+> > >
+> > > > 
+> > >
+> > > ```java
+> > > System.out.println(treeMap.ceilingKey(4));
+> > > ```
+> > >
+> > > >  
+> > > >
+> > > > 
+
+
+
+
+
+
+
+
+
+### **链表**
+
+> **单链表和双链表结构只需要给定一个头部节点 head , 就可以找到剩下的所有节点**
+
+
+
+> **单链表的节点结构**
+>
+> ```java
+> class Node<V>{
+>     
+>     V value;
+>     Node next;
+> }
+> ```
+>
+> > **由以上结构的结点依次连接起来所形成的链叫做单链表**
+
+
+
+> **双链表的节点结构**
+>
+> ```java
+> class Node<V>{
+>     
+>     V value;
+>     Node next;
+>     Node last;
+> }
+> ```
+>
+> > **由以上结构的节点依次连接起来所形成的链叫做双链表**
+> >
+> > 
+> >
+> > 

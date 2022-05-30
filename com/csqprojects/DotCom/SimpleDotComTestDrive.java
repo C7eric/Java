@@ -1,4 +1,4 @@
-//package Java.projects.DotCom;
+//package Java.com.csqprojects.DotCom;
 //
 //public class SimpleDotComTestDrive {
 //    public static void main(String[] args) {

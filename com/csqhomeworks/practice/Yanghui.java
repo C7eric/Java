@@ -1,4 +1,4 @@
-package Java.practice;
+package Java.com.csqhomeworks.practice;
 
 /**
  * @author CSQ-PC

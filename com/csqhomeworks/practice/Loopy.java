@@ -1,4 +1,4 @@
-package Java.practice;
+package Java.com.csqhomeworks.practice;
 
 //循环示例
 public class Loopy {

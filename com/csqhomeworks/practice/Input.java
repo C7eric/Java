@@ -1,4 +1,4 @@
-package Java.practice;
+package Java.com.csqhomeworks.practice;
 
 import java.util.Scanner; //表示把 java.util 下的 Scanner 类 导入
 

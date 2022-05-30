@@ -1,4 +1,4 @@
-package Java.projects.DotCom;
+package Java.com.csqprojects.DotCom;
 
 import java.io.*;
 import java.util.*;

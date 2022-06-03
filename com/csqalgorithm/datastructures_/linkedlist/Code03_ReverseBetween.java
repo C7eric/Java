@@ -1,4 +1,4 @@
-package Java.com.csqalgorithm.datastructures_.linklist_;
+package Java.com.csqalgorithm.datastructures_.linkedlist;
 
 /*
 给你单链表的头指针 head
@@ -8,17 +8,18 @@ package Java.com.csqalgorithm.datastructures_.linklist_;
  */
 
 
-public  class Node {
-    public int value;
-    public Node next;
 
-    public Node(int value) {
-        this.value = value;
-    }
 
 public class Code03_ReverseBetween {
 
-        public  Node reverseBetween(Node head) {
+    public class Node {
+        public int value;
+        public Node next;
+
+        public Node(int value) {
+            this.value = value;
+        }
+        public  Node reverseBetween(Node head,int left,int right) {
             Node dummyNode = new Node(-1);
             dummyNode.next = head;
 

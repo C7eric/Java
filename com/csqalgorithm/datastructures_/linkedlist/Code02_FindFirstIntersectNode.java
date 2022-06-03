@@ -1,4 +1,4 @@
-package Java.com.csqalgorithm.datastructures_.linklist_;
+package Java.com.csqalgorithm.datastructures_.linkedlist;
 
 public class Code02_FindFirstIntersectNode {
 

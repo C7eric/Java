@@ -596,14 +596,14 @@
 > >    ```java
 > >    class GirlFriend {
 > >        private String name;
-> >        
+> >           
 > >        // 为了能够在静态方法中返回 gf 对象，需要将其修饰为 static 
 > >        private static GirlFriend gf = new GirlFriend("q");
-> >        
+> >           
 > >        private GirlFriend(String name){
 > >            this.name = name;
 > >        }
-> >        
+> >           
 > >        // 提供一个公共的 static 方法，返回 gf 对象
 > >        public static GirlFriend getInstance(){
 > >            return gf;
@@ -632,17 +632,17 @@
 > >    ```java
 > >    class Cat{
 > >        private String name;
-> >        
+> >           
 > >        private static Cat cat;
 > >        private Cat(String name){
 > >            this.name = name;
 > >        }
-> >        
+> >           
 > >        public static Cat(){
 > >            if(cat == null){
 > >                cat = new Cat("xx");
 > >            }
-> >            
+> >               
 > >            return cat;
 > >        }
 > >    }

@@ -621,7 +621,7 @@ PriorityQueue<Integer> heap = new Priority<>();
 
 
 
-### **哈希表**
+## **哈希表**
 
 > UnOrderedMap  UnSortedMap  -> C++
 >
@@ -695,7 +695,7 @@ PriorityQueue<Integer> heap = new Priority<>();
 
 
 
-### **有序表**
+## **有序表**
 
 
 
@@ -751,13 +751,13 @@ PriorityQueue<Integer> heap = new Priority<>();
 
 
 
-### **链表**
+## **链表**
 
 > **单链表和双链表结构只需要给定一个头部节点 head , 就可以找到剩下的所有节点**
 
 
 
-> **单链表的节点结构**
+> ### **单链表的节点结构**
 >
 > ---
 >
@@ -773,7 +773,7 @@ PriorityQueue<Integer> heap = new Priority<>();
 
 
 
-> **双链表的节点结构**
+> ### **双链表的节点结构**
 >
 > ---
 >
@@ -794,7 +794,7 @@ PriorityQueue<Integer> heap = new Priority<>();
 
 
 
-> **链表中点求法**
+> ### **链表中点求法**
 >
 > ---
 >
@@ -864,7 +864,7 @@ PriorityQueue<Integer> heap = new Priority<>();
 
 
 
-> **找到链表第一个入环节点**
+> ### **找到链表第一个入环节点**
 >
 > ---
 >
@@ -904,7 +904,7 @@ PriorityQueue<Integer> heap = new Priority<>();
 
 
 
-> **找到两个链表第一个相交节点(无环)**
+> ### **找到两个链表第一个相交节点(无环)**
 >
 > ---
 >
@@ -979,7 +979,7 @@ PriorityQueue<Integer> heap = new Priority<>();
 
  
 
-> **找到两个链表的第一个相交节点（有环）**
+> ### **找到两个链表的第一个相交节点（有环）**
 >
 > ---
 >
@@ -1051,7 +1051,7 @@ PriorityQueue<Integer> heap = new Priority<>();
 
 
 
-> **反转从 left 到 right 区间内的链表**
+> ### **反转从 left 到 right 区间内的链表**
 >
 > ---
 >
@@ -1110,3 +1110,245 @@ PriorityQueue<Integer> heap = new Priority<>();
 > ```
 >
 > 
+
+
+
+> > ## **二叉树**
+>
+> **二叉树（binary tree） 是指树中节点的度不大于 2 的有序树，是一种最简单且最重要的树**
+>
+>  
+>
+> > **二叉树的属性**
+> >
+> > ---
+> >
+> > - **结点**：包含一个数据元素及若干指向子树分支的信息。
+> > - **结点的度**：一个结点拥有子树的数目称为结点的度。
+> > - **叶子结点**：也称为终端结点，没有子树的结点或者度为零的结点。
+> > - **分支结点**：也称为非终端结点，度不为零的结点称为非终端结点。
+> > - **树的度**：树中所有结点的度的最大值。
+> > - **结点的层次**：从根结点开始，假设根结点为第1层，根结点的子节点为第2层，依此类推，如果某一个结点位于第L层，则其子节点位于第L+1层。
+> > - **树的深度**：也称为树的高度，树中所有结点的层次最大值称为树的深度。
+> > - **有序树**：如果树中各棵子树的次序是有先后次序，则称该树为有序树。
+> > - **无序树**：如果树中各棵子树的次序没有先后次序，则称该树为无序树。
+>
+> 
+>
+> > **二叉树的节点结构**
+>
+> ---
+>
+> ```java
+> public static class Node {
+>     
+>     public int value;
+>     public Node left;
+>     public Node right;
+>     
+>     public Node(int value){
+>         this.value = value;
+>     }
+> }
+> ```
+>
+> > left 与 right 为树 的左右节点（左子树，右子树）
+>
+>   
+>
+> > **二叉树的遍历方式**
+> >
+> > ---
+> >
+> > - 前序遍历（根左右）： 访问根结点，再访问左子树、再访问右子树。
+> > - 中序遍历（左根右）： 先访问左子树，再访问根结点、再访问右子树。
+> > - 后序遍历（左右根）： 先访问左子树，再访问右子树，再访问根结点。
+>
+> 
+>
+> > **递归序**
+> >
+> > ---
+> >
+> > 1 2 4 4 4 2 5 5 5 2 1 3 6 6 6 3 7 7 7 3
+>
+> 
+>
+> > **二叉树的递归遍历**
+>
+> ---
+>
+> 1. **先序遍历**
+>
+>    访问根结点，再访问左子树、再访问右子树
+>
+>    > **递归遍历**
+>
+>    > ---
+>
+>    ```java
+>     /**
+>         *  先序打印所有节点
+>         * @param head  二叉树 head 节点
+>         */
+>        public static void prePrintNodes(Node head){
+>            if(head == null){
+>                return;
+>            }
+>    
+>            System.out.println(head.value);
+>            prePrintNodes(head.left);
+>            prePrintNodes(head.right);
+>        }
+>    ```
+>
+>    > **非递归遍历**
+>
+>    ---
+>
+>    > ```java
+>    > public static void pre(Node head) {
+>    >     System.out.print("pre-order: ");
+>    >     if (head != null) {
+>    >         Stack<Node> stack = new Stack<Node>();
+>    >         stack.add(head);
+>    >         while (!stack.isEmpty()) {
+>    >             head = stack.pop();
+>    >             System.out.print(head.value + " ");
+>    >             if (head.right != null) {
+>    >                 stack.push(head.right);
+>    >             }
+>    >             if (head.left != null) {
+>    >                 stack.push(head.left);
+>    >             }
+>    >         }
+>    >     }
+>    >     System.out.println();
+>    > }
+>    > ```
+>
+>    
+>
+> 2. **中序遍历**
+>
+>    先访问左子树，再访问根结点、再访问右子树
+>
+>    > **递归遍历**
+>
+>    ```java
+>    /**
+>     *  中序打印所有节点
+>     * @param head 二叉树 head 节点
+>     */
+>    public static void inPrintNodes(Node head){
+>        if(head == null){
+>            return;
+>        }
+>    
+>        inPrintNodes(head.left);
+>        System.out.println(head.value);
+>        inPrintNodes(head.right);
+>    }
+>    ```
+>
+>    > **非递归遍历**
+>
+>    ---
+>
+>    ```java
+>    public static void in(Node cur) {
+>        System.out.print("in-order: ");
+>        if (cur != null) {
+>            Stack<Node> stack = new Stack<Node>();
+>            while (!stack.isEmpty() || cur != null) {
+>                if (cur != null) {
+>                    stack.push(cur);
+>                    cur = cur.left;
+>                } else {
+>                    cur = stack.pop();
+>                    System.out.print(cur.value + " ");
+>                    cur = cur.right;
+>                }
+>            }
+>        }
+>        System.out.println();
+>    }
+>    ```
+>
+>     
+>
+> 3. **后序遍历**
+>
+>    先访问左子树，再访问右子树，再访问根结点
+>
+>    > **递归遍历**
+>
+>    ---
+>
+>    ```java
+>    /**
+>     *  后序打印所有节点
+>     * @param head 二叉树 head 节点
+>     */
+>    public static void posPrintNodes(Node head){
+>        if(head == null){
+>            return;
+>        }
+>    
+>        posPrintNodes(head.left);
+>        posPrintNodes(head.right);
+>        System.out.println(head.value);
+>    }
+>    ```
+>
+>    > **非递归遍历**
+>
+>    ---
+>
+>    ```java
+>    public static void pos1(Node head) {
+>        System.out.print("pos-order: ");
+>        if (head != null) {
+>            Stack<Node> s1 = new Stack<Node>();
+>            Stack<Node> s2 = new Stack<Node>();
+>            s1.push(head);
+>            while (!s1.isEmpty()) {
+>                head = s1.pop(); // 头 右 左
+>                s2.push(head);
+>                if (head.left != null) {
+>                    s1.push(head.left);
+>                }
+>                if (head.right != null) {
+>                    s1.push(head.right);
+>                }
+>            }
+>            // 左 右 头
+>            while (!s2.isEmpty()) {
+>                System.out.print(s2.pop().value + " ");
+>            }
+>        }
+>        System.out.println();
+>    }
+>    
+>    public static void pos2(Node h) {
+>        System.out.print("pos-order: ");
+>        if (h != null) {
+>            Stack<Node> stack = new Stack<Node>();
+>            stack.push(h);
+>            Node c = null;
+>            while (!stack.isEmpty()) {
+>                c = stack.peek();
+>                if (c.left != null && h != c.left && h != c.right) {
+>                    stack.push(c.left);
+>                } else if (c.right != null && h != c.right) {
+>                    stack.push(c.right);
+>                } else {
+>                    System.out.print(stack.pop().value + " ");
+>                    h = c;
+>                }
+>            }
+>        }
+>        System.out.println();
+>    }
+>    ```
+

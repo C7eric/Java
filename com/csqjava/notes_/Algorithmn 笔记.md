@@ -629,44 +629,46 @@ PriorityQueue<Integer> heap = new Priority<>();
 >
 > **HsahMap 在使用过程（CRUD）中时间复杂度认为为常数级别**
 
-> **HashSet**
->
+### **HashSet**
+
+---
+
 > >  有 key  无  value
+>>
+> >  hashSet 的 key 是基础类型 -> int 类型
 > >
-> > hashSet 的 key 是基础类型 -> int 类型
+> >  ```java
+> >  HashSet<String> hashSet1 = new HashSet<>();
+> >  ```
 > >
-> > ```java
-> > HashSet<String> hashSet1 = new HashSet<>();
-> > ```
+> >  
 > >
-> > 
+> >  ```java
+> >  hashSet1.add("csq");
+> >  ```
 > >
-> > ```java
-> > hashSet1.add("csq");
-> > ```
+> >  > **hashSet.add();**  向 HashSet 中添加 csq
 > >
-> > > **hashSet.add();**  向 HashSet 中添加 csq
+> >  ```java
+> >  hashSet.cantains();
+> >  ```
 > >
-> > ```java
-> > hashSet.cantains();
-> > ```
+> >  > **hashSet.contains();**  确认 HashSet  中是否有 csq
 > >
-> > > **hashSet.contains();**  确认 HashSet  中是否有 csq
+> >  ```java
+> >  hashSet.remove():
+> >  ```
 > >
-> > ```java
-> > hashSet.remove():
-> > ```
+> >  > 移除 HashSet 中的 csq
 > >
-> > > 移除 HashSet 中的 csq
-> >
-> > 
->
->   
->
-> **HashMap**
->
+> 
+
+
+
+### **HashMap**
+
 > > key 伴随 value 
-> >
+>>
 > > ```java
 > > HashMap<Integer,String> hashMap = new HashMap<>();
 > > ```
@@ -757,78 +759,78 @@ PriorityQueue<Integer> heap = new Priority<>();
 
 
 
-> ### **单链表的节点结构**
->
+### **1.单链表的节点结构**
+
 > ---
 >
 > ```java
-> class Node<V>{
+>class Node<V>{
 > 
->  V value;
->  Node next;
-> }
-> ```
->
+> V value;
+> Node next;
+>  }
+>  ```
+> 
 > > **由以上结构的结点依次连接起来所形成的链叫做单链表**
 
 
 
-> ### **双链表的节点结构**
->
+### **2.双链表的节点结构**
+
 > ---
 >
 > ```java
-> class Node<V>{
+>class Node<V>{
 > 
->  V value;
->  Node next;
+> V value;
+> Node next;
 >  Node last;
-> }
-> ```
->
+>  }
+>  ```
+> 
 > > **由以上结构的节点依次连接起来所形成的链叫做双链表**
-> >
+>>
 > > 
 > >
 > > 
 
 
 
-> ### **链表中点求法**
->
+### **3.链表中点求法**
+
 > ---
 >
 > ```java
-> public static class Node{
+>public static class Node{
 > 
->         public int value;
->         public Node next;
-> 
+>      public int value;
+>      public Node next;
+>    
 >         public Node(int v){
->             value = v;
+>          value = v;
 >         }
-> 
+>    
 >         public static Node midOrUpMidNode(Node head){
 > 
 >             if(head == null || head.next == null || head.next.next == null){
->                 return head;
+>              return head;
 >             }
-> 
+>    
 >             // 链表 有三个点或以上
->             Node slow = head.next;
+>          Node slow = head.next;
 >             Node fast = head.next.next;
 >             while(fast.next != null && fast.next.next != null){
-> 
+>    
 >                 slow = slow.next;
->                 fast = fast.next.next;
+>              fast = fast.next.next;
 >             }
 >             return slow;
 >         }
 >     }
-> ```
->
+>    ```
+>    
 > > 快慢指针
-> >
+>>
 > > ---
 > >
 > > ```java
@@ -837,11 +839,11 @@ PriorityQueue<Integer> heap = new Priority<>();
 > > ```
 > >
 > > > 慢指针一次走一步，快指针一次走两步，当 fast.next == null or fast.next.next == null 时 **慢指针 slow 到达中点**
->
+> 
 > 
 >
 > > **ArrayList**
-> >
+>>
 > > ---
 > >
 > > ```java
@@ -864,12 +866,12 @@ PriorityQueue<Integer> heap = new Priority<>();
 
 
 
-> ### **找到链表第一个入环节点**
->
+### **4.找到链表第一个入环节点**
+
 > ---
 >
 > ```java
-> /**
+>/**
 >      * 找到链表第一个入环节点，如果无环返回 null
 >      * @param head 链表头节点
 >      * @return 第一个入环节点
@@ -899,17 +901,17 @@ PriorityQueue<Integer> heap = new Priority<>();
 >         return slow;
 >     }
 > ```
->
+> 
 > 
 
 
 
-> ### **找到两个链表第一个相交节点(无环)**
->
+### **5.找到两个链表第一个相交节点(无环)**
+
 > ---
 >
 > ```java
-> /**
+>/**
 >      * 如果两个链表都无环，返回第一个相交节点
 >      *  如果不相交，返回 null
 >      * @param head1 链表 1 头节点
@@ -950,11 +952,11 @@ PriorityQueue<Integer> heap = new Priority<>();
 >         return cur1;
 >     }
 > ```
->
+> 
 > 
 >
 > > **n 表示链表长度 1 减去 链表长度 2 的值 **
-> >
+>>
 > > ```java
 > > 	int n = 0;
 > >     while(cur1.next != null){
@@ -966,11 +968,11 @@ PriorityQueue<Integer> heap = new Priority<>();
 > >         cur2 = cur2.next;
 > >     }
 > > ```
+> 
+> 
 >
->  
->
-> > ```java
-> > 	cur1 = n > 0 ? head1 :head2;
+>  > ```java
+>> 	cur1 = n > 0 ? head1 :head2;
 > >     cur2 = cur1 == head1 ? head2 : head1;
 > >     n = Math.abs(n);
 > > ```
@@ -979,12 +981,12 @@ PriorityQueue<Integer> heap = new Priority<>();
 
  
 
-> ### **找到两个链表的第一个相交节点（有环）**
->
+### **6.找到两个链表的第一个相交节点（有环）**
+
 > ---
 >
 > ```java
-> /**
+>/**
 >      *  两个有环链表，返回第一个相交节点
 >      *   如果不相交，返回 null
 >      * @param head1 第一个链表  头结点
@@ -1033,11 +1035,11 @@ PriorityQueue<Integer> heap = new Priority<>();
 > 
 >     }
 > ```
+> 
+> 
 >
->  
->
-> ```java
-> else {
+>  ```java
+>else {
 >             cur1 = loop1.next;
 >             while(cur1 != loop1){
 >                 if(cur1 == loop2){
@@ -1046,136 +1048,135 @@ PriorityQueue<Integer> heap = new Priority<>();
 >                 cur1 = cur1.next;
 >             }
 > ```
->
+> 
 > <img src="C:\Users\CSQ-PC\AppData\Roaming\Typora\typora-user-images\image-20220603172812285.png" alt="image-20220603172812285" style="zoom:15%;" />
 
+### 7.**反转从 left 到 right 区间内的链表**
 
-
-> ### **反转从 left 到 right 区间内的链表**
->
 > ---
 >
 > ```java
-> public  class Node {
->     public int value;
->     public Node next;
-> 
+>public  class Node {
+>  public int value;
+>  public Node next;
+>    
 >     public Node(int value) {
->         this.value = value;
+>      this.value = value;
 >     }
+>    
+>    public class Code03_ReverseBetween {
 > 
-> public class Code03_ReverseBetween {
-> 
->         public  Node reverseBetween(Node head) {
->             Node dummyNode = new Node(-1);
+>      public  Node reverseBetween(Node head) {
+>          Node dummyNode = new Node(-1);
 >             dummyNode.next = head;
-> 
+>    
 >             Node pre = dummyNode;
->             for (int i = 0; i < left - 1; i++) {
+>          for (int i = 0; i < left - 1; i++) {
 >                 pre = pre.next;
 >             }
-> 
+>    
 >             Node rightNode = pre;
->             for (int i = 0; i < right -1 ; i++) {
+>          for (int i = 0; i < right -1 ; i++) {
 >                 rightNode = rightNode.next;
 >             }
-> 
+>    
 >             Node leftNode = pre.next;
->             Node curr = rightNode.next;
-> 
+>          Node curr = rightNode.next;
+>    
 >             pre.next = null;
->             rightNode.next = null;
-> 
+>          rightNode.next = null;
+>    
 >             reverseLinkedList(leftNode);
 > 
 >             pre.next = rightNode;
->             leftNode.next = curr;
+>          leftNode.next = curr;
 >             return dummyNode.next;
 >         }
-> 
+>    
 >         private void reverseLinkedList(Node head){
 > 
 >             Node pre = null;
->             Node cur = head;
-> 
+>          Node cur = head;
+>    
 >             while(cur != null){
->                 Node next = cur.next;
+>              Node next = cur.next;
 >                 cur.next = pre;
 >                 pre = cur;
 >                 cur = next;
 >             }
 >         }
-> }
-> 
+>    }
+>    
 > ```
->
+> 
 > 
 
 
 
-> > ## **二叉树**
->
+## **二叉树**
+
 > **二叉树（binary tree） 是指树中节点的度不大于 2 的有序树，是一种最简单且最重要的树**
->
->  
->
-> > **二叉树的属性**
-> >
+
+
+
+### **1.二叉树的属性**
+
 > > ---
-> >
+>>
 > > - **结点**：包含一个数据元素及若干指向子树分支的信息。
-> > - **结点的度**：一个结点拥有子树的数目称为结点的度。
-> > - **叶子结点**：也称为终端结点，没有子树的结点或者度为零的结点。
-> > - **分支结点**：也称为非终端结点，度不为零的结点称为非终端结点。
+>> - **结点的度**：一个结点拥有子树的数目称为结点的度。
+>  > - **叶子结点**：也称为终端结点，没有子树的结点或者度为零的结点。
+>> - **分支结点**：也称为非终端结点，度不为零的结点称为非终端结点。
 > > - **树的度**：树中所有结点的度的最大值。
 > > - **结点的层次**：从根结点开始，假设根结点为第1层，根结点的子节点为第2层，依此类推，如果某一个结点位于第L层，则其子节点位于第L+1层。
 > > - **树的深度**：也称为树的高度，树中所有结点的层次最大值称为树的深度。
 > > - **有序树**：如果树中各棵子树的次序是有先后次序，则称该树为有序树。
 > > - **无序树**：如果树中各棵子树的次序没有先后次序，则称该树为无序树。
->
 > 
->
+> 
+> 
 > > **二叉树的节点结构**
->
+> 
 > ---
->
+> 
 > ```java
-> public static class Node {
->     
->     public int value;
+>public static class Node {
+> 
+>    public int value;
 >     public Node left;
->     public Node right;
->     
->     public Node(int value){
+>    public Node right;
+> 
+>    public Node(int value){
 >         this.value = value;
 >     }
-> }
+>     }
 > ```
->
-> > left 与 right 为树 的左右节点（左子树，右子树）
->
->   
->
-> > **二叉树的遍历方式**
-> >
+> 
+> > left 与 right 为树 的左右节点（左子树，右子树
+>     
+
+
+
+### 2.**二叉树的遍历方式**
+
 > > ---
-> >
+>>
 > > - 前序遍历（根左右）： 访问根结点，再访问左子树、再访问右子树。
-> > - 中序遍历（左根右）： 先访问左子树，再访问根结点、再访问右子树。
-> > - 后序遍历（左右根）： 先访问左子树，再访问右子树，再访问根结点。
+>> - 中序遍历（左根右）： 先访问左子树，再访问根结点、再访问右子树。
+>  > - 后序遍历（左右根）： 先访问左子树，再访问右子树，再访问根结点。
 >
 > 
->
+> 
 > > **递归序**
 > >
 > > ---
 > >
-> > 1 2 4 4 4 2 5 5 5 2 1 3 6 6 6 3 7 7 7 3
->
+> > 1 2 4 4 4 2 5 5 5 2 1 3 6 6 6 3 7 7 7 3 1
 > 
->
+> 
+> 
 > > **二叉树的递归遍历**
->
+> 
 > ---
 >
 > 1. **先序遍历**
@@ -1185,76 +1186,76 @@ PriorityQueue<Integer> heap = new Priority<>();
 >    > **递归遍历**
 >
 >    > ---
->
->    ```java
+> 
+>        ```java
 >     /**
 >         *  先序打印所有节点
 >         * @param head  二叉树 head 节点
->         */
+>             */
 >        public static void prePrintNodes(Node head){
 >            if(head == null){
 >                return;
 >            }
 >    
->            System.out.println(head.value);
+>           System.out.println(head.value);
 >            prePrintNodes(head.left);
->            prePrintNodes(head.right);
->        }
->    ```
->
+>           prePrintNodes(head.right);
+>          }
+>   ```
+> 
 >    > **非递归遍历**
->
+> 
 >    ---
->
+> 
 >    > ```java
 >    > public static void pre(Node head) {
->    >     System.out.print("pre-order: ");
+>   >     System.out.print("pre-order: ");
 >    >     if (head != null) {
->    >         Stack<Node> stack = new Stack<Node>();
+>   >         Stack<Node> stack = new Stack<Node>();
 >    >         stack.add(head);
 >    >         while (!stack.isEmpty()) {
 >    >             head = stack.pop();
 >    >             System.out.print(head.value + " ");
 >    >             if (head.right != null) {
->    >                 stack.push(head.right);
+>   >                 stack.push(head.right);
 >    >             }
->    >             if (head.left != null) {
+>   >             if (head.left != null) {
 >    >                 stack.push(head.left);
->    >             }
+>   >             }
 >    >         }
->    >     }
+>   >     }
 >    >     System.out.println();
->    > }
+>   > }
 >    > ```
 >
->    
+> 
 >
 > 2. **中序遍历**
 >
 >    先访问左子树，再访问根结点、再访问右子树
->
+> 
 >    > **递归遍历**
->
+> 
 >    ```java
 >    /**
 >     *  中序打印所有节点
 >     * @param head 二叉树 head 节点
 >     */
->    public static void inPrintNodes(Node head){
+>       public static void inPrintNodes(Node head){
 >        if(head == null){
 >            return;
 >        }
 >    
 >        inPrintNodes(head.left);
->        System.out.println(head.value);
+>       System.out.println(head.value);
 >        inPrintNodes(head.right);
->    }
+>   }
 >    ```
 >
 >    > **非递归遍历**
->
+> 
 >    ---
->
+> 
 >    ```java
 >    public static void in(Node cur) {
 >        System.out.print("in-order: ");
@@ -1271,40 +1272,40 @@ PriorityQueue<Integer> heap = new Priority<>();
 >                }
 >            }
 >        }
->        System.out.println();
->    }
->    ```
+>       System.out.println();
+>       }
+>   ```
+> 
 >
->     
->
-> 3. **后序遍历**
->
->    先访问左子树，再访问右子树，再访问根结点
->
+> 
+>3. **后序遍历**
+> 
+>   先访问左子树，再访问右子树，再访问根结点
+> 
 >    > **递归遍历**
->
+> 
 >    ---
->
+> 
 >    ```java
 >    /**
 >     *  后序打印所有节点
 >     * @param head 二叉树 head 节点
->     */
+>        */
 >    public static void posPrintNodes(Node head){
 >        if(head == null){
 >            return;
 >        }
 >    
->        posPrintNodes(head.left);
+>       posPrintNodes(head.left);
 >        posPrintNodes(head.right);
->        System.out.println(head.value);
+>       System.out.println(head.value);
 >    }
->    ```
->
+>   ```
+> 
 >    > **非递归遍历**
->
+> 
 >    ---
->
+> 
 >    ```java
 >    public static void pos1(Node head) {
 >        System.out.print("pos-order: ");
@@ -1319,17 +1320,17 @@ PriorityQueue<Integer> heap = new Priority<>();
 >                    s1.push(head.left);
 >                }
 >                if (head.right != null) {
->                    s1.push(head.right);
->                }
->            }
+>                   s1.push(head.right);
+>                    }
+>           }
 >            // 左 右 头
->            while (!s2.isEmpty()) {
+>           while (!s2.isEmpty()) {
 >                System.out.print(s2.pop().value + " ");
->            }
+>           }
 >        }
->        System.out.println();
+>       System.out.println();
 >    }
->    
+>   
 >    public static void pos2(Node h) {
 >        System.out.print("pos-order: ");
 >        if (h != null) {
@@ -1339,16 +1340,29 @@ PriorityQueue<Integer> heap = new Priority<>();
 >            while (!stack.isEmpty()) {
 >                c = stack.peek();
 >                if (c.left != null && h != c.left && h != c.right) {
->                    stack.push(c.left);
+>                       stack.push(c.left);
 >                } else if (c.right != null && h != c.right) {
 >                    stack.push(c.right);
 >                } else {
 >                    System.out.print(stack.pop().value + " ");
 >                    h = c;
->                }
+>               }
 >            }
->        }
+>       }
 >        System.out.println();
->    }
+>   }
 >    ```
+> 
+
+
+
+### **3.二叉树常见题**
+
+>    > ---
+>   >
+>    > > **搜索二叉树**
+>   > >
+>     > > value 小于右子树 ，大于左子树
+>   > >
+>    > > 
 

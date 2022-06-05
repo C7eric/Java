@@ -1047,7 +1047,7 @@ PriorityQueue<Integer> heap = new Priority<>();
 >                 }
 >                 cur1 = cur1.next;
 >             }
-> ```
+>  ```
 > 
 > <img src="C:\Users\CSQ-PC\AppData\Roaming\Typora\typora-user-images\image-20220603172812285.png" alt="image-20220603172812285" style="zoom:15%;" />
 
@@ -1160,23 +1160,23 @@ PriorityQueue<Integer> heap = new Priority<>();
 ### 2.**二叉树的遍历方式**
 
 > > ---
->>
+>
 > > - 前序遍历（根左右）： 访问根结点，再访问左子树、再访问右子树。
->> - 中序遍历（左根右）： 先访问左子树，再访问根结点、再访问右子树。
+> > - 中序遍历（左根右）： 先访问左子树，再访问根结点、再访问右子树。
 >  > - 后序遍历（左右根）： 先访问左子树，再访问右子树，再访问根结点。
 >
 > 
-> 
+>
 > > **递归序**
 > >
 > > ---
 > >
 > > 1 2 4 4 4 2 5 5 5 2 1 3 6 6 6 3 7 7 7 3 1
+>
 > 
-> 
-> 
+>
 > > **二叉树的递归遍历**
-> 
+>
 > ---
 >
 > 1. **先序遍历**
@@ -1185,10 +1185,10 @@ PriorityQueue<Integer> heap = new Priority<>();
 >
 >    > **递归遍历**
 >
->    > ---
-> 
->        ```java
->     /**
+>    ---
+>
+>    ```java
+>       /**
 >         *  先序打印所有节点
 >         * @param head  二叉树 head 节点
 >             */
@@ -1196,12 +1196,12 @@ PriorityQueue<Integer> heap = new Priority<>();
 >            if(head == null){
 >                return;
 >            }
->    
->           System.out.println(head.value);
->            prePrintNodes(head.left);
->           prePrintNodes(head.right);
->          }
->   ```
+>       	System.out.println(head.value);
+>        prePrintNodes(head.left);
+>        prePrintNodes(head.right);
+>      }
+>    ```
+>   ```java
 > 
 >    > **非递归遍历**
 > 
@@ -1226,17 +1226,16 @@ PriorityQueue<Integer> heap = new Priority<>();
 >   >     }
 >    >     System.out.println();
 >   > }
->    > ```
+>   ```
 >
-> 
+> ​       **2.中序遍历**
 >
-> 2. **中序遍历**
+> ​           先访问左子树，再访问根结点、再访问右子树
 >
->    先访问左子树，再访问根结点、再访问右子树
+> ​			>   **递归遍历**
+>
+> ```java
 > 
->    > **递归遍历**
-> 
->    ```java
 >    /**
 >     *  中序打印所有节点
 >     * @param head 二叉树 head 节点
@@ -1245,17 +1244,19 @@ PriorityQueue<Integer> heap = new Priority<>();
 >        if(head == null){
 >            return;
 >        }
->    
+> 
 >        inPrintNodes(head.left);
 >       System.out.println(head.value);
 >        inPrintNodes(head.right);
 >   }
->    ```
+> ```
+>
+> 
 >
 >    > **非递归遍历**
-> 
->    ---
-> 
+>
+> ---
+>
 >    ```java
 >    public static void in(Node cur) {
 >        System.out.print("in-order: ");
@@ -1274,18 +1275,18 @@ PriorityQueue<Integer> heap = new Priority<>();
 >        }
 >       System.out.println();
 >       }
->   ```
-> 
+>    ```
 >
 > 
->3. **后序遍历**
-> 
+>
+> 3. **后序遍历**
+>
 >   先访问左子树，再访问右子树，再访问根结点
-> 
+>
 >    > **递归遍历**
-> 
->    ---
-> 
+>
+> ---
+>
 >    ```java
 >    /**
 >     *  后序打印所有节点
@@ -1295,17 +1296,17 @@ PriorityQueue<Integer> heap = new Priority<>();
 >        if(head == null){
 >            return;
 >        }
->    
+> 
 >       posPrintNodes(head.left);
 >        posPrintNodes(head.right);
 >       System.out.println(head.value);
 >    }
->   ```
-> 
+>    ```
+>
 >    > **非递归遍历**
-> 
->    ---
-> 
+>
+> ---
+>
 >    ```java
 >    public static void pos1(Node head) {
 >        System.out.print("pos-order: ");
@@ -1330,7 +1331,7 @@ PriorityQueue<Integer> heap = new Priority<>();
 >        }
 >       System.out.println();
 >    }
->   
+> 
 >    public static void pos2(Node h) {
 >        System.out.print("pos-order: ");
 >        if (h != null) {
@@ -1352,17 +1353,165 @@ PriorityQueue<Integer> heap = new Priority<>();
 >        System.out.println();
 >   }
 >    ```
-> 
+>
 
 
 
 ### **3.二叉树常见题**
 
 >    > ---
->   >
+>    >
 >    > > **搜索二叉树**
->   > >
->     > > value 小于右子树 ，大于左子树
->   > >
+>    > >
+>    > > value 小于右子树 ，大于左子树
+>    > >
+>    > >   
+>    > >
+>    > >  
+>    >
+>    >  
+>    >
+>    > > **完全二叉树**
+>    >
+>    > ---
+>    >
+>    > ```java
+>    > public static boolean isCBT(Node head){
+>    >     if(head == null){
+>    >         return true;
+>    >     }
+>    >     LinkedList<Node> queue = new LinkedList<>();
+>    >     boolean leaf = false;
+>    >     Node left = null;
+>    >     Node right = null;
+>    >     queue.add(head);
+>    >     while(!queue.isEmpty()){
+>    >         head = queue.poll();
+>    >         left = head.left;
+>    >         right = head.right; 
+>    >         if(
+>    >         (leaf && (left == null || right == null))
+>    >             ||
+>    >         (left == null && right != null)    
+>    >         ){
+>    >             return false;
+>    >         }
+>    >         if(left != null){
+>    >             queue.add(left);
+>    >         }
+>    >         if(right != null){
+>    >             queue.add(right);
+>    >         }
+>    >         if(left == null || right == null){
+>    >             leaf = true;
+>    >         }
+>    >         return true;
+>    >     }
+>    > ```
+>    >
+>    > ---
+>    >
+>    > > ```java
+>    > > if(
+>    > >         (leaf && (left == null || right == null))
+>    > >             ||
+>    > >         (left == null && right != null)    
+>    > >         ){
+>    > >             return false;
+>    > >         }
+>    > > ```
+>    > >
+>    > > > **如果遇到不双全的节点之后，又发现当前节点不是叶节点**
+>    >
+>    > ---
+>    >
+>    > > **方法二**
+>    >
+>    > ---
+>    >
+>    > ```java
+>    > public static boolean isCBT2(Node head){
+>    >     if(head == null){
+>    >         return true;
+>    >     }
+>    >     
+>    >     return process(head).isCBT;
+>    > }
+>    > 
+>    > public static class Info{
+>    >     public boolean isFull;
+>    >     public boolean isCBT;
+>    >     public int height;
+>    >     
+>    >     public Info(boolean full,boolean cbt,int h){
+>    >         isFull = fuu;
+>    >         isCBT = cbt;
+>    >         height = h;
+>    >     }
+>    > }
+>    > 
+>    > public static Info process(Node x){
+>    >     if(x == null){
+>    >         return new Info(true,true,0);
+>    >     }
+>    >     
+>    >     Info leftInfo = process(x.left);
+>    >     Info rightInfo = process(x.right);
+>    >     
+>    >     int height = Math.max(leftInfo.height,rightInfo) + 1;
+>    >     
+>    >     if(isFull){
+>    >         isCBT = true;
+>    >     } else {
+>    >         if(leftInfo.isCBT && rightInfo.isCBT){
+>    >             if(leftInfo.isCBT
+>    >               && rightInfo.isFull
+>    >               && leftInfo.height == rightInfo.height + 1){
+>    >                 isCBT = true;
+>    >             }
+>    >         	if(leftInfo.isFull
+>    >           	  && rightInfo.isFull
+>    >               && leftInfo.height == rightInfo.height + 1){
+>    >                 isCBT = true;
+>    >             }
+>    >             if(leftInfo.isFull
+>    >               && rightInfo.isCBT
+>    >               && leftInfo.height == rightInfo.height){
+>    >                 isCBT =true;
+>    >             }
+>    >         }
+>    >     }
+>    >     	return new Info(isFull,isCBT,height);
+>    > }
+>    > ```
+>    >
+>    > ---
+>    >
+>    > > ```java
+>    > > if(isFull){
+>    > >         isCBT = true;
+>    > >     } else {
+>    > >         if(leftInfo.isCBT && rightInfo.isCBT){
+>    > >             if(leftInfo.isCBT
+>    > >               && rightInfo.isFull
+>    > >               && leftInfo.height == rightInfo.height + 1){
+>    > >                 isCBT = true;
+>    > >             }
+>    > >         	if(leftInfo.isFull
+>    > >           	  && rightInfo.isFull
+>    > >               && leftInfo.height == rightInfo.height + 1){
+>    > >                 isCBT = true;
+>    > >             }
+>    > >             if(leftInfo.isFull
+>    > >               && rightInfo.isCBT
+>    > >               && leftInfo.height == rightInfo.height){
+>    > >                 isCBT =true;
+>    > >             }
+>    > >         }
+>    > >     }
+>    > > ```
+>    > >
 >    > > 
+>    > >
+>    > > > ****
 

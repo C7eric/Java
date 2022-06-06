@@ -577,7 +577,7 @@
 > > 1. 所谓类的单例设计模式，就是采取一定的方法保证在整个的软件系统中，对某个类只能存在一个对象实例，并且该类只提供一个取得其对象实例的方法
 > > 2. 单例模式有两种方式 ：**1.饿汉式  2.懒汉式**
 > >
-> >  
+> > 
 > >
 > > > **单例模式应用实例 -  饿汉式** 
 > >
@@ -596,14 +596,14 @@
 > >    ```java
 > >    class GirlFriend {
 > >        private String name;
-> >              
+> >    
 > >        // 为了能够在静态方法中返回 gf 对象，需要将其修饰为 static 
 > >        private static GirlFriend gf = new GirlFriend("q");
-> >              
+> >    
 > >        private GirlFriend(String name){
 > >            this.name = name;
 > >        }
-> >              
+> >    
 > >        // 提供一个公共的 static 方法，返回 gf 对象
 > >        public static GirlFriend getInstance(){
 > >            return gf;
@@ -613,7 +613,7 @@
 > >
 > > **饿汉式可能造成创建了对象，但是没有使用，造成资源浪费**
 > >
-> >  
+> > 
 > >
 > > > **单例应用案例 - 懒汉式**
 > >
@@ -632,17 +632,17 @@
 > >    ```java
 > >    class Cat{
 > >        private String name;
-> >              
+> >    
 > >        private static Cat cat;
 > >        private Cat(String name){
 > >            this.name = name;
 > >        }
-> >              
+> >    
 > >        public static Cat(){
 > >            if(cat == null){
 > >                cat = new Cat("xx");
 > >            }
-> >                  
+> >    
 > >            return cat;
 > >        }
 > >    }
@@ -650,7 +650,7 @@
 > >
 > > **类加载之后，构造器也不会调用**
 > >
-> >  
+> > 
 > >
 > > > **懒汉式和饿汉式的区别**
 > >
@@ -660,6 +660,14 @@
 > > 2. 饿汉式不存在线程安全问题，懒汉式存在线程安全问题
 > > 3. 饿汉式存在资源浪费的可能。因为一个程序员一个对象实例都没有使用，那么饿汉式创建的对象实例就浪费了，懒汉式是使用时才创建，就不存在这个问题。
 > > 4. 在我们 JavaSE 标准类中，java.lang.Runtime  就是经典的单例模式
+> >
+> >  
+> >
+> > > **模板设计模式**
+> >
+> > ---
+> >
+> > 
 
 
 

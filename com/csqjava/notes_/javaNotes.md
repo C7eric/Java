@@ -738,8 +738,6 @@
 >	// System.out.println("这是一个动物，但是不知道吃什么..");
 >	//}
 >    public abstract void eat() ;
->
->
 >```
 >
 >> **当父类的一些方法不能确定时，可以用 abstract 关键字来修饰该方法，这个方法就是抽象方法，用 abstract 来修饰该类就是抽象类，一般来说，抽象类会被继承，抽象方法会让子类来实现**
@@ -752,21 +750,21 @@
 >
 >1. 用 abstract 关键字l来修饰一个类，这个类就叫做抽象类，
 >
->   ```java
->   访问修饰符 abstract 类名{
->   
+>  ```java
+>  访问修饰符 abstract 类名{
+> 
 >   }
->   ```
->
->​     2.用 abstract 关键字来修饰一个方法 时，这个方法就是抽象方法
+>     ```
+> 
+> ​     2.用 abstract 关键字来修饰一个方法 时，这个方法就是抽象方法
 >
 >​      	**访问修饰符 abstract 返回类型 方法名（参数列表）； // 没有方法体**
 >
 >​     3.抽象类的价值更多作用在于设计，是设计者设计好后，让子类继承并实现抽象类
 >
->     4. 抽象类，是重点，在框架h和设计模式使用较多
+>    4. 抽象类，是重点，在框架h和设计模式使用较多
 >
->> **抽象类的使用事项和细节**
+> > **抽象类的使用事项和细节**
 >
 >---
 >
@@ -787,7 +785,7 @@
 
 > **借口就是给出一些没有实现的方法，封装到一起，到某个类要使用时，再根据具体的情况把这些方法写出来**
 
-#### 语法
+#### 1.语法
 
 ---
 
@@ -810,7 +808,7 @@
 
 
 
-#### 注意事项和细节
+#### 2.注意事项和细节
 
 ---
 
@@ -825,6 +823,127 @@
 > 9. 接口的修饰符，只能是 **public 默认**，这点和类的修饰符是一样的  
 
 
+
+#### 3.实现接口 vs 继承类
+
+---
+
+> **接口和继承解决的问题不同**
+>
+> - 继承的价值主要在于 ：**解决代码的复用性和可维护性**
+> - 接口的价值主要在于： **设计，设计好各种规范（方法），让其他类去实现这些方法。即更加的灵活**
+>
+> **接口比继承更加灵活**
+>
+> - 接口比继承更加灵活，继承是满足  is - a 的关系，而接口只需满足 like - a 的关系。
+>
+> **接口在一定程度上实现代码解耦【即： 接口规范性 + 动态绑定机制】**
+
+
+
+#### 4.接口的多态性
+
+---
+
+> - **多态参数** 
+>
+>   ```java
+>   public class InterfacePolyParameter {
+>   public static void main(String[] args) {
+>   	//接口的多态体现
+>   	//接口类型的变量 if01 可以指向 实现了 IF 接口类的对象实例
+>   	IF if01 = new Monster();
+>   	if01 = new Car();
+>   	//继承体现的多态
+>   	//父类类型的变量 a 可以指向 继承 AAA 的子类的对象实例
+>   	AAA a = new BBB();
+>   	a = new CCC();
+>   	}
+>   }
+>   interface IF {}
+>   class Monster implements IF{}
+>   class Car implements IF{}
+>   class AAA {
+>   }
+>   class BBB extends AAA {}
+>   class CCC extends AAA {
+>   ```
+>
+>   
+>
+> - **多态数组**
+>
+>   ```java
+>   public class InterfacePolyArr {
+>   	public static void main(String[] args) {
+>   	//多态数组 -> 接口类型数组
+>   	Usb[] usbs = new Usb[2];
+>   	usbs[0] = new Phone_();
+>   	usbs[1] = new Camera_();
+>   	/*
+>   	给 Usb 数组中，存放 Phone 和 相机对象，Phone 类还有一个特有的方法 call（），
+>   	请遍历 Usb 数组，如果是 Phone 对象，除了调用 Usb 接口定义的方法外，
+>   	还需要调用 Phone 特有方法 call
+>   	*/
+>   	for(int i = 0; i <usbs.length; i++) {
+>   	sbs[i].work();//动态绑定.. //和前面一样，我们仍然需要进行类型的向下转型
+>   	if(usbs[i] instanceof Phone_) {//判断他的运行类型是 Phone_
+>   		((Phone_) usbs[i]).call();
+>   			}
+>   		}
+>   	}
+>   }
+>   interface Usb{
+>   	void work();
+>   }
+>   
+>   class Phone_ implements Usb {
+>   	public void call() {
+>   	System.out.println("手机可以打电话...");
+>   }
+>   	@Override
+>   	public void work() {
+>   	System.out.println("手机工作中...");
+>   	}
+>   }
+>   	class Camera_ implements Usb {
+>           
+>   		@Override
+>       	public void work() {
+>           System.out.println("相机工作中...");
+>   	}
+>   }
+>   ```
+>
+>   
+>
+> - **接口存在多态传递现象** 
+>
+>   ```java
+>   /**
+>   * 演示多态传递现象
+>   */
+>   public class InterfacePolyPass {
+>       
+>   	public static void main(String[] args) {
+>   	//接口类型的变量可以指向，实现了该接口的类的对象实例
+>   	IG ig = new Teacher();
+>   	//如果 IG 继承了 IH 接口，而 Teacher 类实现了 IG 接口
+>   	//那么，实际上就相当于 Teacher 类也实现了 IH 接口. //这就是所谓的 接口多态传递现象. IH ih = new Teacher();
+>   	}
+>   }
+>   interface IH {
+>   	void hi();
+>   }
+>   
+>   interface IG extends IH{ }
+>   
+>   class Teacher implements IG
+>       @Override
+>   	public void hi() {
+>   	}
+>   }
+>   ```
 
 ## 简答题
 

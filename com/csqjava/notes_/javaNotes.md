@@ -596,14 +596,14 @@
 > >    ```java
 > >    class GirlFriend {
 > >        private String name;
-> >    
+> >       
 > >        // 为了能够在静态方法中返回 gf 对象，需要将其修饰为 static 
 > >        private static GirlFriend gf = new GirlFriend("q");
-> >    
+> >       
 > >        private GirlFriend(String name){
 > >            this.name = name;
 > >        }
-> >    
+> >       
 > >        // 提供一个公共的 static 方法，返回 gf 对象
 > >        public static GirlFriend getInstance(){
 > >            return gf;
@@ -632,17 +632,17 @@
 > >    ```java
 > >    class Cat{
 > >        private String name;
-> >    
+> >       
 > >        private static Cat cat;
 > >        private Cat(String name){
 > >            this.name = name;
 > >        }
-> >    
+> >       
 > >        public static Cat(){
 > >            if(cat == null){
 > >                cat = new Cat("xx");
 > >            }
-> >    
+> >       
 > >            return cat;
 > >        }
 > >    }
@@ -781,7 +781,48 @@
 
 
 
+### **接口**
 
+---
+
+> **借口就是给出一些没有实现的方法，封装到一起，到某个类要使用时，再根据具体的情况把这些方法写出来**
+
+#### 语法
+
+---
+
+> ```java
+> interface 接口名{
+>     // 属性
+>     // 抽象方法
+> }
+> 
+> class 类名 implements 接口 {
+>     //自己的属性;
+>     //自己的方法;
+>     //必须实现的借口的抽象方法
+> }
+> ```
+>
+> > **小结：** 借口是更加抽象的抽象类，抽象类里的方法可以有方法体，接口里的所有方法都没有方法体【jdk 7.0】。接口体现了程序设计的多态和高内聚低耦合的设计思想
+> >
+> > **特别说明：** Jdk 8.0 后接口类可以有静态方法，默认方法，也就是说接口中可以有方法的具体实现
+
+
+
+#### 注意事项和细节
+
+---
+
+> 1. 接口**不能被实例化**
+> 2. 接口中的所有方法是 public 方法，接口中抽象方法，可以不用 abstract 修饰
+> 3. 一个普通类实现接口，就必须将该借口的所有方法都实现
+> 4. 抽象类实现接口，可以不用实现接口的方法
+> 5. 一个类同是**可以实现多个接口**
+> 6. 接口中的属性，只能是 **final** 的，而且是 **public static final** 修饰符
+> 7. 接口属性的访问形式 ： **接口名.属性名**
+> 8. **接口中不能继承其他类**，但是可以继承多个接口
+> 9. 接口的修饰符，只能是 **public 默认**，这点和类的修饰符是一样的  
 
 
 

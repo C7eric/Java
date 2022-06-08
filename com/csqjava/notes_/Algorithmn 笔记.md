@@ -6,7 +6,7 @@
 
 
 
-> **基于Java 与 C 写的数据结构以及基本算法笔记**
+> **基于Java  写的数据结构以及基本算法笔记**
 
 
 
@@ -549,9 +549,11 @@ public class Code01_EvenTimesOddTimes {
 
 
 
+## 四、数据结构
 
 
-##  堆结构
+
+###  堆结构
 
 > **源码：**
 
@@ -565,7 +567,7 @@ PriorityQueue<Integer> heap = new Priority<>();
 
 
 
-###  **1.SortArrayDistanceLessK**
+####  **1.SortArrayDistanceLessK**
 
 >  **源码:**
 
@@ -598,7 +600,7 @@ PriorityQueue<Integer> heap = new Priority<>();
 
 
 
-### **2.比较器**
+#### **2.比较器**
 
 > 比较器相当于 c++ 中重载比较运算符 
 >
@@ -621,7 +623,7 @@ PriorityQueue<Integer> heap = new Priority<>();
 
 
 
-## **哈希表**
+### **哈希表**
 
 > UnOrderedMap  UnSortedMap  -> C++
 >
@@ -629,7 +631,7 @@ PriorityQueue<Integer> heap = new Priority<>();
 >
 > **HsahMap 在使用过程（CRUD）中时间复杂度认为为常数级别**
 
-### **HashSet**
+#### **HashSet**
 
 ---
 
@@ -665,7 +667,7 @@ PriorityQueue<Integer> heap = new Priority<>();
 
 
 
-### **HashMap**
+#### **HashMap**
 
 > > key 伴随 value 
 >>
@@ -697,7 +699,7 @@ PriorityQueue<Integer> heap = new Priority<>();
 
 
 
-## **有序表**
+### **有序表**
 
 
 
@@ -753,13 +755,13 @@ PriorityQueue<Integer> heap = new Priority<>();
 
 
 
-## **链表**
+### **链表**
 
 > **单链表和双链表结构只需要给定一个头部节点 head , 就可以找到剩下的所有节点**
 
 
 
-### **1.单链表的节点结构**
+#### **1.单链表的节点结构**
 
 > ---
 >
@@ -775,7 +777,7 @@ PriorityQueue<Integer> heap = new Priority<>();
 
 
 
-### **2.双链表的节点结构**
+#### **2.双链表的节点结构**
 
 > ---
 >
@@ -796,7 +798,7 @@ PriorityQueue<Integer> heap = new Priority<>();
 
 
 
-### **3.链表中点求法**
+#### **3.链表中点求法**
 
 > ---
 >
@@ -866,7 +868,7 @@ PriorityQueue<Integer> heap = new Priority<>();
 
 
 
-### **4.找到链表第一个入环节点**
+#### **4.找到链表第一个入环节点**
 
 > ---
 >
@@ -906,7 +908,7 @@ PriorityQueue<Integer> heap = new Priority<>();
 
 
 
-### **5.找到两个链表第一个相交节点(无环)**
+#### **5.找到两个链表第一个相交节点(无环)**
 
 > ---
 >
@@ -981,7 +983,7 @@ PriorityQueue<Integer> heap = new Priority<>();
 
  
 
-### **6.找到两个链表的第一个相交节点（有环）**
+#### **6.找到两个链表的第一个相交节点（有环）**
 
 > ---
 >
@@ -1051,7 +1053,7 @@ PriorityQueue<Integer> heap = new Priority<>();
 > 
 > <img src="C:\Users\CSQ-PC\AppData\Roaming\Typora\typora-user-images\image-20220603172812285.png" alt="image-20220603172812285" style="zoom:15%;" />
 
-### 7.**反转从 left 到 right 区间内的链表**
+#### 7.**反转从 left 到 right 区间内的链表**
 
 > ---
 >
@@ -1113,13 +1115,13 @@ PriorityQueue<Integer> heap = new Priority<>();
 
 
 
-## **二叉树**
+### **二叉树**
 
 > **二叉树（binary tree） 是指树中节点的度不大于 2 的有序树，是一种最简单且最重要的树**
 
 
 
-### **1.二叉树的属性**
+#### **1.二叉树的属性**
 
 > > ---
 >>
@@ -1157,7 +1159,7 @@ PriorityQueue<Integer> heap = new Priority<>();
 
 
 
-### 2.**二叉树的遍历方式**
+#### 2.**二叉树的遍历方式**
 
 > > ---
 >
@@ -1165,46 +1167,47 @@ PriorityQueue<Integer> heap = new Priority<>();
 > > - 中序遍历（左根右）： 先访问左子树，再访问根结点、再访问右子树。
 >  > - 后序遍历（左右根）： 先访问左子树，再访问右子树，再访问根结点。
 >
-> 
->
-> > **递归序**
-> >
-> > ---
-> >
+
+
+
+##### 1.递归序
+
+---
+
 > > 1 2 4 4 4 2 5 5 5 2 1 3 6 6 6 3 7 7 7 3 1
->
-> 
->
-> > **二叉树的递归遍历**
->
+
+
+
+##### **2.二叉树的递归遍历**
+
 > ---
 >
 > 1. **先序遍历**
->
+> 
 >    访问根结点，再访问左子树、再访问右子树
 >
 >    > **递归遍历**
 >
 >    ---
->
+> 
 >    ```java
 >       /**
 >         *  先序打印所有节点
->         * @param head  二叉树 head 节点
+>        * @param head  二叉树 head 节点
 >             */
->        public static void prePrintNodes(Node head){
+>       public static void prePrintNodes(Node head){
 >            if(head == null){
->                return;
+>               return;
 >            }
->       	System.out.println(head.value);
+>      	System.out.println(head.value);
 >        prePrintNodes(head.left);
->        prePrintNodes(head.right);
+>       prePrintNodes(head.right);
 >      }
->    ```
+>   ```
 >   ```java
-> 
+>
 >    > **非递归遍历**
-> 
+>
 >    ---
 > 
 >    > ```java
@@ -1227,13 +1230,13 @@ PriorityQueue<Integer> heap = new Priority<>();
 >    >     System.out.println();
 >   > }
 >   ```
->
+> 
 > ​       **2.中序遍历**
->
+> 
 > ​           先访问左子树，再访问根结点、再访问右子树
->
+> 
 > ​			>   **递归遍历**
->
+> 
 > ```java
 > 
 >    /**
@@ -1245,48 +1248,48 @@ PriorityQueue<Integer> heap = new Priority<>();
 >            return;
 >        }
 > 
->        inPrintNodes(head.left);
+>       inPrintNodes(head.left);
 >       System.out.println(head.value);
->        inPrintNodes(head.right);
+>       inPrintNodes(head.right);
 >   }
-> ```
->
+>```
 > 
 >
+> 
 >    > **非递归遍历**
->
-> ---
->
->    ```java
->    public static void in(Node cur) {
->        System.out.print("in-order: ");
->        if (cur != null) {
->            Stack<Node> stack = new Stack<Node>();
->            while (!stack.isEmpty() || cur != null) {
->                if (cur != null) {
->                    stack.push(cur);
->                    cur = cur.left;
->                } else {
->                    cur = stack.pop();
->                    System.out.print(cur.value + " ");
->                    cur = cur.right;
->                }
->            }
->        }
->       System.out.println();
->       }
->    ```
->
 > 
->
-> 3. **后序遍历**
->
->   先访问左子树，再访问右子树，再访问根结点
->
->    > **递归遍历**
->
 > ---
->
+> 
+>    ```java
+> public static void in(Node cur) {
+>     System.out.print("in-order: ");
+>     if (cur != null) {
+>         Stack<Node> stack = new Stack<Node>();
+>         while (!stack.isEmpty() || cur != null) {
+>             if (cur != null) {
+>                 stack.push(cur);
+>                 cur = cur.left;
+>             } else {
+>                 cur = stack.pop();
+>                System.out.print(cur.value + " ");
+>                 cur = cur.right;
+>            }
+>         }
+>    }
+>    System.out.println();
+>   }
+>    ```
+> 
+> 
+> 
+> 3. **后序遍历**
+> 
+>   先访问左子树，再访问右子树，再访问根结点
+> 
+>    > **递归遍历**
+> 
+> ---
+> 
 >    ```java
 >    /**
 >     *  后序打印所有节点
@@ -1294,19 +1297,19 @@ PriorityQueue<Integer> heap = new Priority<>();
 >        */
 >    public static void posPrintNodes(Node head){
 >        if(head == null){
->            return;
+>           return;
 >        }
-> 
+>
 >       posPrintNodes(head.left);
->        posPrintNodes(head.right);
+>       posPrintNodes(head.right);
 >       System.out.println(head.value);
->    }
+>   }
 >    ```
 >
 >    > **非递归遍历**
 >
 > ---
->
+> 
 >    ```java
 >    public static void pos1(Node head) {
 >        System.out.print("pos-order: ");
@@ -1320,11 +1323,11 @@ PriorityQueue<Integer> heap = new Priority<>();
 >                if (head.left != null) {
 >                    s1.push(head.left);
 >                }
->                if (head.right != null) {
+>               if (head.right != null) {
 >                   s1.push(head.right);
->                    }
+>                   }
 >           }
->            // 左 右 头
+>           // 左 右 头
 >           while (!s2.isEmpty()) {
 >                System.out.print(s2.pop().value + " ");
 >           }
@@ -1353,121 +1356,123 @@ PriorityQueue<Integer> heap = new Priority<>();
 >        System.out.println();
 >   }
 >    ```
->
+> 
 
 
 
-### **3.二叉树常见题**
+#### **3.二叉树常见题**
 
->    > ---
->    >
->    > > **搜索二叉树**
->    > >
+---
+
+##### 1.搜索二叉树
+
+---
+
 >    > > value 小于右子树 ，大于左子树
 >    > >
 >    > > ```java
 >    > > public class Code04_IsBST {
 >    > > 
->    > >     public static class Node{
->    > >         public int value;
->    > >         public Node left;
->    > >         public Node right;
+>    > >  public static class Node{
+>    > >      public int value;
+>    > >      public Node left;
+>    > >      public Node right;
 >    > > 
->    > >         public Node(int value) {
->    > >             this.value = value;
->    > >         }
->    > >     }
+>    > >      public Node(int value) {
+>    > >          this.value = value;
+>    > >      }
+>    > >  }
 >    > > 
->    > >     public static boolean isBST(Node head){
->    > >         if(head == null){
->    > >             return true;
->    > >         }
->    > >         ArrayList<Node> res = new ArrayList<>();
->    > >         process(head, res);
->    > >         for (int i = 0; i < res.size(); i++) {
->    > >             if(res.get(i).value <= res.get(i - 1).value){
->    > >                 return false;
->    > >             }
->    > >         }
->    > >         return true;
->    > >     }
+>    > >  public static boolean isBST(Node head){
+>    > >      if(head == null){
+>    > >          return true;
+>    > >      }
+>    > >      ArrayList<Node> res = new ArrayList<>();
+>    > >      process(head, res);
+>    > >      for (int i = 0; i < res.size(); i++) {
+>    > >          if(res.get(i).value <= res.get(i - 1).value){
+>    > >              return false;
+>    > >          }
+>    > >      }
+>    > >      return true;
+>    > >  }
 >    > > 
->    > >     public static void process(Node head, ArrayList<Node> res){
->    > >         if(head == null){
->    > >             return;
->    > >         }
->    > >         process(head.left,res);
->    > >         res.add(head);
->    > >         process(head.right,res);
->    > >     }
+>    > >  public static void process(Node head, ArrayList<Node> res){
+>    > >      if(head == null){
+>    > >          return;
+>    > >      }
+>    > >      process(head.left,res);
+>    > >      res.add(head);
+>    > >      process(head.right,res);
+>    > >  }
 >    > > 
 >    > > 
->    > >     public static boolean isBST2(Node head){
->    > >         if(head == null){
->    > >             return true;
->    > >         }
->    > >         return process(head).isBST;
->    > >     }
+>    > >  public static boolean isBST2(Node head){
+>    > >      if(head == null){
+>    > >          return true;
+>    > >      }
+>    > >      return process(head).isBST;
+>    > >  }
 >    > > 
->    > >     public static class Info{
+>    > >  public static class Info{
 >    > > 
->    > >         public boolean isBST;
->    > >         public int max;
->    > >         public int min;
+>    > >      public boolean isBST;
+>    > >      public int max;
+>    > >      public int min;
 >    > > 
->    > >         public Info(boolean isBST, int max, int min) {
->    > >             this.isBST = isBST;
->    > >             this.max = max;
->    > >             this.min = min;
->    > >         }
->    > >     }
+>    > >      public Info(boolean isBST, int max, int min) {
+>    > >          this.isBST = isBST;
+>    > >          this.max = max;
+>    > >          this.min = min;
+>    > >      }
+>    > >  }
 >    > > 
->    > >     public static Info process(Node x){
->    > >         if(x == null) {
->    > >             return null;
->    > >         }
->    > >             Info leftInfo = process(x.left);
->    > >             Info rightInfo = process(x.right);
+>    > >  public static Info process(Node x){
+>    > >      if(x == null) {
+>    > >          return null;
+>    > >      }
+>    > >          Info leftInfo = process(x.left);
+>    > >          Info rightInfo = process(x.right);
 >    > > 
->    > >             int  max = x.value;
->    > >             if(leftInfo != null){
->    > >                 max = Math.max(max, leftInfo.max);
->    > >             }
->    > >             if(rightInfo != null){
->    > >                 max = Math.max(max, rightInfo.max);
->    > >             }
->    > >             int min = x.value;
->    > >             if(leftInfo != null){
->    > >                 min = Math.min(min, leftInfo.min);
->    > >             }
->    > >             if(rightInfo != null){
->    > >                 min = Math.min(min, rightInfo.min);
->    > >             }
+>    > >          int  max = x.value;
+>    > >          if(leftInfo != null){
+>    > >              max = Math.max(max, leftInfo.max);
+>    > >          }
+>    > >          if(rightInfo != null){
+>    > >              max = Math.max(max, rightInfo.max);
+>    > >          }
+>    > >          int min = x.value;
+>    > >          if(leftInfo != null){
+>    > >              min = Math.min(min, leftInfo.min);
+>    > >          }
+>    > >          if(rightInfo != null){
+>    > >              min = Math.min(min, rightInfo.min);
+>    > >          }
 >    > > 
->    > >             boolean isBST = true;
->    > >             if(leftInfo != null && !leftInfo.isBST){
->    > >                 isBST = false;
->    > >             }
->    > >             if(rightInfo != null && !rightInfo.isBST){
->    > >                 isBST = false;
->    > >             }
->    > >             if(leftInfo != null && leftInfo.max < x.value){
->    > >                 isBST = false;
->    > >             }
->    > >             if(rightInfo != null && rightInfo.min > x.value){
->    > >                 isBST = false;
->    > >             }
->    > >             return new Info(isBST,max,min);
->    > >         }
+>    > >          boolean isBST = true;
+>    > >          if(leftInfo != null && !leftInfo.isBST){
+>    > >              isBST = false;
+>    > >          }
+>    > >          if(rightInfo != null && !rightInfo.isBST){
+>    > >              isBST = false;
+>    > >          }
+>    > >          if(leftInfo != null && leftInfo.max < x.value){
+>    > >              isBST = false;
+>    > >          }
+>    > >          if(rightInfo != null && rightInfo.min > x.value){
+>    > >              isBST = false;
+>    > >          }
+>    > >          return new Info(isBST,max,min);
+>    > >      }
 >    > > }
 >    > > ```
->    >
->    > 
->    >
->    > > **完全二叉树**
->    >
->    > ---
->    >
+
+
+
+##### 2.完全二叉树
+
+---
+
 >    > ```java
 >    > public static boolean isCBT(Node head){
 >    >     if(head == null){
@@ -1506,12 +1511,12 @@ PriorityQueue<Integer> heap = new Priority<>();
 >    >
 >    > > ```java
 >    > > if(
->    > >         (leaf && (left == null || right == null))
->    > >             ||
->    > >         (left == null && right != null)    
->    > >         ){
->    > >             return false;
->    > >         }
+>    > >      (leaf && (left == null || right == null))
+>    > >          ||
+>    > >      (left == null && right != null)    
+>    > >      ){
+>    > >          return false;
+>    > >      }
 >    > > ```
 >    > >
 >    > > > **如果遇到不双全的节点之后，又发现当前节点不是叶节点**
@@ -1582,113 +1587,116 @@ PriorityQueue<Integer> heap = new Priority<>();
 >    >
 >    > > ```java
 >    > > if(isFull){
->    > >         isCBT = true;
->    > >     } else {
->    > >         if(leftInfo.isCBT && rightInfo.isCBT){
->    > >             if(leftInfo.isCBT
->    > >               && rightInfo.isFull
->    > >               && leftInfo.height == rightInfo.height + 1){
->    > >                 isCBT = true;
->    > >             }
->    > >         	if(leftInfo.isFull
->    > >           	  && rightInfo.isFull
->    > >               && leftInfo.height == rightInfo.height + 1){
->    > >                 isCBT = true;
->    > >             }
->    > >             if(leftInfo.isFull
->    > >               && rightInfo.isCBT
->    > >               && leftInfo.height == rightInfo.height){
->    > >                 isCBT =true;
->    > >             }
->    > >         }
->    > >     }
+>    > >      isCBT = true;
+>    > >  } else {
+>    > >      if(leftInfo.isCBT && rightInfo.isCBT){
+>    > >          if(leftInfo.isCBT
+>    > >            && rightInfo.isFull
+>    > >            && leftInfo.height == rightInfo.height + 1){
+>    > >              isCBT = true;
+>    > >          }
+>    > >      	if(leftInfo.isFull
+>    > >        	  && rightInfo.isFull
+>    > >            && leftInfo.height == rightInfo.height + 1){
+>    > >              isCBT = true;
+>    > >          }
+>    > >          if(leftInfo.isFull
+>    > >            && rightInfo.isCBT
+>    > >            && leftInfo.height == rightInfo.height){
+>    > >              isCBT =true;
+>    > >          }
+>    > >      }
+>    > >  }
 >    > > ```
 >    > >
 >    >
->    > 
->    >
->    > > **满二叉树**
->    > >
+
+
+
+##### **3.满二叉树**
+
+---
+
 >    > > ```java
 >    > > public class Code06_IsFull {
->    > >     public static class Node {
->    > >         public int value;
->    > >         public Node left;
->    > >         public Node right;
+>    > >  public static class Node {
+>    > >      public int value;
+>    > >      public Node left;
+>    > >      public Node right;
 >    > > 
->    > >         public Node(int value) {
->    > >             this.value = value;
->    > >         }
->    > >     }
+>    > >      public Node(int value) {
+>    > >          this.value = value;
+>    > >      }
+>    > >  }
 >    > > 
->    > >     public static boolean isFull(Node head) {
->    > >         if (head == null) {
->    > >             return false;
->    > >         }
->    > >         Info1 all = process1(head);
->    > >         return (1 << all.height) - 1 == all.nodes;
->    > >     }
+>    > >  public static boolean isFull(Node head) {
+>    > >      if (head == null) {
+>    > >          return false;
+>    > >      }
+>    > >      Info1 all = process1(head);
+>    > >      return (1 << all.height) - 1 == all.nodes;
+>    > >  }
 >    > > 
->    > >     public static class Info1 {
->    > >         public int height;
->    > >         public int nodes;
+>    > >  public static class Info1 {
+>    > >      public int height;
+>    > >      public int nodes;
 >    > > 
->    > >         public Info1(int height, int nodes) {
->    > >             this.height = height;
->    > >             this.nodes = nodes;
->    > >         }
->    > >     }
+>    > >      public Info1(int height, int nodes) {
+>    > >          this.height = height;
+>    > >          this.nodes = nodes;
+>    > >      }
+>    > >  }
 >    > > 
->    > >     public static Info1 process1(Node head) {
->    > >         if (head == null) {
->    > >             return new Info1(0, 0);
->    > >         }
->    > >         Info1 leftInfo = process1(head.left);
->    > >         Info1 rightInfo = process1(head.right);
+>    > >  public static Info1 process1(Node head) {
+>    > >      if (head == null) {
+>    > >          return new Info1(0, 0);
+>    > >      }
+>    > >      Info1 leftInfo = process1(head.left);
+>    > >      Info1 rightInfo = process1(head.right);
 >    > > 
->    > >         int height = Math.max(leftInfo.height, rightInfo.height);
->    > >         int nodes = leftInfo.nodes + rightInfo.nodes + 1;
->    > >         return new Info1(height, nodes);
->    > >     }
+>    > >      int height = Math.max(leftInfo.height, rightInfo.height);
+>    > >      int nodes = leftInfo.nodes + rightInfo.nodes + 1;
+>    > >      return new Info1(height, nodes);
+>    > >  }
 >    > > 
->    > >     public static boolean isFull2(Node head) {
->    > >         if (head == null) {
->    > >             return false;
->    > >         }
->    > >         return process2(head).isFull;
->    > >     }
+>    > >  public static boolean isFull2(Node head) {
+>    > >      if (head == null) {
+>    > >          return false;
+>    > >      }
+>    > >      return process2(head).isFull;
+>    > >  }
 >    > > 
->    > >     public static class Info2 {
->    > >         public int height;
->    > >         public boolean isFull;
+>    > >  public static class Info2 {
+>    > >      public int height;
+>    > >      public boolean isFull;
 >    > > 
->    > >         public Info2(int height, boolean isFull) {
->    > >             this.height = height;
->    > >             this.isFull = isFull;
->    > >         }
->    > >     }
+>    > >      public Info2(int height, boolean isFull) {
+>    > >          this.height = height;
+>    > >          this.isFull = isFull;
+>    > >      }
+>    > >  }
 >    > > 
->    > >     public static Info2 process2(Node x) {
->    > >         if (x == null) {
->    > >             return new Info2(0, true);
->    > >         }
->    > >         Info2 leftInfo = process2(x.left);
->    > >         Info2 rightInfo = process2(x.right);
+>    > >  public static Info2 process2(Node x) {
+>    > >      if (x == null) {
+>    > >          return new Info2(0, true);
+>    > >      }
+>    > >      Info2 leftInfo = process2(x.left);
+>    > >      Info2 rightInfo = process2(x.right);
 >    > > 
->    > >         int height = Math.max(leftInfo.height, rightInfo.height);
->    > >         boolean isFull = leftInfo.isFull && rightInfo.isFull && leftInfo.height == rightInfo.height;
->    > >         return new Info2(height, isFull);
->    > >     }
+>    > >      int height = Math.max(leftInfo.height, rightInfo.height);
+>    > >      boolean isFull = leftInfo.isFull && rightInfo.isFull && leftInfo.height == rightInfo.height;
+>    > >      return new Info2(height, isFull);
+>    > >  }
 >    > > }
 >    > > 
 >    > > ```
->    >
->    >  
->    >
->    > > **平衡二叉树**
->    >
->    > ---
->    >
+
+
+
+##### **4.平衡二叉树**
+
+---
+
 >    > ```java
 >    > 
 >    > public class Code05_IsBalanced {
@@ -1760,15 +1768,460 @@ PriorityQueue<Integer> heap = new Priority<>();
 >    > 
 >    > ```
 >    >
->    > 
 
 
 
-
-
-## 图
-
-### 1.图的结构描述
+##### 5.二叉树的层序遍历
 
 ---
 
+> ```java
+> public class Code10_TreeMaxWidth {
+>     public static class Node{
+>         public int value;
+>         public Node left;
+>         public Node right;
+> 
+>         public Node(int value) {
+>             this.value = value;
+>         }
+>     }
+>     public static int maxWidthUseMap(Node head) {
+>         if(head == null){
+>             return 0;
+>         }
+>         Queue<Node> queue = new LinkedList<>();
+>         queue.add(head);
+>         HashMap<Node,Integer> levelMap = new HashMap<>();
+>         levelMap.put(head,1);
+>         int curLevel = 1;
+>         int curLevelNodes = 0;
+>         int max = 0;
+>         while (!queue.isEmpty()) {
+> 
+>             Node cur = queue.poll();
+>             int curNodeLevel = levelMap.get(cur);
+>             if(cur.left != null){
+>                 levelMap.put(cur.left,curNodeLevel + 1);
+>                 queue.add(cur.left);
+>             }
+>             if (cur.right != null) {
+>                 levelMap.put(cur.right,curNodeLevel + 1);
+>                 queue.add(cur.right);
+>             }
+>             if(curNodeLevel == curLevel){
+>                 curLevelNodes++;
+>             } else {
+>                 max = Math.max(max,curLevelNodes);
+>                 curLevel++;
+>                 curLevelNodes = 1;
+>             }
+>         }
+>         max = Math.max(max,curLevelNodes);
+>         return max;
+>     }
+> 
+>     public static int maxWidthNoMap(Node head){
+>         if(head == null){
+>             return 0;
+>         }
+>         Queue<Node> queue = new LinkedList<>();
+>         queue.add(head);
+>         Node curEnd = head;
+>         Node nextEnd = null;
+>         int max = 0;
+>         int curLevelNodes = 0;
+>         while (!queue.isEmpty()) {
+>             Node cur = queue.poll();
+>             if(cur.left != null){
+>                 queue.add(cur.left);
+>                 nextEnd = cur.left;
+>             }
+>             if(cur.right != null){
+>                 queue.add(cur.right);
+>                 nextEnd = cur.right;
+>             }
+>             curLevelNodes++;
+>             if (cur == curEnd) {
+>                 max = Math.max(max,curLevelNodes);
+>                 curLevelNodes = 0;
+>                 curEnd = nextEnd;
+>             }
+>         }
+>         return max;
+>     }
+> 
+>     public static class levelOrder {
+>         public List<List<Integer>> levelOrder(Node head) {
+>             List<List<Integer>> res = new ArrayList<List<Integer>>();
+>             if(head == null){
+>                 return res;
+>             }
+>             Queue<Node> queue = new LinkedList<>();
+>             queue.add(head);
+>             while(!queue.isEmpty()){
+> 
+>                 List<Integer> help = new ArrayList<>();
+>                 int curLevelSizes = queue.size();
+>                 for(int  i = 1;i <= curLevelSizes;++i){
+>                     Node cur = queue.poll();
+>                     help.add(cur.value);
+>                     if(cur.left != null){
+>                         queue.add(cur.left);
+>                     }
+>                     if(cur.right != null){
+>                         queue.add(cur.right);
+>                     }
+>                 }
+>                 res.add(help);
+>             }
+>             return res;
+>         }
+>     }
+> }
+> ```
+
+
+
+##### 6.后继节点
+
+---
+
+> ```java
+> public class Code09_SuccessorNode {
+>     public static class Node{
+> 
+>         public int value;
+>         public Node left;
+>         public Node right;
+>         public Node parent;
+> 
+>         public Node(int value) {
+>             this.value = value;
+>         }
+>     }
+> 
+>     public static Node getSuccessorNode(Node node){
+>         if(node == null){
+>             return node;
+>         }
+>         if(node.right != null){
+>             return getLeftMost(node.right);
+>         } else {
+>             Node parent = node.parent;
+>             while (parent != null && parent.right == node) {
+>                 node = parent;
+>                 parent = node.parent;
+>             }
+>             return node;
+>         }
+>     }
+> 
+>     public static Node getLeftMost(Node node){
+>         if (node == null) {
+>             return node;
+>         }
+>         while(node.left != null){
+>             node = node.left;
+>         }
+>         return node;
+>     }
+> }
+> ```
+
+
+
+##### 7.二叉树的最近公共祖先
+
+---
+
+> ```java
+> public class Code07_LowestAncestor {
+>     public static class Node {
+>         public int value;
+>         public Node left;
+>         public Node right;
+> 
+>         public Node(int value) {
+>             this.value = value;
+>         }
+>     }
+>     public static Node lowestAncestor1(Node head,Node o1,Node o2){
+>         if(head == null || head == o1 || head == o2){
+>             return head;
+>         }
+> 
+>         Node left = lowestAncestor1(head.left, o1, o2);
+>         Node right = lowestAncestor1(head.right, o1, o2);
+> 
+>         if(left != null && right != null){
+>             return head;
+>         }
+>         return left != null  ? left : right;
+>     }
+> 
+>     public static Node lowestAncestor2(Node head,Node a,Node b){
+>         return process(head,a,b).ans;
+>     }
+> 
+>     public static class Info{
+>         public boolean findA;
+>         public boolean findB;
+>         public Node ans;
+> 
+>         public Info(boolean findA, boolean findB, Node ans) {
+>             this.findA = findA;
+>             this.findB = findB;
+>             this.ans = ans;
+>         }
+>     }
+> 
+>     public static Info process(Node x,Node a,Node b){
+>         if(x == null){
+>             return new Info(false,false,null);
+>         }
+> 
+>         Info leftInfo = process(x.left,a,b);
+>         Info rightInfo = process(x.right,a,b);
+> 
+>         boolean findA = (x == a) || leftInfo.findA || rightInfo.findA;
+>         boolean findB = (x == b) || leftInfo.findB || rightInfo.findB;
+>         Node ans = null;
+>         if(leftInfo.ans != null){
+>             ans = leftInfo.ans;
+>         } else if(rightInfo.ans != null){
+>             ans = rightInfo.ans;
+>         } else {
+>             if (findA && findB) {
+>                 ans = x;
+>                 }
+>             }
+>         return new Info(findA,findB,ans);
+>     }
+> }
+> ```
+
+
+
+
+
+### 图
+
+#### 1.图的结构描述
+
+---
+
+>```java
+>public static class Graph{
+>    public HashMap<Node,Integer> nodes;
+>    public HashSet<Edge> edges;
+>    
+>    public Graph(){
+>        nodes = new HashMap<Node,Integer>();
+>        edges = new HashSet<Edge>();
+>    }
+>}
+>```
+>
+> 
+>
+>```java
+>public static class Node{
+>    
+>    public int value;
+>    public int in;
+>    public int out;
+>    public ArrayList<Node> nexts;
+>    public ArrayList<Edge> edges;
+>    
+>    public Node(int value){
+>        this.value = value;
+>        in = 0;
+>        out = 0;
+>        nexts = new ArrayList<Node>();
+>        edges = new ArrayList<Edge>();
+>    }
+>}
+>```
+>
+> 
+>
+>```java
+>public static class Edge{
+>    public int weight;
+>    public Node from;
+>    public Node to;
+>    
+>    public Edge(int weight,Node from,Node to){
+>        this.weight = weight;
+>        this.from = from;
+>        this.to = to;
+>    }
+>}
+>```
+
+
+
+#### 2.示例 - 创建图
+
+---
+
+>```java
+>public class Code01_GraphGenerator {
+>    // matrix 所有的边
+>    // N*3 的矩阵
+>    // [weight, from节点上面的值，to节点上面的值]
+>    //
+>    // [ 5 , 0 , 7]
+>    // [ 3 , 0,  1]
+>
+>    public static Graph createGraph(int[][] matrix){
+>        Graph graph = new Graph();
+>        for(int i = 0;i < matrix.length;++i){
+>
+>            //拿到每一条边
+>            int weight = matrix[i][0];
+>            int from = matrix[i][1];
+>            int to = matrix[i][2];
+>            if(!graph.nodes.containsKey(from)){
+>                graph.nodes.put(from,new Node(from));
+>            }
+>            if(!graph.nodes.containsKey(to)){
+>                graph.nodes.put(to,new Node(to));
+>            }
+>            Node fromNode = graph.nodes.get(from);
+>            Node toNode = graph.nodes.get(to);
+>            Edge newEdge = new Edge(weight,fromNode,toNode);
+>            fromNode.nexts.add(toNode);
+>            fromNode.out++;
+>            toNode.in++;
+>            fromNode.edges.add(newEdge);
+>            graph.edges.add(newEdge);
+>        }
+>        return graph;
+>    }
+>}
+>```
+
+
+
+#### 3.BFS
+
+---
+
+> ```java
+> public class Code02_BFS {
+> 
+>     /**
+>      *  从 node 开始 ，进行 广度 / 宽度 优先遍历
+>      */
+>     public static void bfs(Node start) {
+>         if (start == null) {
+>             return;
+>         }
+>         Queue<Node> queue = new LinkedList<>();
+>         HashSet<Node> set = new HashSet<>();
+>         queue.add(start);
+>         set.add(start);
+>         while(!queue.isEmpty()) {
+>             Node cur = queue.poll();
+>             System.out.println(cur.value);
+>             for(Node next : cur.nexts){
+>                 if(!set.contains(next)){
+>                     set.add(next);
+>                     queue.add(next);
+>                 }
+>             }
+>         }
+>     }
+> }
+> ```
+
+
+
+#### 4.DFS
+
+---
+
+> ```java
+> public class Code03_DFS {
+>     public static void dfs(Node start){
+>         if (start == null) {
+>             return;
+>         }
+>         Stack<Node> stack = new Stack<Node>();
+>         HashSet<Node> set = new HashSet<>();
+>         stack.add(start);
+>         set.add(start);
+>         System.out.println(start.value);
+>         while(!stack.isEmpty()){
+>             Node cur = stack.pop();
+>             for(Node next : cur.nexts){
+>                 if(!set.contains(next)) {
+>                     stack.push(cur);
+>                     stack.push(next);
+>                     set.add(next);
+>                     System.out.println(next.value);
+>                     break;
+>                 }
+>             }
+>         }
+>     }
+> }
+> ```
+
+
+
+#### 5.拓扑排序
+
+---
+
+> ```java
+> public class Code04_TopologySort {
+> 
+>     // direct graph no loop
+>     public static List<Node> sortedTopology(Graph graph) {
+> 
+>         HashMap<Node, Integer> inMap = new HashMap<>();
+>         Queue<Node> zeroInQueue = new LinkedList<>();
+> 
+>         /**
+>          * public Collection<V> values() {
+>          *         Collection<V> vs = values;
+>          *         if (vs == null) {
+>          *             vs = new Values();
+>          *             values = vs;
+>          *         }
+>          *         return vs;
+>          *     }
+>          */
+> 
+>         for(Node node : graph.nodes.values()){
+>             inMap.put(node, node.in);
+>             if(node.in == 0){
+>                 zeroInQueue.add(node);
+>             }
+>         }
+>         List<Node> result = new ArrayList<>();
+>         while (!zeroInQueue.isEmpty()) {
+>             Node cur = zeroInQueue.poll();
+>             result.add(cur);
+>             for(Node next : cur.nexts){
+> 
+>                 /**
+>                  *  HashMap.get(e);  @return  e.value / null
+>                  * public V get(Object key) {
+>                  *         Node<K,V> e;
+>                  *         return (e = getNode(key)) == null ? null : e.value;
+>                  *     }
+>                  */
+>                 inMap.put(next,inMap.get(next) - 1);
+>                 if(inMap.get(next) == 0){
+>                     zeroInQueue.add(next);
+>                 }
+>             }
+>         }
+>         return result;
+>     }
+> }
+> ```

@@ -659,14 +659,14 @@
 > >    ```java
 > >    class GirlFriend {
 > >        private String name;
-> >       
+> >          
 > >        // 为了能够在静态方法中返回 gf 对象，需要将其修饰为 static 
 > >        private static GirlFriend gf = new GirlFriend("q");
-> >       
+> >          
 > >        private GirlFriend(String name){
 > >            this.name = name;
 > >        }
-> >       
+> >          
 > >        // 提供一个公共的 static 方法，返回 gf 对象
 > >        public static GirlFriend getInstance(){
 > >            return gf;
@@ -695,17 +695,17 @@
 > >    ```java
 > >    class Cat{
 > >        private String name;
-> >       
+> >          
 > >        private static Cat cat;
 > >        private Cat(String name){
 > >            this.name = name;
 > >        }
-> >       
+> >          
 > >        public static Cat(){
 > >            if(cat == null){
 > >                cat = new Cat("xx");
 > >            }
-> >       
+> >          
 > >            return cat;
 > >        }
 > >    }
@@ -965,7 +965,7 @@
 >   interface Usb{
 >   	void work();
 >   }
->     
+>       
 >   class Phone_ implements Usb {
 >   	public void call() {
 >   	System.out.println("手机可以打电话...");
@@ -976,7 +976,7 @@
 >   	}
 >   }
 >   	class Camera_ implements Usb {
->     
+>       
 >   		@Override
 >       	public void work() {
 >           System.out.println("相机工作中...");
@@ -993,7 +993,7 @@
 >   * 演示多态传递现象
 >   */
 >   public class InterfacePolyPass {
->     
+>       
 >   	public static void main(String[] args) {
 >   	//接口类型的变量可以指向，实现了该接口的类的对象实例
 >   	IG ig = new Teacher();
@@ -1004,9 +1004,9 @@
 >   interface IH {
 >   	void hi();
 >   }
->     
+>       
 >   interface IG extends IH{ }
->     
+>       
 >   class Teacher implements IG
 >       @Override
 >   	public void hi() {
@@ -1530,7 +1530,7 @@ class Outer04 { //外部类
 >      public static inner getInnerInstance (){
 >          return new Inner();
 >      }
->      
+>           
 >      Outer.Inner inner = Outer.gerInnerInstance();
 >      ```
 >
@@ -1598,13 +1598,344 @@ class Outer04 { //外部类
 
 
 
-## 枚举类 
+## 枚举类与注解
+
+### 枚举类
+
+---
+
+> **枚举是一组常量的集合，可以这样理解：枚举属于一种特殊的类，里面只包含一组有限的特定的对象**
 
 
 
+#### 1.枚举的实现方式
+
+---
+
+> - 自定义类实现枚举
+> - 使用 enum 关键字实现枚举
 
 
 
+#### 2.自定义类实现枚举
+
+> - 不需要提供 setXxx 方法，因为枚举类对象值通常为只读
+> - 对枚举对象使用 static + final 共同修饰，实现底层优化
+> - 枚举对象名通常使用全部大写，常量的命名规范
+> - 枚举对象根据需要，也可以有多个属性
+>
+> ```java
+> public class Enumeration02 {
+> 	public static void main(String[] args) {
+> 		System.out.println(Season.AUTUMN);
+> 		System.out.println(Season.SPRING);
+> 	}
+> }
+> 
+> //演示字定义枚举实现
+> class Season {//类
+> 	private String name;
+> 	private String desc;//描述
+> 	//定义了四个对象, 固定. public static final Season SPRING = new Season("春天", "温暖");
+> 	public static final Season WINTER = new Season("冬天", "寒冷");
+>     public static final Season AUTUMN = new Season("秋天", "凉爽");
+>     public static final Season SUMMER = new Season("夏天", "炎热");
+>     //1. 将构造器私有化,目的防止 直接 new
+>     //2. 去掉 setXxx 方法, 防止属性被修改
+>     //3. 在 Season 内部，直接创建固定的对象
+> 	//4. 优化，可以加入 final 修饰符
+>     private Season(String name, String desc) {
+>     this.name = name;
+>     this.desc = desc;
+> }
+>     public String getName() {
+>         
+> 		return name;
+> 	}
+>     
+> 	public String getDesc() {
+>         
+> 		return desc;
+> }
+>     @Override
+>     public String toString() {
+>         
+>     	return "Season{" +
+>     		"name='" + name + '\'' +
+>     		", desc='" + desc + '\'' +
+>     		'}';
+>     }
+> }
+> ```
+
+
+
+> **小结：**
+>
+> ---
+>
+> 1. 构造器私有化
+> 2. 本类内部创建一组对象
+> 3. 对外暴露对象（通过为对象 添加  public static final 修饰符）
+> 4. 可以提供 get  方法，但不要提供 set 方法
+
+
+
+#### 3.enum 关键字实现枚举
+
+---
+
+##### 1.语法
+
+> 1. 使用关键字  enum 代替 class 
+> 2. public static final class Season SPRING = new Season("春天"，"温暖") ；  -> SPRING("春天"，"温暖")；
+> 3. 如果有多个常量（对象），使用 ， 隔开即可
+> 4. 如果使用 enum 来实现枚举，要求将定义常量对象，写在前面
+
+
+
+##### 2.注意事项
+
+> 1. 当我们使用 enum 关键字开发一个枚举类时，默认会继承Enum 类，而且是一个 **final 类**
+> 2. 传统的 public static final Season SPRING = new Season（"春天"，"温暖"）；  简化成SPRING（"春天"，"温暖"),**这里必须知道，它调用的是哪个构造器**
+> 3. 如果使用**无参构造器** 创建 枚举对象，则**实参列表和小括号都可以省略**
+> 4. 当有多个枚举对象时，**使用 ， 间隔**，最后有一个**分号结尾**
+> 5. **枚举对象必须放在枚举类的行首**
+
+
+
+#### 4.  enum 成员方法
+
+---
+
+##### 1.toString 
+
+> Enum 类已经重写过了，返回的是当前对象名，子类可以重写该方法，用于返回对象的属性信息
+
+##### 2.name
+
+> 返回当前对象名（常量名），子类中不能重写
+
+##### 3.ordinal 
+
+> 返回当前对象的位置号，默认从 0 开始
+
+##### 4.values
+
+> 返回当前枚举类的所有的常量
+
+##### 5.valueOf
+
+> 将字符串转换成 枚举对象，要求字符串必须为 已有的常量名 ，否则报异常
+
+##### 6.compareTo
+
+> 比较两个枚举常量，比较的就是位置号
+
+
+
+#### 5. enum 实现接口
+
+---
+
+> **使用 enum 关键字后，就不能再继承其他类了，因为 enum 会隐式继承 Enum ,而 Java 是单继承机制**
+
+> 枚举类和普通类一样，可以实现接口，形式如下：
+>
+> ```java
+> enum 类名 implements 接口1，接口2{
+> }
+> ```
+
+
+
+### 注解
+
+---
+
+> **注解（Annotation）也被成为元数据（MeteData)，用于修饰解释 包、类、方法、属性、构造器、局部变量等数据信息**
+>
+> 和注释一样，注解不影响程序逻辑，但注解可以被编译或运行，相当于嵌入在代码中的补充信息
+>
+> 在 JavaSE 中，注解的使用目的比较简单，例如标记过时的功能，忽略警告等。在JavaEE 中 注解占据了重要角色，例如用来配置应用程序的任何切面，代替JavaEE j旧版中所遗留的繁冗代码和 XML 配置
+
+
+
+#### 1.基本的 Annotation 介绍
+
+---
+
+> **使用 Annotation  时要在其前面增加 @ 符号，并把该 Annotation 当成一个修饰符使用。用于修饰它支持的程序元素**
+
+> **三个基本的 Annotation **
+>
+> - **@Override** : 限定某个方法，是重写父类方法，该注解只能用于方法
+>
+>   ```java
+>   //1. @Override 注解放在 fly 方法上，表示子类的 fly 方法时重写了父类的 fly
+>   //2. 这里如果没有写 @Override 还是重写了父类 fly
+>   //3. 如果你写了@Override 注解，编译器就会去检查该方法是否真的重写了父类的
+>   // 方法，如果的确重写了，则编译通过，如果没有构成重写，则编译错误
+>   //4. 看看 @Override 的定义
+>   // 解读： 如果发现 @interface 表示一个 注解类
+>       /*
+>       @Target(ElementType.METHOD)
+>       @Retention(RetentionPolicy.SOURCE)
+>       public @interface Override {
+>       }
+>       */
+>   ```
+>
+>   > **@Target 是修饰注解的注解，称为元注解**
+>
+> - @**Deprecated** : 用于表示某个程序元素（类、方法等）**已过时**
+>
+>   ```java
+>   @Deprecated 说明
+>   /*
+>   1.用于表示某个程序元素（方法、类） 已过时
+>   2.可以修饰方法、类、字段、包、参数 等等
+>   3.@Target(value={CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE}
+>   4.@Deprecated 的作用可以做到新旧版本的兼容和过渡
+>   */
+>       
+>   /*
+>   @Documented
+>   @Retention(RetentionPolicy.RUNTIME)
+>   @Target(value={CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE})
+>   public @interface Deprecated {
+>   }
+>   */
+>   ```
+>
+>   
+>
+> - @**SuppressWarnings**  : **抑制编译器警告**
+>
+>   ```java
+>   @SuppressWarnings({"rawtypes", "unchecked", "unused"})
+>   public class SuppressWarnings_ {
+>   
+>   //1. 当我们不希望看到这些警告的时候，可以使用 SuppressWarnings 注解来抑制警告信息
+>   //2. 在{""} 中，可以写入你希望抑制(不显示)警告信息
+>       
+>   //3. 可以指定的警告类型有
+>       
+>           // all，抑制所有警告
+>           // boxing，抑制与封装/拆装作业相关的警告
+>           // //cast，抑制与强制转型作业相关的警告
+>           // //dep-ann，抑制与淘汰注释相关的警告
+>           // //deprecation，抑制与淘汰的相关警告
+>           // //fallthrough，抑制与 switch 陈述式中遗漏 break 相关的警告
+>           // //finally，抑制与未传回 finally 区块相关的警告
+>           // //hiding，抑制与隐藏变数的区域变数相关的警告
+>           // //incomplete-switch，抑制与 switch 陈述式(enum case)中遗漏项目相关的警告
+>                   // //javadoc，抑制与 javadoc 相关的警告
+>           // //nls，抑制与非 nls 字串文字相关的警告
+>           // //null，抑制与空值分析相关的警告
+>           // //rawtypes，抑制与使用 raw 类型相关的警告
+>           // //resource，抑制与使用 Closeable 类型的资源相关的警告
+>           // //restriction，抑制与使用不建议或禁止参照相关的警告
+>           // //serial，抑制与可序列化的类别遗漏 serialVersionUID 栏位相关的警告
+>           // //static-access，抑制与静态存取不正确相关的警告
+>           // //static-method，抑制与可能宣告为 static 的方法相关的警告
+>           // //super，抑制与置换方法相关但不含 super 呼叫的警告
+>           // //synthetic-access，抑制与内部类别的存取未最佳化相关的警告
+>           // //sync-override，抑制因为置换同步方法而遗漏同步化的警告
+>           // //unchecked，抑制与未检查的作业相关的警告
+>           // //unqualified-field-access，抑制与栏位存取不合格相关的警告
+>           // //unused，抑制与未用的程式码及停用的程式码相关的警告
+>       
+>       
+>   //4. 关于 SuppressWarnings 作用范围是和你放置的位置相关
+>       
+>   // 比如 @SuppressWarnings 放置在 main 方法，那么抑制警告的范围就是 main
+>   // 通常我们可以放置具体的语句, 方法, 类. 
+>       
+>   //5. 看看 @SuppressWarnings 源码
+>       
+>   //(1) 放置的位置就是 TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE
+>   //(2) 该注解类有数组 String[] values() 设置一个数组比如 {"rawtypes", "unchecked", "unused"}
+>       /*
+>       @Target({TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE})
+>       @Retention(RetentionPolicy.SOURCE)
+>       public @interface SuppressWarnings {
+>       String[] value()
+>       }
+>   */
+>   	public static void main(String[] args) {
+>           List list = new ArrayList();
+>           list.add("jack");
+>           list.add("tom");
+>           list.add("mary");
+>           int i;
+>           System.out.println(list.get(1));
+>       }
+>   	public void f1() {
+>           // @SuppressWarnings({"rawtypes"})
+>           List list = new ArrayList();
+>           list.add("jack");
+>           list.add("tom");
+>           list.add("mary");
+>           // @SuppressWarnings({"unused"})
+>           int i;
+>           System.out.println(list.get(1));
+>   	}
+>   }
+>   
+>   ```
+
+
+
+#### 2.元注解
+
+---
+
+> **JDK 的元 Annotation 用于修饰其他 Annotation** 
+
+> **元注解的种类**
+>
+> - Retention   指定注解的作用范围，三种 SOURCE 、CLASS、RUNTIME
+>
+>   ```java
+>   说明
+>   只能用于修饰一个 Annotation 定义, 用于指定该 Annotation 可以保留多长时间, @Rentention 包含一个 RetentionPolicy
+>   类型的成员变量, 使用 @Rentention 时必须为该 value 成员变量指定值:
+>   @Retention 的三种值
+>   1) RetentionPolicy.SOURCE: 编译器使用后，直接丢弃这种策略的注释
+>   2) RetentionPolicy.CLASS: 编译器将把注解记录在 class 文件中. 当运行 Java 程序时, JVM 不会保留注解。 这是默认
+>   值
+>   3) RetentionPolicy.RUNTIME:编译器将把注解记录在 class 文件中. 当运行 Java 程序时, JVM 会保留注解. 程序可以
+>   通过反射获取该注解
+>   ```
+>
+>   
+>
+> - Target 指定注解可以在那些地方用
+>
+>   ```java
+>   用于修饰 Annotation 定义，用于指定被修饰的 Annotation 能用于那些程序元素。
+>   @Target 也包含一个名为 value 的成员变量
+>   ```
+>
+>   
+>
+> - Documented 指定该注解是否会在 javadoc 体现
+>
+>   ```java
+>   用于指定被该元注解修饰的 Annotation 类 将被 javadoc 工具提取成文档，即在生成文档时，可以看到该注解
+>   说明： 定义为 Documented 的注解必须设置 Retention 为 RUNTIME
+>   ```
+>
+>   
+>
+> - Inherited 子类会继承父类注解
+>
+>   ```java
+>   被它修饰的 Annotation 将具有继承性，如果某个类使用了 被 Inherited 修饰的 Annotation ，则其子类将自动具有该 z
+>   ```
+>
+>   
 
 
 

@@ -2,7 +2,7 @@ package Java.com.csqalgorithm.datastructures_.graph_;
 
 import java.util.*;
 
-//TODO 非并查集方法
+
 public class Code05_Kruskal {
 
     // Union-Find Set
@@ -62,8 +62,8 @@ public class Code05_Kruskal {
                     sizeMap.remove(aDai);
                 } else {
                     fatherMap.put(bDai, aDai);
-                    sizeMap.put(bDai, aSetSize + bSetSize);
-                    sizeMap.remove(aDai);
+                    sizeMap.put(aDai, aSetSize + bSetSize);
+                    sizeMap.remove(bDai);
                 }
             }
         }

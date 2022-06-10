@@ -659,14 +659,14 @@
 > >    ```java
 > >    class GirlFriend {
 > >        private String name;
-> >          
+> >             
 > >        // 为了能够在静态方法中返回 gf 对象，需要将其修饰为 static 
 > >        private static GirlFriend gf = new GirlFriend("q");
-> >          
+> >             
 > >        private GirlFriend(String name){
 > >            this.name = name;
 > >        }
-> >          
+> >             
 > >        // 提供一个公共的 static 方法，返回 gf 对象
 > >        public static GirlFriend getInstance(){
 > >            return gf;
@@ -695,17 +695,17 @@
 > >    ```java
 > >    class Cat{
 > >        private String name;
-> >          
+> >             
 > >        private static Cat cat;
 > >        private Cat(String name){
 > >            this.name = name;
 > >        }
-> >          
+> >             
 > >        public static Cat(){
 > >            if(cat == null){
 > >                cat = new Cat("xx");
 > >            }
-> >          
+> >             
 > >            return cat;
 > >        }
 > >    }
@@ -965,7 +965,7 @@
 >   interface Usb{
 >   	void work();
 >   }
->       
+>         
 >   class Phone_ implements Usb {
 >   	public void call() {
 >   	System.out.println("手机可以打电话...");
@@ -976,7 +976,7 @@
 >   	}
 >   }
 >   	class Camera_ implements Usb {
->       
+>         
 >   		@Override
 >       	public void work() {
 >           System.out.println("相机工作中...");
@@ -993,7 +993,7 @@
 >   * 演示多态传递现象
 >   */
 >   public class InterfacePolyPass {
->       
+>         
 >   	public static void main(String[] args) {
 >   	//接口类型的变量可以指向，实现了该接口的类的对象实例
 >   	IG ig = new Teacher();
@@ -1004,9 +1004,9 @@
 >   interface IH {
 >   	void hi();
 >   }
->       
+>         
 >   interface IG extends IH{ }
->       
+>         
 >   class Teacher implements IG
 >       @Override
 >   	public void hi() {
@@ -1530,7 +1530,7 @@ class Outer04 { //外部类
 >      public static inner getInnerInstance (){
 >          return new Inner();
 >      }
->           
+>                
 >      Outer.Inner inner = Outer.gerInnerInstance();
 >      ```
 >
@@ -1798,7 +1798,7 @@ class Outer04 { //外部类
 >   3.@Target(value={CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE}
 >   4.@Deprecated 的作用可以做到新旧版本的兼容和过渡
 >   */
->       
+>   
 >   /*
 >   @Documented
 >   @Retention(RetentionPolicy.RUNTIME)
@@ -1808,7 +1808,7 @@ class Outer04 { //外部类
 >   */
 >   ```
 >
->   
+> 
 >
 > - @**SuppressWarnings**  : **抑制编译器警告**
 >
@@ -1818,9 +1818,9 @@ class Outer04 { //外部类
 >   
 >   //1. 当我们不希望看到这些警告的时候，可以使用 SuppressWarnings 注解来抑制警告信息
 >   //2. 在{""} 中，可以写入你希望抑制(不显示)警告信息
->       
+>   
 >   //3. 可以指定的警告类型有
->       
+>   
 >           // all，抑制所有警告
 >           // boxing，抑制与封装/拆装作业相关的警告
 >           // //cast，抑制与强制转型作业相关的警告
@@ -1845,45 +1845,46 @@ class Outer04 { //外部类
 >           // //unchecked，抑制与未检查的作业相关的警告
 >           // //unqualified-field-access，抑制与栏位存取不合格相关的警告
 >           // //unused，抑制与未用的程式码及停用的程式码相关的警告
->       
->       
->   //4. 关于 SuppressWarnings 作用范围是和你放置的位置相关
->       
->   // 比如 @SuppressWarnings 放置在 main 方法，那么抑制警告的范围就是 main
->   // 通常我们可以放置具体的语句, 方法, 类. 
->       
->   //5. 看看 @SuppressWarnings 源码
->       
->   //(1) 放置的位置就是 TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE
->   //(2) 该注解类有数组 String[] values() 设置一个数组比如 {"rawtypes", "unchecked", "unused"}
->       /*
->       @Target({TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE})
->       @Retention(RetentionPolicy.SOURCE)
->       public @interface SuppressWarnings {
->       String[] value()
->       }
->   */
->   	public static void main(String[] args) {
->           List list = new ArrayList();
->           list.add("jack");
->           list.add("tom");
->           list.add("mary");
->           int i;
->           System.out.println(list.get(1));
->       }
->   	public void f1() {
->           // @SuppressWarnings({"rawtypes"})
->           List list = new ArrayList();
->           list.add("jack");
->           list.add("tom");
->           list.add("mary");
->           // @SuppressWarnings({"unused"})
->           int i;
->           System.out.println(list.get(1));
->   	}
->   }
+>
+>
+>  
+>
+>   ```java
+>    //4. 关于 SuppressWarnings 作用范围是和你放置的位置相关
 >   
->   ```
+>     // 比如 @SuppressWarnings 放置在 main 方法，那么抑制警告的范围就是 main
+>     // 通常我们可以放置具体的语句, 方法, 类. 
+>   
+>     //5. 看看 @SuppressWarnings 源码
+>   
+>     //(1) 放置的位置就是 TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE
+>     //(2) 该注解类有数组 String[] values() 设置一个数组比如 {"rawtypes", "unchecked", "unused"}
+>         /*
+>         @Target({TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE})
+>         @Retention(RetentionPolicy.SOURCE)
+>         public @interface SuppressWarnings {
+>         String[] value()
+>         }
+>     */
+>     	public static void main(String[] args) {
+>             List list = new ArrayList();
+>             list.add("jack");
+>             list.add("tom");
+>             list.add("mary");
+>             int i;
+>             System.out.println(list.get(1));
+>         }
+>     	public void f1() {
+>             // @SuppressWarnings({"rawtypes"})
+>             List list = new ArrayList();
+>             list.add("jack");
+>             list.add("tom");
+>             list.add("mary");
+>             // @SuppressWarnings({"unused"})
+>             int i;
+>             System.out.println(list.get(1));
+>     	}
+>     }
 
 
 
@@ -1935,7 +1936,296 @@ class Outer04 { //外部类
 >   被它修饰的 Annotation 将具有继承性，如果某个类使用了 被 Inherited 修饰的 Annotation ，则其子类将自动具有该 z
 >   ```
 >
+
+
+
+
+
+## 异常
+
+> **Java 语言中，将程序执行中发生的不正常情况称为“异常”（开发过程中的语法错误和逻辑错误不算异常）**
+
+> **执行过程中所发生的异常事件可分为两大类**
+>
+> - **Error(错误)**：Java 虚拟机无法解决的严重问题。 如：JVM 系统内部错误、资源耗尽等严重情况。比如 StackOverFlow [栈溢出]、OOM [out of memory], Error 是严重错误，程序会崩溃
+> - **Exception**: 其他因编程错误或偶然的外在因素导致的一般性问题，可以使用针对性的代码进行处理。例如空指针访问，试图读取不存在的文件，网络连接中断，**Exception 分为两大类： 运行时异常【程序运行时，发生的异常】，编译时异常【编程时，编译器检查出来的异常】**
+>
+>  
+>
+> **将该代码块  ->  选中  ->  ctrl + alt + t  ->  选中 try - catch**
+>
+> 如果进行了异常处理，那么即使出现了异常，程序可以继续执行
+
+
+
+### 异常体系图
+
+---
+
+> 1. 异常分为两大类 ： 运行时异常、编译时异常
+> 2. 运行时异常，编译器检查不出来，编译器不要求强制处置的异常。一般是指编程时的逻辑错误，是程序员应该避免其出现的异常， java.lang.RuntimeException 类及它的子类都是运行时异常
+> 3. 对于运行时异常，可以不做处理，因为这类异常很普遍，若全处理可能会对程序的可读性和运行效率产生影响
+> 4. 编译时异常，是编译器要求必须处理的异常
+
+
+
+### 常见五大运行时异常
+
+---
+
+> **常见的运行时异常：**
+>
+> 1. **NullPointerException   空指针异常**
+> 2. **ArithmeticEXception   数学运算异常**
+> 3. **ArrayIndexOutOfBoundsException   数组下标越界异常**
+> 4. **ClassCastException   类型转换异常**
+> 5. **NumberFormatException   数字格式不正确异常** 
+
+
+
+#### 1.**NullPointerException   **
+
+---
+
+> **当应用程序试图在需要对象的地方使用 null 时，抛出该异常**
+>
+> ```java
+> public static void main(String[] args) {
+> 
+> 	String name = null;
+> 	System.out.println(name.length());
+> }
+> ```
+
+
+
+#### 2.ArithmeticEXception
+
+---
+
+>**当出现异常的运算条件时，抛出此异常。例如，一个整数“除以零”时，抛出此类的一个实例**
+
+
+
+#### 3.ArrayIndexOutOfBoundsException
+
+---
+
+>**用非法索引访问数组时抛出的异常。如果索引为负或大于等于数组大小，则该索引为非法索引**
+>
+>```java
+>public static void main(String[] args) {
+>    
+>    int[] arr = {1,2,4};
+>    for (int i = 0; i <= arr.length; i++) {
+>    System.out.println(arr[i]);
+>}
+>```
+
+
+
+
+
+#### 4.ClassCastException
+
+---
+
+>**当试图将对象强制转换为不是实例的子类时，抛出该异常**
+>
+>```java
+>public static void main(String[] args) {
+>    A b = new B(); //向上转型
+>    B b2 = (B)b;//向下转型，这里是 OK
+>    C c2 = (C)b;//这里抛出 ClassCastException
+>}
+>```
+
+
+
+
+
+#### 5.NumberFormatException
+
+---
+
+>**当应用程序试图将字符串转换成一种数值类型，但该字符串不能转换为适当格式时，抛出该异常**
+>
+>```java
+>public static void main(String[] args) {
+>    
+>    String name = "csq";
+>    //将 String 转成 int
+>    int num = Integer.parseInt(name);//抛出 NumberFormatException
+>    System.out.println(num);//1234
+>}
+>```
+
+
+
+### 编译异常
+
+---
+
+> **编译异常是指在编译期间，就必须处理的异常，否则代码不能通过编译**
+
+> **常见的编译异常**
+>
+> - **SQLException/操作数据库时，查询表可能发生异常**
+>
+> - **IOException/操作文件时，发生的异常**
+>
+> - **FileNotFoundException/当操作一个不存在的文件时，发生异常**
+>
+> - **ClassNotFoundException/加载类，而该类不存在时，异常**
+>
+> - **EOFException/操作文件，到文件末尾，发生异常**
+>
+> - **lllegalArguementException/参数异常**
+>
 >   
+
+
+
+### 异常处理
+
+---
+
+> **异常处理就是异常发生时，对异常的处理方式**
+>
+>  
+>
+> **异常处理方式**
+>
+> - **try  -  catch  -  finally**
+>
+>   程序员在代码中捕获发生的异常，自行处理
+>
+>   ```java
+>   try{
+>   	//代码可能有异常
+>   }catch(Exception e){
+>       
+>       //捕获到异常
+>       //1当异常发生时
+>       //2.系统将异常封装成Exception对象e,传递给catch
+>   	//3.得到异常对象后，程序员，自己处理
+>   	//4.注意，如果没有发生异常catch代码块不执行
+>   }finally{
+>       
+>   	//不管ty代码块是否有异常发生，始终要执行finally
+>       //所以通常将释放资源的代码，放在 finally 里
+>   }
+>   ```
+>
+>   
+>
+> - **throws**
+>
+>   将发生的异常抛出，交给调用者（方法）来处理，最顶级的处理者就是 **JVM**
+>
+>   
+>
+>   
+
+
+
+#### try - catch
+
+---
+
+
+
+
+
+
+
+#### throws
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

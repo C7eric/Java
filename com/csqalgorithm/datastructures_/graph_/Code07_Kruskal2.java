@@ -38,7 +38,7 @@ public class Code07_Kruskal2 {
         }
 
     }
-    public static Set<Edge> kruskalMST2(Graph graph) {
-
-    }
+//    public static Set<Edge> kruskalMST2(Graph graph) {
+//        return;
+//    }
 }

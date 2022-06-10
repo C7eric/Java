@@ -65,7 +65,7 @@ public class Code05_Kruskal {
                     sizeMap.put(aDai, aSetSize + bSetSize);
                     sizeMap.remove(bDai);
                 }
-            }
+            } 
         }
     }
     public static class EdgeComparator implements Comparator<Edge> {

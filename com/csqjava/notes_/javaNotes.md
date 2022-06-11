@@ -659,14 +659,14 @@
 > >    ```java
 > >    class GirlFriend {
 > >        private String name;
-> >             
+> >                
 > >        // 为了能够在静态方法中返回 gf 对象，需要将其修饰为 static 
 > >        private static GirlFriend gf = new GirlFriend("q");
-> >             
+> >                
 > >        private GirlFriend(String name){
 > >            this.name = name;
 > >        }
-> >             
+> >                
 > >        // 提供一个公共的 static 方法，返回 gf 对象
 > >        public static GirlFriend getInstance(){
 > >            return gf;
@@ -695,17 +695,17 @@
 > >    ```java
 > >    class Cat{
 > >        private String name;
-> >             
+> >                
 > >        private static Cat cat;
 > >        private Cat(String name){
 > >            this.name = name;
 > >        }
-> >             
+> >                
 > >        public static Cat(){
 > >            if(cat == null){
 > >                cat = new Cat("xx");
 > >            }
-> >             
+> >                
 > >            return cat;
 > >        }
 > >    }
@@ -965,7 +965,7 @@
 >   interface Usb{
 >   	void work();
 >   }
->         
+>           
 >   class Phone_ implements Usb {
 >   	public void call() {
 >   	System.out.println("手机可以打电话...");
@@ -976,7 +976,7 @@
 >   	}
 >   }
 >   	class Camera_ implements Usb {
->         
+>           
 >   		@Override
 >       	public void work() {
 >           System.out.println("相机工作中...");
@@ -993,7 +993,7 @@
 >   * 演示多态传递现象
 >   */
 >   public class InterfacePolyPass {
->         
+>           
 >   	public static void main(String[] args) {
 >   	//接口类型的变量可以指向，实现了该接口的类的对象实例
 >   	IG ig = new Teacher();
@@ -1004,9 +1004,9 @@
 >   interface IH {
 >   	void hi();
 >   }
->         
+>           
 >   interface IG extends IH{ }
->         
+>           
 >   class Teacher implements IG
 >       @Override
 >   	public void hi() {
@@ -1530,7 +1530,7 @@ class Outer04 { //外部类
 >      public static inner getInnerInstance (){
 >          return new Inner();
 >      }
->                
+>                     
 >      Outer.Inner inner = Outer.gerInnerInstance();
 >      ```
 >
@@ -1798,7 +1798,7 @@ class Outer04 { //外部类
 >   3.@Target(value={CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE}
 >   4.@Deprecated 的作用可以做到新旧版本的兼容和过渡
 >   */
->   
+>     
 >   /*
 >   @Documented
 >   @Retention(RetentionPolicy.RUNTIME)
@@ -1815,12 +1815,12 @@ class Outer04 { //外部类
 >   ```java
 >   @SuppressWarnings({"rawtypes", "unchecked", "unused"})
 >   public class SuppressWarnings_ {
->   
+>     
 >   //1. 当我们不希望看到这些警告的时候，可以使用 SuppressWarnings 注解来抑制警告信息
 >   //2. 在{""} 中，可以写入你希望抑制(不显示)警告信息
->   
+>     
 >   //3. 可以指定的警告类型有
->   
+>     
 >           // all，抑制所有警告
 >           // boxing，抑制与封装/拆装作业相关的警告
 >           // //cast，抑制与强制转型作业相关的警告
@@ -2104,14 +2104,14 @@ class Outer04 { //外部类
 >   try{
 >   	//代码可能有异常
 >   }catch(Exception e){
->       
+>         
 >       //捕获到异常
 >       //1当异常发生时
 >       //2.系统将异常封装成Exception对象e,传递给catch
 >   	//3.得到异常对象后，程序员，自己处理
 >   	//4.注意，如果没有发生异常catch代码块不执行
 >   }finally{
->       
+>         
 >   	//不管ty代码块是否有异常发生，始终要执行finally
 >       //所以通常将释放资源的代码，放在 finally 里
 >   }
@@ -2132,6 +2132,115 @@ class Outer04 { //外部类
 #### try - catch
 
 ---
+
+> **Java 提供 try 和 catch 块 来处理异常。try 块 用于包含出错的代码。catch 块 用于处理 try 块中发生的异常。可以根据需要在程序中有多个的 try- catch 块**
+>
+>  
+>
+> **基本语法**
+>
+> ```java
+> try {
+>     //可疑代码
+>     //将异常生成对应的异常对象，传递给 catch 块
+> } catch(Exception e) {
+>     //对异常的处理
+> }
+> // 如果没有 finally ，语法也可以通过
+> ```
+
+ 
+
+##### 注意事项
+
+---
+
+> - 如果异常发生了，则异常发生后面的代码不会执行，直接进入到 catch 块
+>
+> - 如果异常没有发生，则顺序执行 try 的代码块，不会进入到 catch
+>
+> - 如果希望不管是否发生异常，都执行某段代码（比如关闭连接，释放资源等），则使用 finally 
+>
+>   ```java
+>   public static void main(String[] args) {
+>       
+>   //ctrl + atl + t
+>   //1. 如果异常发生了，则异常发生后面的代码不会执行，直接进入到 catch 块
+>   //2. 如果异常没有发生，则顺序执行 try 的代码块，不会进入到 catch
+>   //3. 如果希望不管是否发生异常，都执行某段代码(比如关闭连接，释放资源等)则使用如下代码- finally
+>   try {
+>       String str = "csq";
+>       int a = Integer.parseInt(str);
+>       System.out.println("数字：" + a);
+>   } catch (NumberFormatException e) {
+>       System.out.println("异常信息=" + e.getMessage());
+>   } finally {
+>       System.out.println("finally 代码块被执行...");
+>   }
+>       System.out.println("程序继续...");
+>   }
+>   ```
+>
+> - 可以**有多个 catch 语句**，捕获**不同的异常**(进行不同的业务处理)，**要求父类异常在后，子类异常在前**，比如（Exception  在后，NullPointerException 在前），**如果发生异常，只会匹配一个 catch**
+>
+>   ```java
+>   try{
+>       //
+>   } catch(NullPointerException e){
+>       
+>   } catch(Exception e){
+>       
+>   } finally {
+>       
+>   }
+>   ```
+>
+>   ---
+>
+>   ```java
+>   public static void main(String[] args) {
+>   
+>   //1.如果 try 代码块有可能有多个异常
+>   //2.可以使用多个 catch 分别捕获不同的异常，相应处理
+>   //3.要求子类异常写在前面，父类异常写在后面
+>   try {
+>       Person person = new Person();
+>       //person = null;
+>       System.out.println(person.getName());//NullPointerException
+>       int n1 = 10;
+>       int n2 = 0;
+>       int res = n1 / n2;//ArithmeticException
+>   } catch (NullPointerException e) {
+>       System.out.println("空指针异常=" + e.getMessage());
+>   } catch (ArithmeticException e) {
+>       System.out.println("算术异常=" + e.getMessage());
+>   } catch (Exception e) {
+>       System.out.println(e.getMessage());
+>   } finally {
+>   	}
+>   }
+>   }
+>   ```
+>
+> - 可以进行 try - finally 配合使用，这种用法**相当于没有捕获异常**，因此程序**会直接崩掉**，应用场景：就是执行一段代码，不管是否发生异常，都必须执行某个业务
+>
+>   ```java
+>   try{
+>       //代码
+>   }
+>   finally {
+>       //总是执行
+>   }
+>   ```
+
+
+
+##### 执行顺序总结
+
+---
+
+> 1. 如果没有出现异常，则执行 try 块中所有语句，不执行 catch 语句，如果有finally ，最后还需要执行finally 里面的语句
+> 2. 如果出现异常，则 try 块中异常发生后，**try 块剩下的语句不再执行**。将执行 catch 里的语句，**如果有 finally ,最后还需要执行 finally  里面的语句**
 
 
 

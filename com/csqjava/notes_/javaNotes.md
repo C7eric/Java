@@ -659,14 +659,14 @@
 > >    ```java
 > >    class GirlFriend {
 > >        private String name;
-> >                         
+> >                               
 > >        // 为了能够在静态方法中返回 gf 对象，需要将其修饰为 static 
 > >        private static GirlFriend gf = new GirlFriend("q");
-> >                         
+> >                               
 > >        private GirlFriend(String name){
 > >            this.name = name;
 > >        }
-> >                         
+> >                               
 > >        // 提供一个公共的 static 方法，返回 gf 对象
 > >        public static GirlFriend getInstance(){
 > >            return gf;
@@ -695,17 +695,17 @@
 > >    ```java
 > >    class Cat{
 > >        private String name;
-> >                         
+> >                               
 > >        private static Cat cat;
 > >        private Cat(String name){
 > >            this.name = name;
 > >        }
-> >                         
+> >                               
 > >        public static Cat(){
 > >            if(cat == null){
 > >                cat = new Cat("xx");
 > >            }
-> >                         
+> >                               
 > >            return cat;
 > >        }
 > >    }
@@ -965,7 +965,7 @@
 >   interface Usb{
 >   	void work();
 >   }
->                 
+>                     
 >   class Phone_ implements Usb {
 >   	public void call() {
 >   	System.out.println("手机可以打电话...");
@@ -976,7 +976,7 @@
 >   	}
 >   }
 >   	class Camera_ implements Usb {
->                 
+>                     
 >   		@Override
 >       	public void work() {
 >           System.out.println("相机工作中...");
@@ -993,7 +993,7 @@
 >   * 演示多态传递现象
 >   */
 >   public class InterfacePolyPass {
->                 
+>                     
 >   	public static void main(String[] args) {
 >   	//接口类型的变量可以指向，实现了该接口的类的对象实例
 >   	IG ig = new Teacher();
@@ -1004,9 +1004,9 @@
 >   interface IH {
 >   	void hi();
 >   }
->                 
+>                     
 >   interface IG extends IH{ }
->                 
+>                     
 >   class Teacher implements IG
 >       @Override
 >   	public void hi() {
@@ -1530,7 +1530,7 @@ class Outer04 { //外部类
 >      public static inner getInnerInstance (){
 >          return new Inner();
 >      }
->                                    
+>                                              
 >      Outer.Inner inner = Outer.gerInnerInstance();
 >      ```
 >
@@ -1798,7 +1798,7 @@ class Outer04 { //外部类
 >   3.@Target(value={CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE}
 >   4.@Deprecated 的作用可以做到新旧版本的兼容和过渡
 >   */
->           
+>               
 >   /*
 >   @Documented
 >   @Retention(RetentionPolicy.RUNTIME)
@@ -1815,12 +1815,12 @@ class Outer04 { //外部类
 >   ```java
 >   @SuppressWarnings({"rawtypes", "unchecked", "unused"})
 >   public class SuppressWarnings_ {
->           
+>               
 >   //1. 当我们不希望看到这些警告的时候，可以使用 SuppressWarnings 注解来抑制警告信息
 >   //2. 在{""} 中，可以写入你希望抑制(不显示)警告信息
->           
+>               
 >   //3. 可以指定的警告类型有
->           
+>               
 >           // all，抑制所有警告
 >           // boxing，抑制与封装/拆装作业相关的警告
 >           // //cast，抑制与强制转型作业相关的警告
@@ -2104,14 +2104,14 @@ class Outer04 { //外部类
 >   try{
 >   	//代码可能有异常
 >   }catch(Exception e){
->               
+>                   
 >       //捕获到异常
 >       //1当异常发生时
 >       //2.系统将异常封装成Exception对象e,传递给catch
 >   	//3.得到异常对象后，程序员，自己处理
 >   	//4.注意，如果没有发生异常catch代码块不执行
 >   }finally{
->               
+>                   
 >   	//不管ty代码块是否有异常发生，始终要执行finally
 >       //所以通常将释放资源的代码，放在 finally 里
 >   }
@@ -2423,11 +2423,11 @@ class Outer04 { //外部类
 >           int n1 = 100;
 >           Integer integer = new Integer(n1);
 >           Integer integer1 = Integer.valueOf(n1);
->   
+>       
 >           //手动拆箱
 >           //Integer -> int
 >           int i = integer.intValue();
->   
+>       
 >           //jdk5后，就可以自动装箱和自动拆箱
 >           int n2 = 200;
 >           //自动装箱 int->Integer
@@ -2473,6 +2473,89 @@ class Outer04 { //外部类
 
 
 
+
+### String 类
+
+---
+
+##### String  类的理解和创建对象
+
+> 1. String 对象用于保存字符串，也是一组字符序列
+> 2. 字符串常量对象是用双引号括起来的字符序列。例如 “你好” ， “12.97” ， “boy” 
+> 3. 字符串的字符使用的是 **Unicode **字符编码，一个字符（不区分字母还是汉子）占两个字节。
+> 4. String 类常用构造器
+>    - String s1 = new String();
+>    - String s2 = new String(String original);
+>    - String s3 = new String(char[] a);
+>    - String s4 = new String(char[] a,int startIndex,int count);
+>
+> ```java
+> public class String01 {
+>     public static void main(String[] args) {
+>         
+>     //1.String 对象用于保存字符串，也就是一组字符序列
+>     //2. "jack" 字符串常量, 双引号括起的字符序列
+>     //3. 字符串的字符使用 Unicode 字符编码，一个字符(不区分字母还是汉字)占两个字节
+>     //4. String 类有很多构造器，构造器的重载
+>     // 常用的有 String s1 = new String(); 
+>     //String s2 = new String(String original);
+>     //String s3 = new String(char[] a);
+>     //String s4 = new String(char[] a,int startIndex,int count)
+>     //String s5 = new String(byte[] b)
+>     //5. String 类实现了接口 Serializable【String 可以串行化:可以在网络传输】
+>     // 接口 Comparable [String 对象可以比较大小]
+>     //6. String 是 final 类，不能被其他的类继承
+>     //7. String 有属性 private final char value[]; 用于存放字符串内容
+>     //8. 一定要注意：value 是一个 final 类型， 不可以修改(需要功力)：即 value 不能指向
+>     // 新的地址，但是单个字符内容是可以变化
+>     String name = "jack";
+>     name = "tom";
+>     final char[] value = {'a','b','c'};
+>     char[] v2 = {'t','o','m'};
+>     value[0] = 'H';
+>     //value = v2; 不可以修改 value 地址
+> }
+> ```
+
+
+
+##### 创建 String 对象的两种方式
+
+> - **方式一 ：直接赋值 String s = "csq";**
+> - **方式二 ： 调用构造器 String s = new String("csq");**
+
+> **两种方式的区别：**
+>
+> - 方式一 ： 先从常量池查看是否有 “csq" 数据空间，如果有，直接指向，如果没有则重新创建，然后指向。s 最终指向的是常量池的空间地址
+> - 方式二 ： 先在堆中创建空间，里面维护了 value 属性，指向常量池的 csq 空间。如果常量池中 没有 csq 则重新创建，如果有直接通过 value 指向，最终指向的是堆中的空间地址。
+
+
+
+##### 字符串的特性
+
+> 1. Sring 是一个 final 类，代表不可变的字符序列。
+> 1. 字符串是不可变的，一个字符串对象一旦被分配，其内容是不可变的
+
+
+
+##### String 类常用的方法
+
+> **字符串是保存字符串常量的。每次更新都需要重新开辟空间，效率极低，因此 Java 设计者还提供了  StringBuilder 和 StringBuffer 来增强String 的功能，并提高效率。**
+
+> **常见方法：**
+>
+> - **equals**    //区分大小写，判断内容是否相等
+> - **equalslgnoreCase**   //忽略大小写的判断内容是否相等
+> - **length**   //获取字符的个数，字符串的长度
+> - **indexof**   //获取字符在字符串中第1次出现的索引，索引从0开始，如果找不到，返回-1
+> - **lastIndexOf**   //获取字符在字符串中最后1次出现的索引，索引从0开始如找不到，返回-1
+> - **substring**   //截取指定范围的子串
+> - **trim**   //去前后空格
+> - **charAt**  :   获取某索引处的字符，注意不能使用Str[index]这种方式.
+
+
+
+##### StringBuffer 类
 
 
 

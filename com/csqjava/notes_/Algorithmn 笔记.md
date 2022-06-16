@@ -1,4 +1,4 @@
-# **Algorithmn 笔记**
+# Algorithmn 笔记
 
 ​																																		——CSQ
 
@@ -2225,3 +2225,28 @@ PriorityQueue<Integer> heap = new Priority<>();
 >     }
 > }
 > ```
+
+
+
+#### kruskal 算法
+
+---
+
+
+
+
+
+#### prim 算法
+
+---
+
+
+
+
+
+#### dijkstra 算法
+
+---
+
+
+

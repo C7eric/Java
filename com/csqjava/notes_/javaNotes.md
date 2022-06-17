@@ -659,14 +659,14 @@
 > >    ```java
 > >    class GirlFriend {
 > >        private String name;
-> >                                  
+> >                                     
 > >        // 为了能够在静态方法中返回 gf 对象，需要将其修饰为 static 
 > >        private static GirlFriend gf = new GirlFriend("q");
-> >                                  
+> >                                     
 > >        private GirlFriend(String name){
 > >            this.name = name;
 > >        }
-> >                                  
+> >                                     
 > >        // 提供一个公共的 static 方法，返回 gf 对象
 > >        public static GirlFriend getInstance(){
 > >            return gf;
@@ -695,17 +695,17 @@
 > >    ```java
 > >    class Cat{
 > >        private String name;
-> >                                  
+> >                                     
 > >        private static Cat cat;
 > >        private Cat(String name){
 > >            this.name = name;
 > >        }
-> >                                  
+> >                                     
 > >        public static Cat(){
 > >            if(cat == null){
 > >                cat = new Cat("xx");
 > >            }
-> >                                  
+> >                                     
 > >            return cat;
 > >        }
 > >    }
@@ -965,7 +965,7 @@
 >   interface Usb{
 >   	void work();
 >   }
->                       
+>                         
 >   class Phone_ implements Usb {
 >   	public void call() {
 >   	System.out.println("手机可以打电话...");
@@ -976,7 +976,7 @@
 >   	}
 >   }
 >   	class Camera_ implements Usb {
->                       
+>                         
 >   		@Override
 >       	public void work() {
 >           System.out.println("相机工作中...");
@@ -993,7 +993,7 @@
 >   * 演示多态传递现象
 >   */
 >   public class InterfacePolyPass {
->                       
+>                         
 >   	public static void main(String[] args) {
 >   	//接口类型的变量可以指向，实现了该接口的类的对象实例
 >   	IG ig = new Teacher();
@@ -1004,9 +1004,9 @@
 >   interface IH {
 >   	void hi();
 >   }
->                       
+>                         
 >   interface IG extends IH{ }
->                       
+>                         
 >   class Teacher implements IG
 >       @Override
 >   	public void hi() {
@@ -1530,7 +1530,7 @@ class Outer04 { //外部类
 >      public static inner getInnerInstance (){
 >          return new Inner();
 >      }
->                                                   
+>                                                        
 >      Outer.Inner inner = Outer.gerInnerInstance();
 >      ```
 >
@@ -1798,7 +1798,7 @@ class Outer04 { //外部类
 >   3.@Target(value={CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE}
 >   4.@Deprecated 的作用可以做到新旧版本的兼容和过渡
 >   */
->                 
+>                   
 >   /*
 >   @Documented
 >   @Retention(RetentionPolicy.RUNTIME)
@@ -1815,12 +1815,12 @@ class Outer04 { //外部类
 >   ```java
 >   @SuppressWarnings({"rawtypes", "unchecked", "unused"})
 >   public class SuppressWarnings_ {
->                 
+>                   
 >   //1. 当我们不希望看到这些警告的时候，可以使用 SuppressWarnings 注解来抑制警告信息
 >   //2. 在{""} 中，可以写入你希望抑制(不显示)警告信息
->                 
+>                   
 >   //3. 可以指定的警告类型有
->                 
+>                   
 >           // all，抑制所有警告
 >           // boxing，抑制与封装/拆装作业相关的警告
 >           // //cast，抑制与强制转型作业相关的警告
@@ -2104,14 +2104,14 @@ class Outer04 { //外部类
 >   try{
 >   	//代码可能有异常
 >   }catch(Exception e){
->                     
+>                       
 >       //捕获到异常
 >       //1当异常发生时
 >       //2.系统将异常封装成Exception对象e,传递给catch
 >   	//3.得到异常对象后，程序员，自己处理
 >   	//4.注意，如果没有发生异常catch代码块不执行
 >   }finally{
->                     
+>                       
 >   	//不管ty代码块是否有异常发生，始终要执行finally
 >       //所以通常将释放资源的代码，放在 finally 里
 >   }
@@ -2423,11 +2423,11 @@ class Outer04 { //外部类
 >           int n1 = 100;
 >           Integer integer = new Integer(n1);
 >           Integer integer1 = Integer.valueOf(n1);
->         
+>           
 >           //手动拆箱
 >           //Integer -> int
 >           int i = integer.intValue();
->         
+>           
 >           //jdk5后，就可以自动装箱和自动拆箱
 >           int n2 = 200;
 >           //自动装箱 int->Integer
@@ -2506,7 +2506,7 @@ class Outer04 { //外部类
 
 ---
 
-##### String  类的理解和创建对象
+#### String  类的理解和创建对象
 
 > 1. String 对象用于保存字符串，也是一组字符序列
 > 2. 字符串常量对象是用双引号括起来的字符序列。例如 “你好” ， “12.97” ， “boy” 
@@ -2547,7 +2547,7 @@ class Outer04 { //外部类
 
 
 
-##### 创建 String 对象的两种方式
+#### 创建 String 对象的两种方式
 
 > - **方式一 ：直接赋值 String s = "csq";**
 > - **方式二 ： 调用构造器 String s = new String("csq");**
@@ -2559,7 +2559,7 @@ class Outer04 { //外部类
 
 
 
-##### 字符串的特性
+#### 字符串的特性
 
 > 1. Sring 是一个 final 类，代表不可变的字符序列。
 > 1. 字符串是不可变的，一个字符串对象一旦被分配，其内容是不可变的
@@ -2581,19 +2581,13 @@ class Outer04 { //外部类
 >     }
 > ```
 >
-> **重要规则：** 底层是 StringBuilder sb = new StringBuilder(); sb.append(a);  sb.append(b); sb 是在堆中，并且 append 是在原来字符串的基础上追加的 
+> **重要规则：** **底层是 StringBuilder sb = new StringBuilder(); sb.append(a);  sb.append(b); sb 是在堆中，并且 append 是在原来字符串的基础上追加的** 
 >
-> String c1 = "ab" + "cd";  常量相加，看的是池。  String c1 = a + b; 变量相加，是在堆中
+> **String c1 = "ab" + "cd";  常量相加，看的是池。  String c1 = a + b; 变量相加，是在堆中**
 
 
 
-
-
-
-
-
-
-##### String 类常用的方法
+#### String 类常用的方法
 
 > **字符串是保存字符串常量的。每次更新都需要重新开辟空间，效率极低，因此 Java 设计者还提供了  StringBuilder 和 StringBuffer 来增强String 的功能，并提高效率。**
 
@@ -2611,7 +2605,676 @@ class Outer04 { //外部类
 
  
 
-##### StringBuffer 类
+#### StringBuffer 类
+
+> **java.lang.StringBuffer 代表可变的字符序列，可以对字符串序列内容进行删减。**
+>
+> 很多方法与 String 相同，但 StringBuffer 是可变长度的。
+>
+> StringBuffer 是一个容器。
+>
+> - Stringbuffer 是 final 类
+> - 实现了 Serializable 接口，可以保存到文件，或文件传输
+> - 继承了抽象类 AbstractStringBuider 
+> - AbstractStringBuilder 属性  char[] value,存放的字符序列
+>
+> ```java
+> public static void main(String[] args) {
+> 
+>     //1. StringBuffer 的直接父类 是 AbstractStringBuilder
+>     //2. StringBuffer 实现了 Serializable, 即 StringBuffer 的对象可以串行化
+>     //3. 在父类中 AbstractStringBuilder 有属性 char[] value,不是 final
+>     // 该 value 数组存放 字符串内容，引出存放在堆中的
+>     //4. StringBuffer 是一个 final 类，不能被继承
+>     //5. 因为 StringBuffer 字符内容是存在 char[] value, 所有在变化(增加/删除)
+>     // 不用每次都更换地址(即不是每次创建新对象)， 所以效率高于 String
+>     StringBuffer stringBuffer = new StringBuffer("hello");
+> }
+> ```
+
+
+
+##### String 与 StringBuffer
+
+1. String 保存的是字符串常量，里面的值不能改，每次 String 类 更新实际上就是更换地址，效率较低。
+2. StringBuffer 保存的是字符串变量，里面的值可以更改，每次 StringBuffer 的更新 实际上可以更新内容，不用每次更新地址，效率较高。
+
+
+
+##### String 与 StringBuffer 相互转换
+
+> **在开发中，我 们经常需要将 String 与 StringBuffer 进行转换。**
+
+```java
+public static void main(String[] args) {
+    
+	//看 String——>StringBuffe
+    String str = "hello tom";
+    //方式 1 使用构造器
+    //注意： 返回的才是 StringBuffer 对象，对 str 本身没有影响
+    StringBuffer stringBuffer = new StringBuffer(str);
+    //方式 2 使用的是 append 方法
+    StringBuffer stringBuffer1 = new StringBuffer();
+    stringBuffer1 = stringBuffer1.append(str);
+    //看看 StringBuffer ->String
+    StringBuffer stringBuffer3 = new StringBuffer("韩顺平教育");
+    //方式 1 使用 StringBuffer 提供的 toString 方法
+    String s = stringBuffer3.toString();
+    //方式 2: 使用构造器来搞定
+    String s1 = new String(stringBuffer3);
+}
+```
+
+
+
+##### StringBuffer 类常见方法
+
+
+
+```java
+public static void main(String[] args) {
+    
+    StringBuffer s = new StringBuffer("hello");
+    
+    //增
+    s.append(',');// "hello,"
+    s.append("张三丰");//"hello,张三丰"
+    s.append("赵敏").append(100).append(true).append(10.5);//"hello,张三丰赵敏 100true10.5" System.out.println(s);//"hello,张三丰赵敏 100true10.5"
+    
+    //删
+    /*
+    * 删除索引为>=start && <end 处的字符
+    * 解读: 删除 11~14 的字符 [11, 14)
+    */
+    s.delete(11, 14);
+    System.out.println(s);//"hello,张三丰赵敏 true10.5"
+    
+    //改
+    //使用 周芷若 替换 索引 9-11 的字符 [9,11)
+    s.replace(9, 11, "周芷若");
+    System.out.println(s);//"hello,张三丰周芷若 true10.5"
+    //查找指定的子串在字符串第一次出现的索引，如果找不到返回-1
+    int indexOf = s.indexOf("张三丰");
+    System.out.println(indexOf);//6
+    
+    //插
+    //老韩解读，在索引为 9 的位置插入 "赵敏",原来索引为 9 的内容自动后移
+    s.insert(9, "赵敏");
+    System.out.println(s);//"hello,张三丰赵敏周芷若 true10.5"
+    //长度
+    System.out.println(s.length());//22
+    System.out.println(s);
+}
+```
+
+
+
+#### StringBuilder 类
+
+> - 一个可变的字符序列。此类提供一个与 StringBuffer 兼容的 API ，但不保证同步（StringBuilder 不是线程安全）。该类 被设计用作 StringBuffer 的一个简易替换，用在字符串缓冲区被单个线程使用的时候。如果可能，建议优先采用该类，因为在大多数实现中，它 比 StringBuffer 要快。
+> - 在 StringBuiler 上的主要操作是 append 和 insert 方法，可重载这些方法，以接受任意类型的数据。
+
+```java
+public static void main(String[] args) {
+
+    //1. StringBuffer 的直接父类 是 AbstractStringBuilder
+    //2. StringBuffer 实现了 Serializable, 即 StringBuffer 的对象可以串行化
+    //3. 在父类中 AbstractStringBuilder 有属性 char[] value,不是 final
+    // 该 value 数组存放 字符串内容，引出存放在堆中
+    //4. StringBuffer 是一个 final 类，不能被继承
+    //5. 因为 StringBuffer 字符内容是存在 char[] value, 所有在变化(增加/删除)
+    // 不用每次都更换地址(即不是每次创建新对象)， 所以效率高于 String
+    StringBuffer stringBuffer = new StringBuffer("hello");
+}
+```
+
+
+
+##### StringBuffer 类 常用方法
+
+> **StringBuffer 和 StringBuilder 均代表可变的字符序列，方法是一样的，所以使用和 StringBuffer 一样 。**
+>
+> - StringBuilder 是 final 
+> - 继承了 AbstractStringBuilder 属性 char[] value ,内容存到 value
+> - 实现了 Serializable 接口，序列化（所谓序列化即可以保存类型和数据本 
+
+```java
+public static void main(String[] args){
+    //1. StringBuilder 继承 AbstractStringBuilder 类
+    //2. 实现了 Serializable ,说明 StringBuilder 对象是可以串行化(对象可以网络传输,可以保存到文件)
+    //3. StringBuilder 是 final 类, 不能被继承
+    //4. StringBuilder 对象字符序列仍然是存放在其父类 AbstractStringBuilder 的 char[] value;
+    // 因此，字符序列是堆中
+    //5. StringBuilder 的方法，没有做互斥的处理,即没有 synchronized 关键字,因此在单线程的情况下使用
+    // StringBuilder
+    StringBuilder stringBuilder = new StringBuilder();
+}
+```
+
+
+
+#### String 与 StringXxx 比较
+
+---
+
+1. StringBuilder 和 StringBuffer 非常类似，均代表可变的字符序列，而且方法都一样
+
+2. String ： 不可变字符序列，效率低，但是复用率高
+
+3. StringBuffer ： 可变字符序列，效率较高（增删）、线程安全、看源码
+
+4. StringBuilder : 可变序列、效率最高、线程不安全
+
+5. String 使用说明：
+
+   String s = "a"; //创建了一个字符串
+
+   s += "b";  // 实际上 原来的"a"字符串对象 已经丢弃了，现在又产生了一个字符串 s + "b"(也就是"ab")。如果多次执行这些改变内容的操作，会导致大量副本字符串对象存留在内存中，将降低效率。如果这样的操作放在循环中，会 极大影响程序的性能 = > **如果我们对 String 做大量修改，不要使用 String**
+
+
+
+#### StringXxx 的选择
+
+---
+
+使用的原则，结论：
+
+1. 如果字符串存在大量的修改操作，一般使用 StringBuffer 或 StringBuiler 
+2. 如果字符串存在大量的修改操作，并在单线程的情况，使用StringBuilder
+3. 如果字符串存在大量的修改操作，并在多线程的情况，使用 StringBuffer
+4. 如果我们的字符串存在很少的修改操作，被多个对象引用，使用 String ，比如配置信息
+
+
+
+### Math 类
+
+---
+
+> **Math 类包括用于执行基本数学运算的方法，如初等指数、对数、平方根和三角函数**
+
+
+
+#### Math 类 常见方法 
+
+---
+
+- .**abs  [绝对值]**
+
+  ```java
+  int abs = Math.abs(-9);
+  System.out.println(abs);//9
+  ```
+
+- **.pow  [求幂]**
+
+  ```java
+  double pow = Math.pow(2, 4);//2 的 4 次方
+  System.out.println(pow);//16
+  ```
+
+- **.ceil  [向上取整]**
+
+  ```java
+  double ceil = Math.ceil(3.9);
+  System.out.println(ceil);//4.0
+  ```
+
+- **.floor  [向下取整]**
+
+  ```java
+  double floor = Math.floor(4.001);
+  System.out.println(floor);//4.0
+  ```
+
+- **.round  [四舍五入]**
+
+  ```java
+  // Math.floor(该参数+0.5)
+  long round = Math.round(5.51);
+  System.out.println(round);//6
+  ```
+
+- **.sqrt  [开平方]**
+
+  ```java
+  double sqrt = Math.sqrt(9.0);
+  System.out.println(sqrt);//3.0
+  ```
+
+- **.random  [求随机数]**
+
+  ```java
+  // random 返回的是 0 <= x < 1 之间的一个随机小数
+  // 思考：请写出获取 a-b 之间的一个随机整数,a,b 均为整数 ，比如 a = 2, b=7
+  // 即返回一个数 x 2 <= x <= 7
+  // Math.random() * (b-a) 返回的就是 0 <= 数 <= b-a
+  // (1) (int)(a) <= x <= (int)(a + Math.random() * (b-a +1) )
+  // (2) 使用具体的数给小伙伴介绍 a = 2 b = 7
+  // (int)(a + Math.random() * (b-a +1) ) = (int)( 2 + Math.random()*6)
+  // Math.random()*6 返回的是 0 <= x < 6 小数
+  // 2 + Math.random()*6 返回的就是 2<= x < 8 小数
+  // (int)(2 + Math.random()*6) = 2 <= x <= 7
+  // (3) 公式就是 (int)(a + Math.random() * (b-a +1) )
+  for(int i = 0; i < 100; i++) {
+      System.out.println((int)(2 + Math.random() * (7 - 2 + 1)));
+  }
+  ```
+
+- **.max / min  [最大值/最小值]**
+
+  ```java
+  int min = Math.min(1, 9);
+  int max = Math.max(45, 90);
+  System.out.println("min=" + min);
+  System.out.println("max=" + max);
+  ```
+
+  
+
+### Arrays 类
+
+---
+
+> **Arrays 类中包含了一系列的静态方法，用于管理或操作数组（比如排序和搜索）**
+
+
+
+#### Arrays 类常用方法
+
+---
+
+- toString 返回数组的字符串形式
+
+  ```java
+  System.out.println(Arrays.toString(arr));
+  ```
+
+- sort 排序（自然排序和定制排序）
+
+  ```java
+  Arrays.sort(arr); // 默认排序方法
+  ```
+
+  案例分析
+
+  ```java
+  //(2)price 从小到大
+  // Arrays.sort(books, new Comparator() {
+  // //这里是对 Book 数组排序，因此 o1 和 o2 就是 Book 对象
+  // @Override
+  // public int compare(Object o1, Object o2) {
+  // Book book1 = (Book) o1;
+  // Book book2 = (Book) o2;
+  // double priceVal = book2.getPrice() - book1.getPrice();
+  //如果发现返回结果和我们输出的不一致，就修改一下返回的 1 和 -1
+  // if(priceVal > 0) {
+  // return -1;
+  // } else if(priceVal < 0) {
+  // return 1;
+  // } else {
+  // return 0;
+  // }
+  //}
+  
+  //(3)按照书名长度从大到小
+      Arrays.sort(books, new Comparator() {
+      //这里是对 Book 数组排序，因此 o1 和 o2 就是 Book 对象
+      @Override
+      public int compare(Object o1, Object o2) {
+          Book book1 = (Book) o1;
+          Book book2 = (Book) o2;
+          //要求按照书名的长度来进行排序
+          return book2.getName().length() - book1.getName().length();
+      }
+  });
+  ```
+
+- binarySearch 通过二分查找进行查找，要求必须排好序
+
+  ```java
+  int index = Arrays.binarySearch(arr, 567);
+  ```
+
+- copyOf 数组元素的复制
+
+  ```java
+  Integer[] newArr = Arrays.copyOf(arr, 
+  ```
+
+- fill 数组元素的填充
+
+  ```java
+  //1. 使用 99 去填充 num 数组，可以理解成是替换原理的元素
+  Arrays.fill(num, 99);
+  ```
+
+- equals 比较两个数组元素内容是否完全一致
+
+  ```java
+  //1. 如果 arr 和 arr2 数组的元素一样，则方法 true;
+  //2. 如果不是完全一样，就返回 false
+  boolean equals = Arrays.equals(arr, arr2);
+  System.out.println("equals=" + equals);
+  ```
+
+- asList 将一组值，转换成 List
+
+  ```java
+  //1. asList 方法，会将 (2,3,4,5,6,1)数据转成一个 List 集合
+  //2. 返回的 asList 编译类型 List(接口)
+  //3. asList 运行类型 java.util.Arrays#ArrayList, 是 Arrays 类的
+  // 静态内部类 private static class ArrayList<E> extends AbstractList<E>
+  // implements RandomAccess, java.io.Serializable
+  List asList = Arrays.asList(2,3,4,5,6,1);
+  System.out.println("asList=" + asList);
+  System.out.println("asList 的运行类型" + asList.getClass());
+  ```
+
+  
+
+### System 类
+
+---
+
+#### System 常用方法
+
+- exit :退出当前程序
+- arrayCopy : 复制数组元素，比较适合底层调用，一般使用 Arrays.copyOf 完成数组复制
+- currentTimeMillens : 返回当前时间距离 1970-1-1 的 毫秒数
+- gc :  运行垃圾回收机制 System.gc();
+
+```java
+public static void main(String[] args) {
+//exit 退出当前程序
+// System.out.println("ok1");
+
+// //1. exit(0) 表示程序退出
+// //2. 0 表示一个状态 , 正常的状态
+// System.exit(0);//
+// System.out.println("ok2");
+//arraycopy ：复制数组元素，比较适合底层调用，
+// 一般使用 Arrays.copyOf 完成复制数组
+    int[] src={1,2,3};
+    int[] dest = new int[3];// dest 当前是 {0,0,0}
+
+//1. 主要是搞清楚这五个参数的含义
+//2. // 源数组
+// * @param src the source array. // srcPos： 从源数组的哪个索引位置开始拷贝
+// * @param srcPos starting position in the source array. // dest : 目标数组，即把源数组的数据拷贝到哪个数组
+// * @param dest the destination array. // destPos: 把源数组的数据拷贝到 目标数组的哪个索引
+// * @param destPos starting position in the destination data. // length: 从源数组拷贝多少个数据到目标数组
+// * @param length the number of array elements to be copied. System.arraycopy(src, 0, dest, 0, src.length);
+// int[] src={1,2,3};
+    System.out.println("dest=" + Arrays.toString(dest));//[1, 2, 3]
+//currentTimeMillens:返回当前时间距离 1970-1-1 的毫秒数
+
+    System.out.println(System.currentTimeMillis());
+    }
+}
+```
+
+
+
+### BigInteger 和 BigDecimal 类
+
+---
+
+> - **BigInteger 适合存放比较大的整型**
+> - **BigDecimal 适合存放 精度更高的浮点型**
+
+
+
+#### 常用方法
+
+---
+
+- add  加
+- substract  减
+- multiply  乘
+- divide 除
+
+```java
+public static void main(String[] args) {
+    //当我们编程中，需要处理很大的整数，long 不够用
+    //可以使用 BigInteger 的类来搞定
+    // long l = 23788888899999999999999999999l;
+    // System.out.println("l=" + l);
+    BigInteger bigInteger = new BigInteger("23788888899999999999999999999");
+    BigInteger bigInteger2 = new BigInteger("10099999999999999999999999999999999999999999999999999999999999999999999999999999999");
+    System.out.println(bigInteger);
+    //1. 在对 BigInteger 进行加减乘除的时候，需要使用对应的方法，不能直接进行 + - * /
+    //2. 可以创建一个 要操作的 BigInteger 然后进行相应操作
+    BigInteger add = bigInteger.add(bigInteger2);
+    System.out.println(add);//
+    BigInteger subtract = bigInteger.subtract(bigInteger2);
+    System.out.println(subtract);//减
+    BigInteger multiply = bigInteger.multiply(bigInteger2);
+    System.out.println(multiply);//乘
+    BigInteger divide = bigInteger.divide(bigInteger2);
+    System.out.println(divide);//除
+}
+```
+
+```java
+public static void main(String[] args) {
+    //当我们需要保存一个精度很高的数时，double 不够用
+    //可以是 BigDecimal
+    // double d = 1999.11111111111999999999999977788d;
+    // System.out.println(d);
+    BigDecimal bigDecimal = new BigDecimal("1999.11");
+    BigDecimal bigDecimal2 = new BigDecimal("3");
+    System.out.println(bigDecimal);
+    
+    //1. 如果对 BigDecimal 进行运算，比如加减乘除，需要使用对应的方法
+    //2. 创建一个需要操作的 BigDecimal 然后调用相应的方法即可
+    System.out.println(bigDecimal.add(bigDecimal2));
+    System.out.println(bigDecimal.subtract(bigDecimal2));
+    System.out.println(bigDecimal.multiply(bigDecimal2));
+    //System.out.println(bigDecimal.divide(bigDecimal2));//可能抛出异常 ArithmeticException
+    //在调用 divide 方法时，指定精度即可. BigDecimal.ROUND_CEILING
+    //如果有无限循环小数，就会保留 分子 的精度
+    System.out.println(bigDecimal.divide(bigDecimal2, BigDecimal.ROUND_CEILING));
+}
+```
+
+
+
+### 日期类
+
+---
+
+#### 第一代日期类
+
+1. Date :精确到毫秒，代表特定的瞬间
+
+2. SimpleDateFormat ： 格式和解析日期的类
+
+   SimpleDateFormat 格式化和解析日期的具体类，他允许进行格式化（日期 - > 文本）、解析（文本 -> 日期）和规范化
+
+```java
+public class Date01 {
+    public static void main(String[] args) throws ParseException {
+    //1. 获取当前系统时间
+    //2. 这里的 Date 类是在 java.util 包
+    //3. 默认输出的日期格式是国外的方式, 因此通常需要对格式进行转换
+    Date d1 = new Date(); //获取当前系统时间
+    System.out.println("当前日期=" + d1);
+    Date d2 = new Date(9234567); //通过指定毫秒数得到时间
+    System.out.println("d2=" + d2); //获取某个时间对应的毫秒数
+    //
+
+    //1. 创建 SimpleDateFormat 对象，可以指定相应的格式
+    //2. 这里的格式使用的字母是规定好，不能乱写
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy 年 MM 月 dd 日 hh:mm:ss E");
+    String format = sdf.format(d1); // format:将日期转换成指定格式的字符串
+    System.out.println("当前日期=" + format);
+
+    //1. 可以把一个格式化的 String 转成对应的 Date
+    //2. 得到 Date 仍然在输出时，还是按照国外的形式，如果希望指定格式输出，需要转换
+    //3. 在把 String -> Date ， 使用的 sdf 格式需要和你给的 String 的格式一样，否则会抛出转换异常
+    String s = "1996 年 01 月 01 日 10:20:30 星期一";
+    Date parse = sdf.parse(s);
+    System.out.println("parse=" + sdf.format(parse));
+    }
+}
+```
+
+
+
+#### 第二代日期类
+
+1. 第二代日期类 ，主要就是 Calendar 类（日历）
+
+   ```java
+   public abstract class Calendar extends Object implements Serializable,Cloneable,Comparabale<Calendar>
+   ```
+
+2. Calendar 类是一个抽象类，它为特定瞬间与一组诸如 YEAR,MONTH，DAY_OF_MONTH,HOUR 等日历字段之间的转换提供了一些方法，并为操作日历字段（例如获得下星期的日期）提供了一些方法。
+
+   ```java
+   public static void main(String[] args) {
+   
+       //1. Calendar 是一个抽象类， 并且构造器是 private
+       //2. 可以通过 getInstance() 来获取实例
+       //3. 提供大量的方法和字段提供给程序员
+       //4. Calendar 没有提供对应的格式化的类，因此需要程序员自己组合来输出(灵活)
+       //5. 如果我们需要按照 24 小时进制来获取时间， Calendar.HOUR ==改成=> Calendar.HOUR_OF_DAY
+       Calendar c = Calendar.getInstance(); //创建日历类对象//比较简单，自由
+       System.out.println("c=" + c);
+       //2.获取日历对象的某个日历字段
+       System.out.println("年：" + c.get(Calendar.YEAR));
+       // 这里为什么要 + 1, 因为 Calendar 返回月时候，是按照 0 开始编号
+       System.out.println("月：" + (c.get(Calendar.MONTH) + 1));
+       System.out.println("日：" + c.get(Calendar.DAY_OF_MONTH));
+       System.out.println("小时：" + c.get(Calendar.HOUR));
+       System.out.println("分钟：" + c.get(Calendar.MINUTE));
+       System.out.println("秒：" + c.get(Calendar.SECOND));
+       //Calender 没有专门的格式化方法，所以需要程序员自己来组合显示
+       System.out.println(c.get(Calendar.YEAR) + "-" + (c.get(Calendar.MONTH) + 1) + "-" +
+       c.get(Calendar.DAY_OF_MONTH) +
+       " " + c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND) );
+   }
+   ```
+
+
+
+#### 第三代日期类
+
+- 前面两代日期类的不足分析：
+
+  **JDK 1.0 中包含了一个java.util.Date 类，但是它的大多数方法已经在 JDk 1.1 引入Calendar 类之后被弃用了。而 Calendar 类 存在的问题是：	**
+
+  1. 可变性：像日期和时间这样的类应该是不可变的
+  2. 偏移性：Date 中年份是从 1900 开始的，而月份都从 0 开始
+  3. 格式化：格式化只对 Date 有用，Calendar 则不行
+  4. 此外，它们也不是线程安全的；不能处理闰秒等（每隔2天，多出 1 s)
+
+    
+
+- LocalDate （日期/年月日）、LocalTime(时间/十分秒) 、LocalDateTime（日期时间/年月日时分秒） JDK 8 加入
+
+  - LocalDate 只包括日期，可以获取日期字段
+  - LocalTime 只包括时间，可以获取时间字段
+  - LocalDateTime 包括日期 + 时间，可以获取日期 + 时间字段
+
+  ```java
+  public static void main(String[] args) {
+      //第三代日期
+  
+      //1. 使用 now() 返回表示当前日期时间的 对象
+      LocalDateTime ldt = LocalDateTime.now(); //LocalDate.now();//LocalTime.now()
+      System.out.println(ldt);
+      
+      //2. 使用 DateTimeFormatter 对象来进行格式化
+      // 创建 DateTimeFormatter 对象
+      DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+      String format = dateTimeFormatter.format(ldt);
+      System.out.println("格式化的日期=" + format);
+      System.out.println("年=" + ldt.getYear());
+      System.out.println("月=" + ldt.getMonth());
+      System.out.println("月=" + ldt.getMonthValue());
+      System.out.println("日=" + ldt.getDayOfMonth());
+      System.out.println("时=" + ldt.getHour());
+      System.out.println("分=" + ldt.getMinute());
+      System.out.println("秒=" + ldt.getSecond());
+      LocalDate now = LocalDate.now(); //可以获取年月日
+      LocalTime now2 = LocalTime.now();//获取到时分秒
+      
+      //提供 plus 和 minus 方法可以对当前时间进行加或者减
+      //看看 890 天后，是什么时候 把 年月日-时分秒
+      LocalDateTime localDateTime = ldt.plusDays(890);
+      System.out.println("890 天后=" + dateTimeFormatter.format(localDateTime));
+      //看看在 3456 分钟前是什么时候，把 年月日-时分秒输出
+      LocalDateTime localDateTime2 = ldt.minusMinutes(3456);
+      System.out.println("3456 分钟前 日期=" + dateTimeFormatter.format(localDateTime2));
+  }
+  ```
+
+
+
+#### DateTimeFormatter 格式日期类
+
+> **类似于 SimpleDateFormat **
+
+```java
+DateTimeFormat dtf = DateTimeformat.ofPattern(格式);
+String str = dtf.format(日期对象); 
+```
+
+
+
+#### Instant 时间戳
+
+> **类似于 Date ,提供了一系列 和Date 类 转换的方式**
+
+```java
+// Instant ->  Date
+Date date = Date.from(instant);
+// Date ->  Instant
+Instant instant = date.toInstant();
+```
+
+```java
+public static void main(String[] args) {
+    
+    //1.通过 静态方法 now() 获取表示当前时间戳的对象
+    Instant now = Instant.now();
+    System.out.println(now);
+    
+    //2. 通过 from 可以把 Instant 转成 Date
+    Date date = Date.from(now);
+    
+    //3. 通过 date 的 toInstant() 可以把 date 转成 Instant 对象
+    Instant instant = date.toInstant();
+}
+```
+
+
+
+#### 第三代日期类更多方法
+
+- LocalDateTime 类
+- MonthDay 类 ： 检查重复事件
+- 是否是闰年
+- 增加日期的某个部分
+- 使用 plus 方法测试增加时间的某个部分
+- 使用 minus 方法测试查看一年前和一年后的日期
+
+
+
+## 集合
+
+> - 可以动态保存任意多个对象，使用比较方便
+> - 提供一系列方便的操作对象的方法：add,remove,set,get
+> - 使用j集合添加，删除新元素
+
+
+
+### 数组
+
+---
+
+1. 
 
 
 
@@ -2619,33 +3282,7 @@ class Outer04 { //外部类
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+### 集合的框架体系
 
 
 

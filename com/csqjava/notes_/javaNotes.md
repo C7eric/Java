@@ -659,14 +659,14 @@
 > >    ```java
 > >    class GirlFriend {
 > >        private String name;
-> >                                     
+> >                                        
 > >        // 为了能够在静态方法中返回 gf 对象，需要将其修饰为 static 
 > >        private static GirlFriend gf = new GirlFriend("q");
-> >                                     
+> >                                        
 > >        private GirlFriend(String name){
 > >            this.name = name;
 > >        }
-> >                                     
+> >                                        
 > >        // 提供一个公共的 static 方法，返回 gf 对象
 > >        public static GirlFriend getInstance(){
 > >            return gf;
@@ -695,17 +695,17 @@
 > >    ```java
 > >    class Cat{
 > >        private String name;
-> >                                     
+> >                                        
 > >        private static Cat cat;
 > >        private Cat(String name){
 > >            this.name = name;
 > >        }
-> >                                     
+> >                                        
 > >        public static Cat(){
 > >            if(cat == null){
 > >                cat = new Cat("xx");
 > >            }
-> >                                     
+> >                                        
 > >            return cat;
 > >        }
 > >    }
@@ -965,7 +965,7 @@
 >   interface Usb{
 >   	void work();
 >   }
->                         
+>                           
 >   class Phone_ implements Usb {
 >   	public void call() {
 >   	System.out.println("手机可以打电话...");
@@ -976,7 +976,7 @@
 >   	}
 >   }
 >   	class Camera_ implements Usb {
->                         
+>                           
 >   		@Override
 >       	public void work() {
 >           System.out.println("相机工作中...");
@@ -993,7 +993,7 @@
 >   * 演示多态传递现象
 >   */
 >   public class InterfacePolyPass {
->                         
+>                           
 >   	public static void main(String[] args) {
 >   	//接口类型的变量可以指向，实现了该接口的类的对象实例
 >   	IG ig = new Teacher();
@@ -1004,9 +1004,9 @@
 >   interface IH {
 >   	void hi();
 >   }
->                         
+>                           
 >   interface IG extends IH{ }
->                         
+>                           
 >   class Teacher implements IG
 >       @Override
 >   	public void hi() {
@@ -1530,7 +1530,7 @@ class Outer04 { //外部类
 >      public static inner getInnerInstance (){
 >          return new Inner();
 >      }
->                                                        
+>                                                             
 >      Outer.Inner inner = Outer.gerInnerInstance();
 >      ```
 >
@@ -1798,7 +1798,7 @@ class Outer04 { //外部类
 >   3.@Target(value={CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE}
 >   4.@Deprecated 的作用可以做到新旧版本的兼容和过渡
 >   */
->                   
+>                     
 >   /*
 >   @Documented
 >   @Retention(RetentionPolicy.RUNTIME)
@@ -1815,12 +1815,12 @@ class Outer04 { //外部类
 >   ```java
 >   @SuppressWarnings({"rawtypes", "unchecked", "unused"})
 >   public class SuppressWarnings_ {
->                   
+>                     
 >   //1. 当我们不希望看到这些警告的时候，可以使用 SuppressWarnings 注解来抑制警告信息
 >   //2. 在{""} 中，可以写入你希望抑制(不显示)警告信息
->                   
+>                     
 >   //3. 可以指定的警告类型有
->                   
+>                     
 >           // all，抑制所有警告
 >           // boxing，抑制与封装/拆装作业相关的警告
 >           // //cast，抑制与强制转型作业相关的警告
@@ -2104,14 +2104,14 @@ class Outer04 { //外部类
 >   try{
 >   	//代码可能有异常
 >   }catch(Exception e){
->                       
+>                         
 >       //捕获到异常
 >       //1当异常发生时
 >       //2.系统将异常封装成Exception对象e,传递给catch
 >   	//3.得到异常对象后，程序员，自己处理
 >   	//4.注意，如果没有发生异常catch代码块不执行
 >   }finally{
->                       
+>                         
 >   	//不管ty代码块是否有异常发生，始终要执行finally
 >       //所以通常将释放资源的代码，放在 finally 里
 >   }
@@ -2423,11 +2423,11 @@ class Outer04 { //外部类
 >           int n1 = 100;
 >           Integer integer = new Integer(n1);
 >           Integer integer1 = Integer.valueOf(n1);
->           
+>             
 >           //手动拆箱
 >           //Integer -> int
 >           int i = integer.intValue();
->           
+>             
 >           //jdk5后，就可以自动装箱和自动拆箱
 >           int n2 = 200;
 >           //自动装箱 int->Integer
@@ -2602,6 +2602,88 @@ class Outer04 { //外部类
 > - **trim**   //去前后空格
 > - **charAt**  :   获取某索引处的字符，注意不能使用Str[index]这种方式.
 > - **intern : **当调用 intern 方法时，如果池中已经包含一个d等于 此 String 对象的字符串(用 equals (object) 方法确定，则返回池中的字符串。否则，将此 String 对象添加到池中，并返回此 String 对象的引用)    **此方法最终返回的是 常量池中的地址（对象）**
+>
+> ```java
+> public static void main(String[] args) {
+>         // 1.toUpperCase转换成大写
+>         String s = "heLLo";
+>         System.out.println(s.toUpperCase());//HELLO
+>         // 2.toLowerCase
+>         System.out.println(s.toLowerCase());//hello
+>         // 3.concat拼接字符串
+>         String s1 = "宝玉";
+>         s1 = s1.concat("林黛玉").concat("薛宝钗").concat("together");
+>         System.out.println(s1);//宝玉林黛玉薛宝钗together
+>         // 4.replace 替换字符串中的字符
+>         s1 = "宝玉 and 林黛玉 林黛玉 林黛玉";
+>         //在s1中，将 所有的 林黛玉 替换成薛宝钗
+>         //  s1.replace() 方法执行后，返回的结果才是替换过的.
+>         // 注意对 s1没有任何影响
+>         String s11 = s1.replace("宝玉", "jack");
+>         System.out.println(s1);//宝玉 and 林黛玉 林黛玉 林黛玉
+>         System.out.println(s11);//jack and 林黛玉 林黛玉 林黛玉
+>         // 5.split 分割字符串, 对于某些分割字符，我们需要 转义比如 | \\等
+>         String poem = "锄禾日当午,汗滴禾下土,谁知盘中餐,粒粒皆辛苦";
+>         //
+>         // 1. 以 , 为标准对 poem 进行分割 , 返回一个数组
+>         // 2. 在对字符串进行分割时，如果有特殊字符，需要加入 转义符 \
+>         String[] split = poem.split(",");
+>         poem = "E:\\aaa\\bbb";
+>         split = poem.split("\\\\");
+>         System.out.println("==分割后内容===");
+>         for (int i = 0; i < split.length; i++) {
+>             System.out.println(split[i]);
+>         }
+>         // 6.toCharArray 转换成字符数组
+>         s = "happy";
+>         char[] chs = s.toCharArray();
+>         for (int i = 0; i < chs.length; i++) {
+>             System.out.println(chs[i]);
+>         }
+>         // 7.compareTo 比较两个字符串的大小，如果前者大，
+>         // 则返回正数，后者大，则返回负数，如果相等，返回0
+>         // 解读
+>         // (1) 如果长度相同，并且每个字符也相同，就返回 0
+>         // (2) 如果长度相同或者不相同，但是在进行比较时，可以区分大小
+>         //     就返回 if (c1 != c2) {
+>         //                return c1 - c2;
+>         //            }
+>         // (3) 如果前面的部分都相同，就返回 str1.len - str2.len
+>         String a = "jcck";// len = 3
+>         String b = "jack";// len = 4
+>         System.out.println(a.compareTo(b)); // 返回值是 'c' - 'a' = 2的值
+> // 8.format 格式字符串
+>         /* 占位符有:
+>          * %s 字符串 %c 字符 %d 整型 %.2f 浮点型
+>          *
+>          */
+>         String name = "john";
+>         int age = 10;
+>         double score = 56.857;
+>         char gender = '男';
+>         //将所有的信息都拼接在一个字符串.
+>         String info =
+>                 "我的姓名是" + name + "年龄是" + age + ",成绩是" + score + "性别是" + gender + "。希望大家喜欢我！";
+> 
+>         System.out.println(info);
+> 
+> 
+>         //解读
+>         //1. %s , %d , %.2f %c 称为占位符
+>         //2. 这些占位符由后面变量来替换
+>         //3. %s 表示后面由 字符串来替换
+>         //4. %d 是整数来替换
+>         //5. %.2f 表示使用小数来替换，替换后，只会保留小数点两位, 并且进行四舍五入的处理
+>         //6. %c 使用char 类型来替换
+>         String formatStr = "我的姓名是%s 年龄是%d，成绩是%.2f 性别是%c.希望大家喜欢我！";
+> 
+>         String info2 = String.format(formatStr, name, age, score, gender);
+> 
+>         System.out.println("info2=" + info2);
+>     }
+> ```
+>
+> 
 
  
 
@@ -2631,6 +2713,27 @@ class Outer04 { //外部类
 >     StringBuffer stringBuffer = new StringBuffer("hello");
 > }
 > ```
+
+
+
+##### StringBuffer 构造器的使用
+
+```java
+public static void main(String[] args) {
+
+        //构造器的使用
+        //解读
+        //1. 创建一个 大小为 16的 char[] ,用于存放字符内容
+        StringBuffer stringBuffer = new StringBuffer();
+
+        //2 通过构造器指定 char[] 大小
+        StringBuffer stringBuffer1 = new StringBuffer(100);
+        //3. 通过 给一个String 创建 StringBuffer, char[] 大小就是 str.length() + 16
+
+        StringBuffer hello = new StringBuffer("hello");
+
+    }
+```
 
 
 
@@ -2698,7 +2801,7 @@ public static void main(String[] args) {
     System.out.println(indexOf);//6
     
     //插
-    //老韩解读，在索引为 9 的位置插入 "赵敏",原来索引为 9 的内容自动后移
+    //老解读，在索引为 9 的位置插入 "赵敏",原来索引为 9 的内容自动后移
     s.insert(9, "赵敏");
     System.out.println(s);//"hello,张三丰赵敏周芷若 true10.5"
     //长度

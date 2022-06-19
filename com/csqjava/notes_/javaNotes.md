@@ -1,14 +1,16 @@
 #  	JavaNotes
 
+​																																				           		 	 	 	 	 	 	 	 	 	 	 	 	   	 	 ——C77eric									 																								
 
 
 
+[TOC]
 
 
 
 ## **面向对象OOP**
 
-### **类变量**
+### 类变量
 
 ---
 
@@ -79,7 +81,7 @@ public static String name = "csq";
 
 
 
-### **类方法**
+### 类方法
 
 ---
 
@@ -194,7 +196,7 @@ Math 类、Array 类、Collections 集合类
 
 
 
-###  **main() 方法**
+###  main() 方法
 
 ---
 
@@ -230,7 +232,7 @@ public static void main(String [] args){}
 
 
 
-###  **代码块**
+###  代码块
 
 ---
 
@@ -327,9 +329,11 @@ public Movie(String name, double price, String director) {
 
 #### 小结
 
-1.  static 代码块是在类加载时，执行，且只执行一次
-2.  普通代码块是在创建对象时调用的，创建一次，调用一次
-3.  类加载的 3 种 情况需要记住
+> ##### 1.static 代码块是在类加载时，执行，且只执行一次
+
+> ##### 2.普通代码块是在创建对象时调用的，创建一次，调用一次
+
+> ##### 3.类加载的 3 种 情况需要记住
 
 ```java
 public static void main(String[] args) {
@@ -394,9 +398,11 @@ class AA extends BB {
 }
 ```
 
+---
 
 
-**4.创建一个对象时，在 一个类 调用顺序是（重点、难点）**
+
+> ##### 4.创建一个对象时，在 一个类 调用顺序是（重点、难点）
 
 1.  调用静态代码块和静态属性初始化（注意：静态代码块和静态属性初始化调用的优先级一样，如果有多个静态代码块和多个静态变量初始化，则按他们定义的顺序调用）
 2.  调用普通代码块和普通属性的初始化（注意：普通代码块和普通属性初始化调用的优先级一样，如果有多个普通代码块和普通属性初始化，则按定义顺序调用
@@ -435,7 +441,11 @@ class A {
 }
 ```
 
-5.构造器的最前面其实隐含了 super() 和 调用普通代码块，静态相关的代码块，属性初始化，在类加载时，就加载完毕，因此是优先于 构造器和 普通代码块执行的
+---
+
+
+
+> ##### 5.构造器的最前面其实隐含了 super() 和 调用普通代码块，静态相关的代码块，属性初始化，在类加载时，就加载完毕，因此是优先于 构造器和 普通代码块执行的
 
 ```java
 public class CodeBlockDetail03 {
@@ -485,7 +495,9 @@ public BBB() {
 
 
 
-**6.创建一个子类对象时（继承关系） ，他们的 静态代码块，静态属性初始化，普通代码块，普通属性初始化，构造方法的调用顺序如下**
+
+
+> ##### 6.创建一个子类对象时（继承关系） ，他们的 静态代码块，静态属性初始化，普通代码块，普通属性初始化，构造方法的调用顺序如下
 
 1. 父类的静态代码块和静态属性(优先级一样，按定义顺序执行)
 
@@ -595,11 +607,13 @@ public int getVal04() {
 
 
 
-**7.静态代码块只能调用静态成员(静态属性和静态方法)，普通代码块可以调用任意成员**
+
+
+> ##### 7.静态代码块只能调用静态成员(静态属性和静态方法)，普通代码块可以调用任意成员
 
 
 
-### **设计模式**
+### 设计模式
 
 ---
 
@@ -649,7 +663,7 @@ class GirlFriend {
 }
 ```
 
-> **饿汉式可能造成创建了对象，但是没有使用，造成资源浪费**
+> ###### 饿汉式可能造成创建了对象，但是没有使用，造成资源浪费
 
 
 
@@ -684,7 +698,7 @@ class Cat{
 }
 ```
 
-> **类加载之后，构造器也不会调用**
+> ###### 类加载之后，构造器也不会调用
 
 
 
@@ -701,7 +715,7 @@ class Cat{
 
 
 
-### **final**
+### final
 
 ---
 
@@ -729,8 +743,9 @@ class Cat{
    3. 在代码块中
 
 3. 如果 final 修饰的属性是静态的，则初始化的位置只能是 
-
-   **1.定义时    2.在静态代码块          不能在构造器中赋值**
+   - 定义时 
+   - 在静态代码块          
+   - 不能在构造器中赋值
 
 4. final 类不能继承，但是可以有实例化对象
 
@@ -746,7 +761,7 @@ class Cat{
 
 
 
-### **抽象类**
+### 抽象类
 
 ---
 
@@ -803,7 +818,7 @@ public abstract void eat() ;
 
 1. 抽象类不能实例化
 2. 抽象类不一定要b包含 abstract 方法，**也就是说 ：抽象类可以 没有 abstract 方法**
-   3. 一旦类包含了 abstract 方法，**则这个类必须声明为 abstract**
+   - 一旦类包含了 abstract 方法，**则这个类必须声明为 abstract**
 3. abstract 只能修饰 类 和 方法，不能修饰属性和其他的
 4. 抽象类可以有任何成员（**抽象类还是类**），比如：非抽象方法，构造器，静态属性
 5. 抽象方法，不能有主体，即不能实现
@@ -812,7 +827,7 @@ public abstract void eat() ;
 
 
 
-### **接口**
+### 接口
 
 ---
 
@@ -837,7 +852,7 @@ class 类名 implements 接口 {
 
 
 
-**小结：** 借口是更加抽象的抽象类，抽象类里的方法可以有方法体，接口里的所有方法都没有方法体【jdk 7.0】。接口体现了程序设计的多态和高内聚低耦合的设计思想
+> ###### **小结：** 借口是更加抽象的抽象类，抽象类里的方法可以有方法体，接口里的所有方法都没有方法体【jdk 7.0】。接口体现了程序设计的多态和高内聚低耦合的设计思想
 
 **特别说明：** Jdk 8.0 后接口类可以有静态方法，默认方法，也就是说接口中可以有方法的具体实现
 
@@ -860,17 +875,22 @@ class 类名 implements 接口 {
 #### 实现接口 vs 继承类
 
 - **接口和继承解决的问题不同**
-- - 继承的价值主要在于 ：**解决代码的复用性和可维护性**
+
+  - 继承的价值主要在于 ：**解决代码的复用性和可维护性**
+
   - 接口的价值主要在于： **设计，设计好各种规范（方法），让其他类去实现这些方法。即更加的灵活**
+
 - **接口比继承更加灵活**
-- - 接口比继承更加灵活，继承是满足  is - a 的关系，而接口只需满足 like - a 的关系。
+
+  - 接口比继承更加灵活，继承是满足  is - a 的关系，而接口只需满足 like - a 的关系。
+
 - **接口在一定程度上实现代码解耦【即： 接口规范性 + 动态绑定机制】**
 
 
 
 #### 接口的多态性
 
-##### 	**多态参数** 
+##### 	多态参数 
 
 ```java
 public class InterfacePolyParameter {
@@ -943,7 +963,7 @@ class Phone_ implements Usb {
 
 
 
-##### 	**接口的多态传递现象** 
+##### 	接口的多态传递现象 
 
 ```java
 /**
@@ -993,55 +1013,58 @@ class Teacher implements IG
 
 > ```java
 > class Outer{
->     class Inner{
->         
->     }
+>  class Inner{
+> 
+>  }
 > }
 > 
 > class Other{
->     
+> 
 > }
 > ```
 >
-> > **示例**
-> >
-> > ```java
-> > public class InnerClass01 { //外部其他类
-> > public static void main(String[] args) {
-> > 	}
-> > }
-> > class Outer { //外部类
-> >     
-> > 	private int n1 = 100;//属性
-> >     
-> > 	public Outer(int n1) {//构造器
-> > 		this.n1 = n1;
-> > 	}
-> >     
-> > 	public void m1() {//方法
-> > 		System.out.println("m1()");
-> > 	}
-> > 	{//代码块
-> > 		System.out.println("代码块...");
-> > 	}
-> > 	class Inner { //内部类, 在 Outer
-> >         
-> >     }
-> > }
-> > ```
+
+
+
+> ###### 示例
+
+```java
+public class InnerClass01 { //外部其他类
+public static void main(String[] args) {
+	}
+}
+class Outer { //外部类
+
+	private int n1 = 100;//属性
+
+	public Outer(int n1) {//构造器
+		this.n1 = n1;
+	}
+
+	public void m1() {//方法
+		System.out.println("m1()");
+	}
+	{//代码块
+		System.out.println("代码块...");
+	}
+	class Inner { //内部类, 在 Outer
+
+ }
+}
+```
+
+
 
 
 
 #### 内部类的分类
 
----
-
-> - 定义在外部类局部位置上（比如方法内）：
->   1. 局部内部类（有类名）
->   2. **匿名内部类（没有类名，重点）**
-> - 定义在外部类成员位置上：
->   1. 成员内部类（没用 static 修饰）
->   2. 静态内部类（使用 static 修饰）
+- 定义在外部类局部位置上（比如方法内）：
+  1. 局部内部类（有类名）
+  2. **匿名内部类（没有类名，重点）**
+- 定义在外部类成员位置上：
+  1. 成员内部类（没用 static 修饰）
+  2. 静态内部类（使用 static 修饰）
 
 
 
@@ -1069,7 +1092,7 @@ class Teacher implements IG
 >
 > 7. 如果外部类和局部内部类的**成员重名时**，默认遵循**就近原则**，**如果想访问外部类的成员，则可以使用（外部类.this.成员）去访问**
 >
->    > **Outer.this 本质就是 外部类的对象**，即哪个对象调用了方法，Outer.this 就指向哪个对象
+>    > ###### **Outer.this 本质就是 外部类的对象**，即哪个对象调用了方法，Outer.this 就指向哪个对象
 >
 > ```java
 > /**
@@ -1138,7 +1161,7 @@ class Teacher implements IG
 > ```
 >
 
-> **案例演示**
+> ###### **案例演示**
 
 ```java
 /**
@@ -1454,8 +1477,6 @@ class Person {//类
 
 #### 静态内部类
 
----
-
 > **静态内部类s是定义在外部类的成员位置，并且有 static 修饰**
 
 
@@ -1474,24 +1495,26 @@ class Person {//类
 >
 > 6. 外部其他类 --- 访问 --- 静态内部类
 >
->    - ```jav
->      Outer.Inner inner = new Outer.Inner();
->      inner.f1();
->      ```
->
->      > **因为静态内部类，是可以通过类名直接访问(前提是满足访问权限)**
->
->      
->
->    - ```java
+>    -  因为静态内部类，是可以通过类名直接访问(前提是满足访问权限)
+>    
+>    ```java
+>    Outer.Inner inner = new Outer.Inner();
+>    inner.f1();
+>    ```
+>    
+>    
+>    
+>    - 通过构造方法来返回一个 Inner 的 对象实例
+>    
+>      ```java
 >      public static inner getInnerInstance (){
 >          return new Inner();
 >      }
->                                                                  
+>      
 >      Outer.Inner inner = Outer.gerInnerInstance();
 >      ```
->
->      > **通过构造方法来返回一个 Inner 的 对象实例**
+>    
+>      
 >
 > 7. 如果外部类和静态内部类的成员重名时，静态内部类访问时遵循就近原则，如果想访问外部类的成员，则可以用（外部类.成员）去访问
 >
@@ -1557,6 +1580,8 @@ class Person {//类
 
 ## 枚举类与注解
 
+
+
 ### 枚举类
 
 ---
@@ -1565,16 +1590,14 @@ class Person {//类
 
 
 
-#### 1.枚举的实现方式
-
----
+#### 枚举的实现方式
 
 > - 自定义类实现枚举
 > - 使用 enum 关键字实现枚举
 
 
 
-#### 2.自定义类实现枚举
+#### 自定义类实现枚举
 
 > - 不需要提供 setXxx 方法，因为枚举类对象值通常为只读
 > - 对枚举对象使用 static + final 共同修饰，实现底层优化
@@ -1627,12 +1650,10 @@ class Person {//类
 
 
 
-> **小结：**
->
-> ---
+> ###### 小结：
 >
 > 1. 构造器私有化
-> 2. 本类内部创建一组对象
+>2. 本类内部创建一组对象
 > 3. 对外暴露对象（通过为对象 添加  public static final 修饰符）
 > 4. 可以提供 get  方法，但不要提供 set 方法
 
@@ -1640,9 +1661,7 @@ class Person {//类
 
 #### 3.enum 关键字实现枚举
 
----
-
-##### 1.语法
+##### 语法
 
 > 1. 使用关键字  enum 代替 class 
 > 2. public static final class Season SPRING = new Season("春天"，"温暖") ；  -> SPRING("春天"，"温暖")；
@@ -1651,7 +1670,7 @@ class Person {//类
 
 
 
-##### 2.注意事项
+##### 注意事项
 
 > 1. 当我们使用 enum 关键字开发一个枚举类时，默认会继承Enum 类，而且是一个 **final 类**
 > 2. 传统的 public static final Season SPRING = new Season（"春天"，"温暖"）；  简化成SPRING（"春天"，"温暖"),**这里必须知道，它调用的是哪个构造器**
@@ -1662,8 +1681,6 @@ class Person {//类
 
 
 #### 4.  enum 成员方法
-
----
 
 ##### 1.toString 
 
@@ -1718,110 +1735,119 @@ class Person {//类
 
 
 
-#### 1.基本的 Annotation 介绍
-
----
+#### 基本的 Annotation 介绍
 
 > **使用 Annotation  时要在其前面增加 @ 符号，并把该 Annotation 当成一个修饰符使用。用于修饰它支持的程序元素**
 
-> **三个基本的 Annotation **
->
-> - **@Override** : 限定某个方法，是重写父类方法，该注解只能用于方法
->
->   ```java
->   //1. @Override 注解放在 fly 方法上，表示子类的 fly 方法时重写了父类的 fly
->   //2. 这里如果没有写 @Override 还是重写了父类 fly
->   //3. 如果你写了@Override 注解，编译器就会去检查该方法是否真的重写了父类的
->   // 方法，如果的确重写了，则编译通过，如果没有构成重写，则编译错误
->   //4. 看看 @Override 的定义
->   // 解读： 如果发现 @interface 表示一个 注解类
->       /*
->       @Target(ElementType.METHOD)
->       @Retention(RetentionPolicy.SOURCE)
->       public @interface Override {
->       }
->       */
->   ```
->
->   > **@Target 是修饰注解的注解，称为元注解**
->
-> - @**Deprecated** : 用于表示某个程序元素（类、方法等）**已过时**
->
->   ```java
->   @Deprecated 说明
->   /*
->   1.用于表示某个程序元素（方法、类） 已过时
->   2.可以修饰方法、类、字段、包、参数 等等
->   3.@Target(value={CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE}
->   4.@Deprecated 的作用可以做到新旧版本的兼容和过渡
->   */
->                       
->   /*
->   @Documented
->   @Retention(RetentionPolicy.RUNTIME)
->   @Target(value={CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE})
->   public @interface Deprecated {
->   }
->   */
->   ```
->
+
+
+##### 	三个基本的 Annotation
+
+###### 	@Override 
+
+> 限定某个方法，是重写父类方法，该注解只能用于方法
+
+> ```java
+>//1. @Override 注解放在 fly 方法上，表示子类的 fly 方法时重写了父类的 fly
+> //2. 这里如果没有写 @Override 还是重写了父类 fly
+>//3. 如果你写了@Override 注解，编译器就会去检查该方法是否真的重写了父类的
+> // 方法，如果的确重写了，则编译通过，如果没有构成重写，则编译错误
+> //4. 看看 @Override 的定义
+> // 解读： 如果发现 @interface 表示一个 注解类
+>     /*
+>     @Target(ElementType.METHOD)
+>     @Retention(RetentionPolicy.SOURCE)
+>     public @interface Override {
+>     }
+>     */
+> ```
 > 
+> > **@Target 是修饰注解的注解，称为元注解**
+
+
+
+###### @Deprecated 
+
+> 用于表示某个程序元素（类、方法等）**已过时**
+
+> ```java
+>@Deprecated 说明
+> /*
+>1.用于表示某个程序元素（方法、类） 已过时
+> 2.可以修饰方法、类、字段、包、参数 等等
+> 3.@Target(value={CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE}
+> 4.@Deprecated 的作用可以做到新旧版本的兼容和过渡
+> */
+> 
+> /*
+> @Documented
+> @Retention(RetentionPolicy.RUNTIME)
+> @Target(value={CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE})
+> public @interface Deprecated {
+> }
+> */
+> ```
+
+
+
+###### @SuppressWarnings 
+
+> **抑制编译器警告**
+
+> ```java
+>@SuppressWarnings({"rawtypes", "unchecked", "unused"})
+> public class SuppressWarnings_ {
 >
-> - @**SuppressWarnings**  : **抑制编译器警告**
->
->   ```java
->   @SuppressWarnings({"rawtypes", "unchecked", "unused"})
->   public class SuppressWarnings_ {
->                       
->   //1. 当我们不希望看到这些警告的时候，可以使用 SuppressWarnings 注解来抑制警告信息
->   //2. 在{""} 中，可以写入你希望抑制(不显示)警告信息
->                       
->   //3. 可以指定的警告类型有
->                       
->           // all，抑制所有警告
->           // boxing，抑制与封装/拆装作业相关的警告
->           // //cast，抑制与强制转型作业相关的警告
->           // //dep-ann，抑制与淘汰注释相关的警告
->           // //deprecation，抑制与淘汰的相关警告
->           // //fallthrough，抑制与 switch 陈述式中遗漏 break 相关的警告
->           // //finally，抑制与未传回 finally 区块相关的警告
->           // //hiding，抑制与隐藏变数的区域变数相关的警告
->           // //incomplete-switch，抑制与 switch 陈述式(enum case)中遗漏项目相关的警告
->                   // //javadoc，抑制与 javadoc 相关的警告
->           // //nls，抑制与非 nls 字串文字相关的警告
->           // //null，抑制与空值分析相关的警告
->           // //rawtypes，抑制与使用 raw 类型相关的警告
->           // //resource，抑制与使用 Closeable 类型的资源相关的警告
->           // //restriction，抑制与使用不建议或禁止参照相关的警告
->           // //serial，抑制与可序列化的类别遗漏 serialVersionUID 栏位相关的警告
->           // //static-access，抑制与静态存取不正确相关的警告
->           // //static-method，抑制与可能宣告为 static 的方法相关的警告
->           // //super，抑制与置换方法相关但不含 super 呼叫的警告
->           // //synthetic-access，抑制与内部类别的存取未最佳化相关的警告
->           // //sync-override，抑制因为置换同步方法而遗漏同步化的警告
->           // //unchecked，抑制与未检查的作业相关的警告
->           // //unqualified-field-access，抑制与栏位存取不合格相关的警告
->           // //unused，抑制与未用的程式码及停用的程式码相关的警告
->
->
->  
->
+> //1. 当我们不希望看到这些警告的时候，可以使用 SuppressWarnings 注解来抑制警告信息
+> //2. 在{""} 中，可以写入你希望抑制(不显示)警告信息
+> 
+> //3. 可以指定的警告类型有
+> 
+>         // all，抑制所有警告
+>         // boxing，抑制与封装/拆装作业相关的警告
+>         // //cast，抑制与强制转型作业相关的警告
+>         // //dep-ann，抑制与淘汰注释相关的警告
+>         // //deprecation，抑制与淘汰的相关警告
+>         // //fallthrough，抑制与 switch 陈述式中遗漏 break 相关的警告
+>         // //finally，抑制与未传回 finally 区块相关的警告
+>         // //hiding，抑制与隐藏变数的区域变数相关的警告
+>         // //incomplete-switch，抑制与 switch 陈述式(enum case)中遗漏项目相关的警告
+>                // //javadoc，抑制与 javadoc 相关的警告
+>         // //nls，抑制与非 nls 字串文字相关的警告
+>        // //null，抑制与空值分析相关的警告
+>         // //rawtypes，抑制与使用 raw 类型相关的警告
+>        // //resource，抑制与使用 Closeable 类型的资源相关的警告
+>         // //restriction，抑制与使用不建议或禁止参照相关的警告
+>         // //serial，抑制与可序列化的类别遗漏 serialVersionUID 栏位相关的警告
+>         // //static-access，抑制与静态存取不正确相关的警告
+>         // //static-method，抑制与可能宣告为 static 的方法相关的警告
+>         // //super，抑制与置换方法相关但不含 super 呼叫的警告
+>         // //synthetic-access，抑制与内部类别的存取未最佳化相关的警告
+>         // //sync-override，抑制因为置换同步方法而遗漏同步化的警告
+>         // //unchecked，抑制与未检查的作业相关的警告
+>                             // //unqualified-field-access，抑制与栏位存取不合格相关的警告
+>         // //unused，抑制与未用的程式码及停用的程式码相关的警告
+> ```
+> 
+> 
+> 
+> 
 >   ```java
 >    //4. 关于 SuppressWarnings 作用范围是和你放置的位置相关
->   
+>
 >     // 比如 @SuppressWarnings 放置在 main 方法，那么抑制警告的范围就是 main
->     // 通常我们可以放置具体的语句, 方法, 类. 
->   
->     //5. 看看 @SuppressWarnings 源码
->   
+>    // 通常我们可以放置具体的语句, 方法, 类. 
+> 
+>    //5. 看看 @SuppressWarnings 源码
+> 
 >     //(1) 放置的位置就是 TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE
 >     //(2) 该注解类有数组 String[] values() 设置一个数组比如 {"rawtypes", "unchecked", "unused"}
->         /*
+>                             /*
 >         @Target({TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE})
 >         @Retention(RetentionPolicy.SOURCE)
->         public @interface SuppressWarnings {
+>                             public @interface SuppressWarnings {
 >         String[] value()
->         }
+>                             }
 >     */
 >     	public static void main(String[] args) {
 >             List list = new ArrayList();
@@ -1845,54 +1871,62 @@ class Person {//类
 
 
 
-#### 2.元注解
-
----
+#### 元注解
 
 > **JDK 的元 Annotation 用于修饰其他 Annotation** 
 
-> **元注解的种类**
->
-> - Retention   指定注解的作用范围，三种 SOURCE 、CLASS、RUNTIME
->
->   ```java
->   说明
->   只能用于修饰一个 Annotation 定义, 用于指定该 Annotation 可以保留多长时间, @Rentention 包含一个 RetentionPolicy
->   类型的成员变量, 使用 @Rentention 时必须为该 value 成员变量指定值:
->   @Retention 的三种值
->   1) RetentionPolicy.SOURCE: 编译器使用后，直接丢弃这种策略的注释
->   2) RetentionPolicy.CLASS: 编译器将把注解记录在 class 文件中. 当运行 Java 程序时, JVM 不会保留注解。 这是默认
->   值
->   3) RetentionPolicy.RUNTIME:编译器将把注解记录在 class 文件中. 当运行 Java 程序时, JVM 会保留注解. 程序可以
->   通过反射获取该注解
->   ```
->
->   
->
-> - Target 指定注解可以在那些地方用
->
->   ```java
->   用于修饰 Annotation 定义，用于指定被修饰的 Annotation 能用于那些程序元素。
->   @Target 也包含一个名为 value 的成员变量
->   ```
->
->   
->
-> - Documented 指定该注解是否会在 javadoc 体现
->
->   ```java
->   用于指定被该元注解修饰的 Annotation 类 将被 javadoc 工具提取成文档，即在生成文档时，可以看到该注解
->   说明： 定义为 Documented 的注解必须设置 Retention 为 RUNTIME
->   ```
->
->   
->
-> - Inherited 子类会继承父类注解
->
->   ```java
->   被它修饰的 Annotation 将具有继承性，如果某个类使用了 被 Inherited 修饰的 Annotation ，则其子类将自动具有该 z
->   ```
->
+
+
+##### 元注解的种类
+
+###### Retention  
+
+> 指定注解的作用范围，三种 SOURCE 、CLASS、RUNTIME
+
+> ```java
+>/*说明
+> 只能用于修饰一个 Annotation 定义, 用于指定该 Annotation 可以保留多长时间, @Rentention 包含一个 RetentionPolicy
+>类型的成员变量, 使用 @Rentention 时必须为该 value 成员变量指定值:
+> @Retention 的三种值
+> 1) RetentionPolicy.SOURCE: 编译器使用后，直接丢弃这种策略的注释
+> 2) RetentionPolicy.CLASS: 编译器将把注解记录在 class 文件中. 当运行 Java 程序时, JVM 不会保留注解。 这是默认
+> 值
+> 3) RetentionPolicy.RUNTIME:编译器将把注解记录在 class 文件中. 当运行 Java 程序时, JVM 会保留注解. 程序可以
+> 通过反射获取该注解
+> */
+> ```
+
+
+
+###### Target 
+
+> 指定注解可以在那些地方用
+
+> ```java
+>用于修饰 Annotation 定义，用于指定被修饰的 Annotation 能用于那些程序元素。
+> @Target 也包含一个名为 value 的成员变量
+>```
+
+
+
+###### Documented 
+
+> 指定该注解是否会在 javadoc 体现
+
+> ```java
+>用于指定被该元注解修饰的 Annotation 类 将被 javadoc 工具提取成文档，即在生成文档时，可以看到该注解
+> 说明： 定义为 Documented 的注解必须设置 Retention 为 RUNTIME
+>```
+
+
+
+###### Inherited 
+
+> 子类会继承父类注解
+
+> ```java
+>被它修饰的 Annotation 将具有继承性，如果某个类使用了 被 Inherited 修饰的 Annotation ，则其子类将自动具有该 z
+> ```
 
 
 
@@ -1901,17 +1935,26 @@ class Person {//类
 ## 异常
 
 > **Java 语言中，将程序执行中发生的不正常情况称为“异常”（开发过程中的语法错误和逻辑错误不算异常）**
-
-> **执行过程中所发生的异常事件可分为两大类**
 >
-> - **Error(错误)**：Java 虚拟机无法解决的严重问题。 如：JVM 系统内部错误、资源耗尽等严重情况。比如 StackOverFlow [栈溢出]、OOM [out of memory], Error 是严重错误，程序会崩溃
-> - **Exception**: 其他因编程错误或偶然的外在因素导致的一般性问题，可以使用针对性的代码进行处理。例如空指针访问，试图读取不存在的文件，网络连接中断，**Exception 分为两大类： 运行时异常【程序运行时，发生的异常】，编译时异常【编程时，编译器检查出来的异常】**
->
->  
+> 
 >
 > **将该代码块  ->  选中  ->  ctrl + alt + t  ->  选中 try - catch**
 >
 > 如果进行了异常处理，那么即使出现了异常，程序可以继续执行
+
+
+
+### 异常事件分类
+
+---
+
+#### Error(错误)
+
+> Java 虚拟机无法解决的严重问题。 如：JVM 系统内部错误、资源耗尽等严重情况。比如 StackOverFlow [栈溢出]、OOM [out of memory], Error 是严重错误，程序会崩溃
+
+#### **Exception**
+
+> 其他因编程错误或偶然的外在因素导致的一般性问题，可以使用针对性的代码进行处理。例如空指针访问，试图读取不存在的文件，网络连接中断，**Exception 分为两大类： 运行时异常【程序运行时，发生的异常】，编译时异常【编程时，编译器检查出来的异常】**
 
 
 
@@ -1932,17 +1975,19 @@ class Person {//类
 
 > **常见的运行时异常：**
 >
-> 1. **NullPointerException   空指针异常**
-> 2. **ArithmeticEXception   数学运算异常**
-> 3. **ArrayIndexOutOfBoundsException   数组下标越界异常**
-> 4. **ClassCastException   类型转换异常**
-> 5. **NumberFormatException   数字格式不正确异常** 
+> ​		**NullPointerException   空指针异常**
+>
+> ​		**ArithmeticEXception   数学运算异常**
+>
+> ​		**ArrayIndexOutOfBoundsException   数组下标越界异常**
+>
+> ​		**ClassCastException   类型转换异常**
+>
+> ​		**NumberFormatException   数字格式不正确异常** 
 
 
 
-#### 1.**NullPointerException   **
-
----
+#### NullPointerException 
 
 > **当应用程序试图在需要对象的地方使用 null 时，抛出该异常**
 >
@@ -1956,17 +2001,13 @@ class Person {//类
 
 
 
-#### 2.ArithmeticEXception
-
----
+#### ArithmeticEXception
 
 >**当出现异常的运算条件时，抛出此异常。例如，一个整数“除以零”时，抛出此类的一个实例**
 
 
 
-#### 3.ArrayIndexOutOfBoundsException
-
----
+#### ArrayIndexOutOfBoundsException
 
 >**用非法索引访问数组时抛出的异常。如果索引为负或大于等于数组大小，则该索引为非法索引**
 >
@@ -1981,29 +2022,21 @@ class Person {//类
 
 
 
-
-
-#### 4.ClassCastException
-
----
+#### ClassCastException
 
 >**当试图将对象强制转换为不是实例的子类时，抛出该异常**
 >
 >```java
 >public static void main(String[] args) {
->    A b = new B(); //向上转型
->    B b2 = (B)b;//向下转型，这里是 OK
->    C c2 = (C)b;//这里抛出 ClassCastException
+>A b = new B(); //向上转型
+>B b2 = (B)b;//向下转型，这里是 OK
+>C c2 = (C)b;//这里抛出 ClassCastException
 >}
 >```
 
 
 
-
-
-#### 5.NumberFormatException
-
----
+#### NumberFormatException
 
 >**当应用程序试图将字符串转换成一种数值类型，但该字符串不能转换为适当格式时，抛出该异常**
 >
@@ -2025,21 +2058,45 @@ class Person {//类
 
 > **编译异常是指在编译期间，就必须处理的异常，否则代码不能通过编译**
 
-> **常见的编译异常**
->
-> - **SQLException/操作数据库时，查询表可能发生异常**
->
-> - **IOException/操作文件时，发生的异常**
->
-> - **FileNotFoundException/当操作一个不存在的文件时，发生异常**
->
-> - **ClassNotFoundException/加载类，而该类不存在时，异常**
->
-> - **EOFException/操作文件，到文件末尾，发生异常**
->
-> - **lllegalArguementException/参数异常**
->
->   
+
+
+#### 常见的编译异常
+
+##### SQLException
+
+> 操作数据库时，查询表可能发生异常**
+
+
+
+##### IOException
+
+> 操作文件时，发生的异常
+
+
+
+##### FileNotFoundException
+
+> 当操作一个不存在的文件时，发生异常
+
+
+
+##### ClassNotFoundException
+
+> 加载类，而该类不存在时，异常
+
+
+
+##### EOFException
+
+> 操作文件，到文件末尾，发生异常
+
+
+
+##### lllegalArguementException
+
+> 参数异常
+
+
 
 
 
@@ -2049,152 +2106,150 @@ class Person {//类
 
 > **异常处理就是异常发生时，对异常的处理方式**
 >
->  
+
+
+
+#### 异常处理方式
+
+##### try  -  catch  -  finally
+
+> 程序员在代码中捕获发生的异常，自行处理
 >
-> **异常处理方式**
->
-> - **try  -  catch  -  finally**
->
->   程序员在代码中捕获发生的异常，自行处理
->
->   ```java
->   try{
->   	//代码可能有异常
->   }catch(Exception e){
->                           
->       //捕获到异常
->       //1当异常发生时
->       //2.系统将异常封装成Exception对象e,传递给catch
->   	//3.得到异常对象后，程序员，自己处理
->   	//4.注意，如果没有发生异常catch代码块不执行
->   }finally{
->                           
->   	//不管ty代码块是否有异常发生，始终要执行finally
->       //所以通常将释放资源的代码，放在 finally 里
->   }
->   ```
->
->   
->
-> - **throws**
->
->   将发生的异常抛出，交给调用者（方法）来处理，最顶级的处理者就是 **JVM**
->
->   
->
->   
+>  ```java
+>try{
+> 	//代码可能有异常
+>}catch(Exception e){
+> 
+>    //捕获到异常
+>     //1当异常发生时
+>    //2.系统将异常封装成Exception对象e,传递给catch
+> 	//3.得到异常对象后，程序员，自己处理
+> 	//4.注意，如果没有发生异常catch代码块不执行
+> }finally{
+> 
+>                         	//不管ty代码块是否有异常发生，始终要执行finally
+>     //所以通常将释放资源的代码，放在 finally 里
+> }
+> ```
+
+
+
+##### throws
+
+> 将发生的异常抛出，交给调用者（方法）来处理，最顶级的处理者就是 **JVM**
+
+
 
 
 
 #### try - catch
 
----
-
 > **Java 提供 try 和 catch 块 来处理异常。try 块 用于包含出错的代码。catch 块 用于处理 try 块中发生的异常。可以根据需要在程序中有多个的 try- catch 块**
 >
->  
->
-> **基本语法**
->
+
+
+
+##### 基本语法
+
 > ```java
-> try {
->     //可疑代码
->     //将异常生成对应的异常对象，传递给 catch 块
+>try {
+>   //可疑代码
+> //将异常生成对应的异常对象，传递给 catch 块
 > } catch(Exception e) {
->     //对异常的处理
+> //对异常的处理
 > }
 > // 如果没有 finally ，语法也可以通过
-> ```
+>    ```
 
  
 
 ##### 注意事项
 
----
+> ###### 如果异常发生了，则异常发生后面的代码不会执行，直接进入到 catch 块
 
-> - 如果异常发生了，则异常发生后面的代码不会执行，直接进入到 catch 块
->
-> - 如果异常没有发生，则顺序执行 try 的代码块，不会进入到 catch
->
-> - 如果希望不管是否发生异常，都执行某段代码（比如关闭连接，释放资源等），则使用 finally 
->
->   ```java
->   public static void main(String[] args) {
->       
->   //ctrl + atl + t
->   //1. 如果异常发生了，则异常发生后面的代码不会执行，直接进入到 catch 块
->   //2. 如果异常没有发生，则顺序执行 try 的代码块，不会进入到 catch
->   //3. 如果希望不管是否发生异常，都执行某段代码(比如关闭连接，释放资源等)则使用如下代码- finally
->   try {
->       String str = "csq";
->       int a = Integer.parseInt(str);
->       System.out.println("数字：" + a);
->   } catch (NumberFormatException e) {
->       System.out.println("异常信息=" + e.getMessage());
->   } finally {
->       System.out.println("finally 代码块被执行...");
->   }
->       System.out.println("程序继续...");
->   }
->   ```
->
-> - 可以**有多个 catch 语句**，捕获**不同的异常**(进行不同的业务处理)，**要求父类异常在后，子类异常在前**，比如（Exception  在后，NullPointerException 在前），**如果发生异常，只会匹配一个 catch**
->
->   ```java
->   try{
->       //
->   } catch(NullPointerException e){
->       
->   } catch(Exception e){
->       
->   } finally {
->       
->   }
->   ```
->
->   ---
->
->   ```java
->   public static void main(String[] args) {
->   
->   //1.如果 try 代码块有可能有多个异常
->   //2.可以使用多个 catch 分别捕获不同的异常，相应处理
->   //3.要求子类异常写在前面，父类异常写在后面
->   try {
->       Person person = new Person();
->       //person = null;
->       System.out.println(person.getName());//NullPointerException
->       int n1 = 10;
->       int n2 = 0;
->       int res = n1 / n2;//ArithmeticException
->   } catch (NullPointerException e) {
->       System.out.println("空指针异常=" + e.getMessage());
->   } catch (ArithmeticException e) {
->       System.out.println("算术异常=" + e.getMessage());
->   } catch (Exception e) {
->       System.out.println(e.getMessage());
->   } finally {
->   	}
->   }
->   }
->   ```
->
-> - 可以进行 try - finally 配合使用，这种用法**相当于没有捕获异常**，因此程序**会直接崩掉**，应用场景：就是执行一段代码，不管是否发生异常，都必须执行某个业务
->
->   ```java
->   try{
->       //代码
->   }
->   finally {
->       //总是执行
->   }
->   ```
+> ###### 如果异常没有发生，则顺序执行 try 的代码块，不会进入到 catch
+
+> ###### 如果希望不管是否发生异常，都执行某段代码（比如关闭连接，释放资源等），则使用 finally 
+
+```java
+public static void main(String[] args) {
+
+//ctrl + atl + t
+//1. 如果异常发生了，则异常发生后面的代码不会执行，直接进入到 catch 块
+//2. 如果异常没有发生，则顺序执行 try 的代码块，不会进入到 catch
+//3. 如果希望不管是否发生异常，都执行某段代码(比如关闭连接，释放资源等)则使用如下代码- finally
+try {
+    String str = "csq";
+    int a = Integer.parseInt(str);
+    System.out.println("数字：" + a);
+} catch (NumberFormatException e) {
+    System.out.println("异常信息=" + e.getMessage());
+} finally {
+    System.out.println("finally 代码块被执行...");
+}
+    System.out.println("程序继续...");
+}
+```
+
+
+
+> ###### 可以**有多个 catch 语句**，捕获**不同的异常**(进行不同的业务处理)，**要求父类异常在后，子类异常在前**，比如（Exception  在后，NullPointerException 在前），**如果发生异常，只会匹配一个 catch**
+
+```java
+try{
+    //
+} catch(NullPointerException e){
+
+} catch(Exception e){
+
+} finally {
+
+}
+```
+
+
+
+```java
+public static void main(String[] args) {
+
+//1.如果 try 代码块有可能有多个异常
+//2.可以使用多个 catch 分别捕获不同的异常，相应处理
+//3.要求子类异常写在前面，父类异常写在后面
+try {
+    Person person = new Person();
+    //person = null;
+    System.out.println(person.getName());//NullPointerException
+    int n1 = 10;
+    int n2 = 0;
+    int res = n1 / n2;//ArithmeticException
+} catch (NullPointerException e) {
+    System.out.println("空指针异常=" + e.getMessage());
+} catch (ArithmeticException e) {
+    System.out.println("算术异常=" + e.getMessage());
+} catch (Exception e) {
+    System.out.println(e.getMessage());
+} finally {
+	}
+}
+}
+```
+
+
+
+> ###### 可以进行 try - finally 配合使用，这种用法**相当于没有捕获异常**，因此程序**会直接崩掉**，应用场景：就是执行一段代码，不管是否发生异常，都必须执行某个业务
+
+```java
+try{
+    //代码
+}
+finally {
+    //总是执行
+}
+```
 
 
 
 ##### 执行顺序总结
-
----
 
 > 1. 如果没有出现异常，则执行 try 块中所有语句，不执行 catch 语句，如果有finally ，最后还需要执行finally 里面的语句
 > 2. 如果出现异常，则 try 块中异常发生后，**try 块剩下的语句不再执行**。将执行 catch 里的语句，**如果有 finally ,最后还需要执行 finally  里面的语句**
@@ -2209,86 +2264,94 @@ class Person {//类
 
 ---
 
-> **基本介绍**
->
-> - 如果一个方法（中的语句执行时）可能生成某种异常，但是并不能确定如何处理这种异常，则此方法应显式的声明抛出异常，表明该方法将不对这些异常进行处理，而由该方法的调用者负责处理
-> - 在方法声明中用 throws 语句可以声明抛出异常的列表，throws 后面的异常种类可以是方法中产生的异常类型，也可以是他的父类
->
-> ```java
-> public void f2() throws FileNotFoundException,NullPointerException,ArithmeticException{
->     // 创建了一个文件流d对象
->     //1.这里的异常是一个 FileNotFoundException 变异异常
->     //2.使用 try - catch 
->     //3.使用 throws 抛出异常，让调用 f2方法的调用者处理
->     //4.throws 后面的异常类型可以是方法中产生的异常，也可以是他的父类
->     //5.throws 后面也可以是一个异常列表，有多个异常
->     FileInputStream fis = new FileInputStream(d://aa.txt);
-> }
-> ```
+##### 基本介绍
+
+> ###### 如果一个方法（中的语句执行时）可能生成某种异常，但是并不能确定如何处理这种异常，则此方法应显式的声明抛出异常，表明该方法将不对这些异常进行处理，而由该方法的调用者负责处理
+
+> ###### 在方法声明中用 throws 语句可以声明抛出异常的列表，throws 后面的异常种类可以是方法中产生的异常类型，也可以是他的父类
+
+> ###### 代码示例：
+
+```java
+public void f2() throws FileNotFoundException,NullPointerException,ArithmeticException{
+    // 创建了一个文件流d对象
+    //1.这里的异常是一个 FileNotFoundException 变异异常
+    //2.使用 try - catch 
+    //3.使用 throws 抛出异常，让调用 f2方法的调用者处理
+    //4.throws 后面的异常类型可以是方法中产生的异常，也可以是他的父类
+    //5.throws 后面也可以是一个异常列表，有多个异常
+    FileInputStream fis = new FileInputStream(d://aa.txt);
+}
+```
 
 
 
 ##### 细节和注意事项
 
----
+> ###### 对于编译异常，程序中必须处理，，比如 try - catch - finally  或者  throws 
 
-> 1. 对于编译异常，程序中必须处理，，比如 try - catch - finally  或者  throws 
-> 2. 对于运行时异常，程序中如果没有处理，默认就是 throws 的方式处理
-> 3. 子类重写父类方法时，对于抛出异常的规定 ： **子类所抛出的异常类型要么和父类抛出的异常一致，要么为父类抛出的异常的类型的子类型**
-> 4. 在 throws 过程中，如果有方法 try - catch - finally ,就相当于处理异常，就不必再  throws 
->
-> ```java
-> public class ThrowsDetail {
->     public static void main(String[] args) {
->     f2();
-> 	}
->     public static void f2() /*throws ArithmeticException*/ {
->     //1.对于编译异常，程序中必须处理，比如 try-catch 或者 throws
->     //2.对于运行时异常，程序中如果没有处理，默认就是 throws 的方式处理
->     int n1 = 10;
->     int n2 = 0;
->     double res = n1 / n2;
-> 	}
->     public static void f1() throws FileNotFoundException {
->     //调用 f3() 报错
-> 
->     //1. 因为 f3() 方法抛出的是一个编译异常
->     //2. 即这时，就要 f1() 必须处理这个编译异常
->     //3. 在 f1() 中，要么 try-catch-finally ,或者继续 throws 这个编译异常
->         f3(); // 抛出异常
-> 	}
->     public static void f3() throws FileNotFoundException {
->         FileInputStream fis = new FileInputStream("d://aa.txt");
->     }
->     public static void f4() {
-> 
->         //1. 在 f4()中调用方法 f5() 是 OK
->         //2. 原因是 f5() 抛出的是运行异常
->         //3. 而 java 中，并不要求程序员显示处理,因为有默认处理机制
->         f5();
-> 	}
->     public static void f5() throws ArithmeticException {
-> 	}
-> }
-> class Father { //父类
->     public void method() throws RuntimeException {
->     }
-> }
-> class Son extends Father {//子类
->     //3. 子类重写父类的方法时，对抛出异常的规定:子类重写的方法，
->     // 所抛出的异常类型要么和父类抛出的异常一致，要么为父类抛出的异常类型的子类型
->     //4. 在 throws 过程中，如果有方法 try-catch , 就相当于处理异常，就可以不必 throws
->     @Override
->     public void method() throws ArithmeticException {
-> 	}
-> }
-> ```
+> ###### 对于运行时异常，程序中如果没有处理，默认就是 throws 的方式处理
+
+> ###### 子类重写父类方法时，对于抛出异常的规定 ： **子类所抛出的异常类型要么和父类抛出的异常一致，要么为父类抛出的异常的类型的子类型**
+
+> ###### 在 throws 过程中，如果有方法 try - catch - finally ,就相当于处理异常，就不必再  throws 
+
+> ###### 代码示例：
+
+```java
+public class ThrowsDetail {
+    public static void main(String[] args) {
+    f2();
+	}
+    public static void f2() /*throws ArithmeticException*/ {
+    //1.对于编译异常，程序中必须处理，比如 try-catch 或者 throws
+    //2.对于运行时异常，程序中如果没有处理，默认就是 throws 的方式处理
+    int n1 = 10;
+    int n2 = 0;
+    double res = n1 / n2;
+	}
+    public static void f1() throws FileNotFoundException {
+    //调用 f3() 报错
+
+    //1. 因为 f3() 方法抛出的是一个编译异常
+    //2. 即这时，就要 f1() 必须处理这个编译异常
+    //3. 在 f1() 中，要么 try-catch-finally ,或者继续 throws 这个编译异常
+        f3(); // 抛出异常
+	}
+    public static void f3() throws FileNotFoundException {
+        FileInputStream fis = new FileInputStream("d://aa.txt");
+    }
+    public static void f4() {
+
+        //1. 在 f4()中调用方法 f5() 是 OK
+        //2. 原因是 f5() 抛出的是运行异常
+        //3. 而 java 中，并不要求程序员显示处理,因为有默认处理机制
+        f5();
+	}
+    public static void f5() throws ArithmeticException {
+	}
+}
+class Father { //父类
+    public void method() throws RuntimeException {
+    }
+}
+class Son extends Father {//子类
+    //3. 子类重写父类的方法时，对抛出异常的规定:子类重写的方法，
+    // 所抛出的异常类型要么和父类抛出的异常一致，要么为父类抛出的异常类型的子类型
+    //4. 在 throws 过程中，如果有方法 try-catch , 就相当于处理异常，就可以不必 throws
+    @Override
+    public void method() throws ArithmeticException {
+	}
+}
+```
+
+
+
+
 
 
 
 #### 自定义异常
-
----
 
 > **当程序中出现了某些错误，但该错误信息并没有在 Throwable 子类中描述处理，这个时候可以自己设计异常类，用于描述该错误信息**
 
@@ -2328,8 +2391,6 @@ class Person {//类
 
 #### throw 和 throws 区别
 
----
-
 >|        | 意义                     | 位置       | 后面跟的东西 |
 >| ------ | ------------------------ | ---------- | ------------ |
 >| throws | 异常处理的一种方式       | 方法声明处 | 异常类型     |
@@ -2362,43 +2423,43 @@ class Person {//类
 
 #### 包装类和基本数据的转换
 
----
+> ##### jdk5 前的手动装箱和拆箱方式，装箱：基本类型 -> 包装类型 ，拆箱反之
 
-> - jdk5 前的手动装箱和拆箱方式，装箱：基本类型 -> 包装类型 ，拆箱反之
->
-> - jdk5 以后（含 jdk5) 的自动装箱和拆箱方式
->
-> - 自动装箱底层调用的是 valueOf 方法，比如 Integer,valueOf();
->
-> - 其他包装类的应用案例
->
->   ```java
->   public static void main(String[] args) {
->           //演示int <--> Integer 的装箱和拆箱
->           //jdk5前是手动装箱和拆箱
->           //手动装箱 int->Integer
->           int n1 = 100;
->           Integer integer = new Integer(n1);
->           Integer integer1 = Integer.valueOf(n1);
->               
->           //手动拆箱
->           //Integer -> int
->           int i = integer.intValue();
->               
->           //jdk5后，就可以自动装箱和自动拆箱
->           int n2 = 200;
->           //自动装箱 int->Integer
->           Integer integer2 = n2; //底层使用的是 Integer.valueOf(n2)
->           //自动拆箱 Integer->int
->           int n3 = integer2; //底层仍然使用的是 intValue()方法
->       }
->   ```
+> ##### jdk5 以后（含 jdk5) 的自动装箱和拆箱方式
+
+> ##### 自动装箱底层调用的是 valueOf 方法，比如 Integer,valueOf();
+
+> ##### 其他包装类的应用案例
+
+```java
+public static void main(String[] args) {
+        //演示int <--> Integer 的装箱和拆箱
+        //jdk5前是手动装箱和拆箱
+        //手动装箱 int->Integer
+        int n1 = 100;
+        Integer integer = new Integer(n1);
+        Integer integer1 = Integer.valueOf(n1);
+
+        //手动拆箱
+        //Integer -> int
+        int i = integer.intValue();
+
+        //jdk5后，就可以自动装箱和自动拆箱
+        int n2 = 200;
+        //自动装箱 int->Integer
+        Integer integer2 = n2; //底层使用的是 Integer.valueOf(n2)
+        //自动拆箱 Integer->int
+        int n3 = integer2; //底层仍然使用的是 intValue()方法
+    }
+```
+
+
+
+
 
 
 
 #### 包装类型和 String 类型的相互转换
-
----
 
 > ```java
 > public static void main(String[] args) {
@@ -2424,10 +2485,6 @@ class Person {//类
 
 
 #### Integer 类
-
----
-
-
 
 > ```java
 > public static void main(String[] args) {
@@ -2509,7 +2566,7 @@ class Person {//类
 > - **方式一 ：直接赋值 String s = "csq";**
 > - **方式二 ： 调用构造器 String s = new String("csq");**
 
-> **两种方式的区别：**
+> ##### 两种方式的区别：
 >
 > - 方式一 ： 先从常量池查看是否有 “csq" 数据空间，如果有，直接指向，如果没有则重新创建，然后指向。s 最终指向的是常量池的空间地址
 > - 方式二 ： 先在堆中创建空间，里面维护了 value 属性，指向常量池的 csq 空间。如果常量池中 没有 csq 则重新创建，如果有直接通过 value 指向，最终指向的是堆中的空间地址。
@@ -2538,7 +2595,7 @@ class Person {//类
 >     }
 > ```
 >
-> **重要规则：** **底层是 StringBuilder sb = new StringBuilder(); sb.append(a);  sb.append(b); sb 是在堆中，并且 append 是在原来字符串的基础上追加的** 
+> ##### **重要规则：** **底层是 StringBuilder sb = new StringBuilder(); sb.append(a);  sb.append(b); sb 是在堆中，并且 append 是在原来字符串的基础上追加的** 
 >
 > **String c1 = "ab" + "cd";  常量相加，看的是池。  String c1 = a + b; 变量相加，是在堆中**
 
@@ -2548,99 +2605,154 @@ class Person {//类
 
 > **字符串是保存字符串常量的。每次更新都需要重新开辟空间，效率极低，因此 Java 设计者还提供了  StringBuilder 和 StringBuffer 来增强String 的功能，并提高效率。**
 
-> **常见方法：**
->
-> - **equals**    //区分大小写，判断内容是否相等
-> - **equalslgnoreCase**   //忽略大小写的判断内容是否相等
-> - **length**   //获取字符的个数，字符串的长度
-> - **indexof**   //获取字符在字符串中第1次出现的索引，索引从0开始，如果找不到，返回-1
-> - **lastIndexOf**   //获取字符在字符串中最后1次出现的索引，索引从0开始如找不到，返回-1
-> - **substring**   //截取指定范围的子串
-> - **trim**   //去前后空格
-> - **charAt**  :   获取某索引处的字符，注意不能使用Str[index]这种方式.
-> - **intern : **当调用 intern 方法时，如果池中已经包含一个d等于 此 String 对象的字符串(用 equals (object) 方法确定，则返回池中的字符串。否则，将此 String 对象添加到池中，并返回此 String 对象的引用)    **此方法最终返回的是 常量池中的地址（对象）**
->
-> ```java
-> public static void main(String[] args) {
->         // 1.toUpperCase转换成大写
->         String s = "heLLo";
->         System.out.println(s.toUpperCase());//HELLO
->         // 2.toLowerCase
->         System.out.println(s.toLowerCase());//hello
->         // 3.concat拼接字符串
->         String s1 = "宝玉";
->         s1 = s1.concat("林黛玉").concat("薛宝钗").concat("together");
->         System.out.println(s1);//宝玉林黛玉薛宝钗together
->         // 4.replace 替换字符串中的字符
->         s1 = "宝玉 and 林黛玉 林黛玉 林黛玉";
->         //在s1中，将 所有的 林黛玉 替换成薛宝钗
->         //  s1.replace() 方法执行后，返回的结果才是替换过的.
->         // 注意对 s1没有任何影响
->         String s11 = s1.replace("宝玉", "jack");
->         System.out.println(s1);//宝玉 and 林黛玉 林黛玉 林黛玉
->         System.out.println(s11);//jack and 林黛玉 林黛玉 林黛玉
->         // 5.split 分割字符串, 对于某些分割字符，我们需要 转义比如 | \\等
->         String poem = "锄禾日当午,汗滴禾下土,谁知盘中餐,粒粒皆辛苦";
->         //
->         // 1. 以 , 为标准对 poem 进行分割 , 返回一个数组
->         // 2. 在对字符串进行分割时，如果有特殊字符，需要加入 转义符 \
->         String[] split = poem.split(",");
->         poem = "E:\\aaa\\bbb";
->         split = poem.split("\\\\");
->         System.out.println("==分割后内容===");
->         for (int i = 0; i < split.length; i++) {
->             System.out.println(split[i]);
->         }
->         // 6.toCharArray 转换成字符数组
->         s = "happy";
->         char[] chs = s.toCharArray();
->         for (int i = 0; i < chs.length; i++) {
->             System.out.println(chs[i]);
->         }
->         // 7.compareTo 比较两个字符串的大小，如果前者大，
->         // 则返回正数，后者大，则返回负数，如果相等，返回0
->         // 解读
->         // (1) 如果长度相同，并且每个字符也相同，就返回 0
->         // (2) 如果长度相同或者不相同，但是在进行比较时，可以区分大小
->         //     就返回 if (c1 != c2) {
->         //                return c1 - c2;
->         //            }
->         // (3) 如果前面的部分都相同，就返回 str1.len - str2.len
->         String a = "jcck";// len = 3
->         String b = "jack";// len = 4
->         System.out.println(a.compareTo(b)); // 返回值是 'c' - 'a' = 2的值
-> // 8.format 格式字符串
->         /* 占位符有:
->          * %s 字符串 %c 字符 %d 整型 %.2f 浮点型
->          *
->          */
->         String name = "john";
->         int age = 10;
->         double score = 56.857;
->         char gender = '男';
->         //将所有的信息都拼接在一个字符串.
->         String info =
->                 "我的姓名是" + name + "年龄是" + age + ",成绩是" + score + "性别是" + gender + "。希望大家喜欢我！";
-> 
->         System.out.println(info);
-> 
-> 
->         //解读
->         //1. %s , %d , %.2f %c 称为占位符
->         //2. 这些占位符由后面变量来替换
->         //3. %s 表示后面由 字符串来替换
->         //4. %d 是整数来替换
->         //5. %.2f 表示使用小数来替换，替换后，只会保留小数点两位, 并且进行四舍五入的处理
->         //6. %c 使用char 类型来替换
->         String formatStr = "我的姓名是%s 年龄是%d，成绩是%.2f 性别是%c.希望大家喜欢我！";
-> 
->         String info2 = String.format(formatStr, name, age, score, gender);
-> 
->         System.out.println("info2=" + info2);
->     }
-> ```
->
-> 
+
+
+##### 常见方法
+
+###### equals   
+
+> 区分大小写，判断内容是否相等
+
+
+
+###### equalslgnoreCase   
+
+> 忽略大小写的判断内容是否相等
+
+
+
+###### length   
+
+> 获取字符的个数，字符串的长度
+
+
+
+###### indexof   
+
+> 获取字符在字符串中第1次出现的索引，索引从0开始，如果找不到，返回-1
+
+
+
+###### lastIndexOf   
+
+> 获取字符在字符串中最后1次出现的索引，索引从0开始如找不到，返回-1
+
+
+
+###### substring   
+
+> 截取指定范围的子串
+
+
+
+###### trim   
+
+> 去前后空格
+
+
+
+###### charAt   
+
+> 获取某索引处的字符，注意不能使用Str[index]这种方式.
+
+
+
+###### intern 
+
+> 当调用 intern 方法时，如果池中已经包含一个d等于 此 String 对象的字符串(用 equals (object) 方法确定，则返回池中的字符串。否则，将此 String 对象添加到池中，并返回此 String 对象的引用)    **此方法最终返回的是 常量池中的地址（对象）**
+
+
+
+> ###### 代码：
+
+```java
+public static void main(String[] args) {
+        // 1.toUpperCase转换成大写
+        String s = "heLLo";
+        System.out.println(s.toUpperCase());//HELLO
+    
+        // 2.toLowerCase
+        System.out.println(s.toLowerCase());//hello
+    
+        // 3.concat拼接字符串
+        String s1 = "宝玉";
+        s1 = s1.concat("林黛玉").concat("薛宝钗").concat("together");
+        System.out.println(s1);//宝玉林黛玉薛宝钗together
+    
+        // 4.replace 替换字符串中的字符
+        s1 = "宝玉 and 林黛玉 林黛玉 林黛玉";
+        //在s1中，将 所有的 林黛玉 替换成薛宝钗
+        //  s1.replace() 方法执行后，返回的结果才是替换过的.
+        // 注意对 s1没有任何影响
+        String s11 = s1.replace("宝玉", "jack");
+        System.out.println(s1);//宝玉 and 林黛玉 林黛玉 林黛玉
+        System.out.println(s11);//jack and 林黛玉 林黛玉 林黛玉
+    
+        // 5.split 分割字符串, 对于某些分割字符，我们需要 转义比如 | \\等
+        String poem = "锄禾日当午,汗滴禾下土,谁知盘中餐,粒粒皆辛苦";
+        //
+        // 1. 以 , 为标准对 poem 进行分割 , 返回一个数组
+        // 2. 在对字符串进行分割时，如果有特殊字符，需要加入 转义符 \
+        String[] split = poem.split(",");
+        poem = "E:\\aaa\\bbb";
+        split = poem.split("\\\\");
+        System.out.println("==分割后内容===");
+        for (int i = 0; i < split.length; i++) {
+            System.out.println(split[i]);
+        }
+    
+        // 6.toCharArray 转换成字符数组
+        s = "happy";
+        char[] chs = s.toCharArray();
+        for (int i = 0; i < chs.length; i++) {
+            System.out.println(chs[i]);
+        }
+    
+        // 7.compareTo 比较两个字符串的大小，如果前者大，
+        // 则返回正数，后者大，则返回负数，如果相等，返回0
+        // 解读
+        // (1) 如果长度相同，并且每个字符也相同，就返回 0
+        // (2) 如果长度相同或者不相同，但是在进行比较时，可以区分大小
+        //     就返回 if (c1 != c2) {
+        //                return c1 - c2;
+        //            }
+        // (3) 如果前面的部分都相同，就返回 str1.len - str2.len
+        String a = "jcck";// len = 3
+        String b = "jack";// len = 4
+        System.out.println(a.compareTo(b)); // 返回值是 'c' - 'a' = 2的值
+    
+		// 8.format 格式字符串
+        /* 占位符有:
+         * %s 字符串 %c 字符 %d 整型 %.2f 浮点型
+         *
+         */
+        String name = "john";
+        int age = 10;
+        double score = 56.857;
+        char gender = '男';
+        //将所有的信息都拼接在一个字符串.
+        String info =
+                "我的姓名是" + name + "年龄是" + age + ",成绩是" + score + "性别是" + gender + "。希望大家喜欢我！";
+
+        System.out.println(info);
+
+
+        //解读
+        //1. %s , %d , %.2f %c 称为占位符
+        //2. 这些占位符由后面变量来替换
+        //3. %s 表示后面由 字符串来替换
+        //4. %d 是整数来替换
+        //5. %.2f 表示使用小数来替换，替换后，只会保留小数点两位, 并且进行四舍五入的处理
+        //6. %c 使用char 类型来替换
+        String formatStr = "我的姓名是%s 年龄是%d，成绩是%.2f 性别是%c.希望大家喜欢我！";
+
+        String info2 = String.format(formatStr, name, age, score, gender);
+
+        System.out.println("info2=" + info2);
+    }
+```
+
+
 
  
 
@@ -2651,7 +2763,11 @@ class Person {//类
 > 很多方法与 String 相同，但 StringBuffer 是可变长度的。
 >
 > StringBuffer 是一个容器。
->
+
+
+
+##### 基础内容
+
 > - Stringbuffer 是 final 类
 > - 实现了 Serializable 接口，可以保存到文件，或文件传输
 > - 继承了抽象类 AbstractStringBuider 
@@ -2729,8 +2845,6 @@ public static void main(String[] args) {
 
 ##### StringBuffer 类常见方法
 
-
-
 ```java
 public static void main(String[] args) {
     
@@ -2793,10 +2907,10 @@ public static void main(String[] args) {
 ##### StringBuffer 类 常用方法
 
 > **StringBuffer 和 StringBuilder 均代表可变的字符序列，方法是一样的，所以使用和 StringBuffer 一样 。**
->
-> - StringBuilder 是 final 
-> - 继承了 AbstractStringBuilder 属性 char[] value ,内容存到 value
-> - 实现了 Serializable 接口，序列化（所谓序列化即可以保存类型和数据本 
+
+- StringBuilder 是 final 
+- 继承了 AbstractStringBuilder 属性 char[] value ,内容存到 value
+- 实现了 Serializable 接口，序列化（所谓序列化即可以保存类型和数据本 
 
 ```java
 public static void main(String[] args){
@@ -2815,8 +2929,6 @@ public static void main(String[] args){
 
 #### String 与 StringXxx 比较
 
----
-
 1. StringBuilder 和 StringBuffer 非常类似，均代表可变的字符序列，而且方法都一样
 
 2. String ： 不可变字符序列，效率低，但是复用率高
@@ -2834,8 +2946,6 @@ public static void main(String[] args){
 
 
 #### StringXxx 的选择
-
----
 
 使用的原则，结论：
 
@@ -2856,80 +2966,92 @@ public static void main(String[] args){
 
 #### Math 类 常见方法 
 
----
+##### .**abs  [绝对值]**
 
-- .**abs  [绝对值]**
+```java
+int abs = Math.abs(-9);
+System.out.println(abs);//9
+```
 
-  ```java
-  int abs = Math.abs(-9);
-  System.out.println(abs);//9
-  ```
 
-- **.pow  [求幂]**
 
-  ```java
-  double pow = Math.pow(2, 4);//2 的 4 次方
-  System.out.println(pow);//16
-  ```
+##### .pow  [求幂]
 
-- **.ceil  [向上取整]**
+```java
+double pow = Math.pow(2, 4);//2 的 4 次方
+System.out.println(pow);//16
+```
 
-  ```java
-  double ceil = Math.ceil(3.9);
-  System.out.println(ceil);//4.0
-  ```
 
-- **.floor  [向下取整]**
 
-  ```java
-  double floor = Math.floor(4.001);
-  System.out.println(floor);//4.0
-  ```
+##### .ceil  [向上取整]
 
-- **.round  [四舍五入]**
+```java
+double ceil = Math.ceil(3.9);
+System.out.println(ceil);//4.0
+```
 
-  ```java
-  // Math.floor(该参数+0.5)
-  long round = Math.round(5.51);
-  System.out.println(round);//6
-  ```
 
-- **.sqrt  [开平方]**
 
-  ```java
-  double sqrt = Math.sqrt(9.0);
-  System.out.println(sqrt);//3.0
-  ```
+##### .floor  [向下取整]
 
-- **.random  [求随机数]**
+```java
+double floor = Math.floor(4.001);
+System.out.println(floor);//4.0
+```
 
-  ```java
-  // random 返回的是 0 <= x < 1 之间的一个随机小数
-  // 思考：请写出获取 a-b 之间的一个随机整数,a,b 均为整数 ，比如 a = 2, b=7
-  // 即返回一个数 x 2 <= x <= 7
-  // Math.random() * (b-a) 返回的就是 0 <= 数 <= b-a
-  // (1) (int)(a) <= x <= (int)(a + Math.random() * (b-a +1) )
-  // (2) 使用具体的数给小伙伴介绍 a = 2 b = 7
-  // (int)(a + Math.random() * (b-a +1) ) = (int)( 2 + Math.random()*6)
-  // Math.random()*6 返回的是 0 <= x < 6 小数
-  // 2 + Math.random()*6 返回的就是 2<= x < 8 小数
-  // (int)(2 + Math.random()*6) = 2 <= x <= 7
-  // (3) 公式就是 (int)(a + Math.random() * (b-a +1) )
-  for(int i = 0; i < 100; i++) {
-      System.out.println((int)(2 + Math.random() * (7 - 2 + 1)));
-  }
-  ```
 
-- **.max / min  [最大值/最小值]**
 
-  ```java
-  int min = Math.min(1, 9);
-  int max = Math.max(45, 90);
-  System.out.println("min=" + min);
-  System.out.println("max=" + max);
-  ```
+##### .round  [四舍五入]
 
-  
+```java
+// Math.floor(该参数+0.5)
+long round = Math.round(5.51);
+System.out.println(round);//6
+```
+
+
+
+##### .sqrt  [开平方]
+
+```java
+double sqrt = Math.sqrt(9.0);
+System.out.println(sqrt);//3.0
+```
+
+
+
+##### .random  [求随机数]
+
+```java
+// random 返回的是 0 <= x < 1 之间的一个随机小数
+// 思考：请写出获取 a-b 之间的一个随机整数,a,b 均为整数 ，比如 a = 2, b=7
+// 即返回一个数 x 2 <= x <= 7
+// Math.random() * (b-a) 返回的就是 0 <= 数 <= b-a
+// (1) (int)(a) <= x <= (int)(a + Math.random() * (b-a +1) )
+// (2) 使用具体的数给小伙伴介绍 a = 2 b = 7
+// (int)(a + Math.random() * (b-a +1) ) = (int)( 2 + Math.random()*6)
+// Math.random()*6 返回的是 0 <= x < 6 小数
+// 2 + Math.random()*6 返回的就是 2<= x < 8 小数
+// (int)(2 + Math.random()*6) = 2 <= x <= 7
+// (3) 公式就是 (int)(a + Math.random() * (b-a +1) )
+for(int i = 0; i < 100; i++) {
+    System.out.println((int)(2 + Math.random() * (7 - 2 + 1)));
+}
+```
+
+
+
+##### .max / min  [最大值/最小值]
+
+```java
+int min = Math.min(1, 9);
+int max = Math.max(45, 90);
+System.out.println("min=" + min);
+System.out.println("max=" + max);
+```
+
+
 
 ### Arrays 类
 
@@ -2943,273 +3065,273 @@ public static void main(String[] args){
 
 ---
 
-- toString 返回数组的字符串形式
+##### toString 返回数组的字符串形式
 
-  ```java
-  System.out.println(Arrays.toString(arr));
-  ```
+```java
+System.out.println(Arrays.toString(arr));
+```
 
-- sort 排序（自然排序和定制排序）
 
-  ```java
-  Arrays.sort(arr); // 默认排序方法
-  ```
 
-  定制排序
+##### sort 排序（自然排序和定制排序）
 
-  ```java
-  public class ArraysMethod01 {
-      public static void main(String[] args) {
-  
-          Integer[] integers = {1, 20, 90};
-          //遍历数组
-  //        for(int i = 0; i < integers.length; i++) {
-  //            System.out.println(integers[i]);
-  //        }
-          //直接使用Arrays.toString方法，显示数组
-  //        System.out.println(Arrays.toString(integers));//
-  
-          //演示 sort方法的使用
-  
-          Integer arr[] = {1, -1, 7, 0, 89};
-          //进行排序
-          //解读
-          //1. 可以直接使用冒泡排序 , 也可以直接使用Arrays提供的sort方法排序
-          //2. 因为数组是引用类型，所以通过sort排序后，会直接影响到 实参 arr
-          //3. sort重载的，也可以通过传入一个接口 Comparator 实现定制排序
-          //4. 调用 定制排序 时，传入两个参数 (1) 排序的数组 arr
-          //(2) 实现了Comparator接口的匿名内部类 , 要求实现  compare方法
-          //5. 先演示效果，再解释
-          //6. 这里体现了接口编程的方式 , 看看源码，就明白
-          //   源码分析
-          //(1) Arrays.sort(arr, new Comparator()
-          //(2) 最终到 TimSort类的 private static <T> void binarySort(T[] a, int lo, int hi, int start,
-          //                                       Comparator<? super T> c)()
-          //(3) 执行到 binarySort方法的代码, 会根据动态绑定机制 c.compare()执行我们传入的
-          //    匿名内部类的 compare ()
-          //     while (left < right) {
-          //                int mid = (left + right) >>> 1;
-          //                if (c.compare(pivot, a[mid]) < 0)
-          //                    right = mid;
-          //                else
-          //                    left = mid + 1;
-          //            }
-          //(4) new Comparator() {
-          //            @Override
-          //            public int compare(Object o1, Object o2) {
-          //                Integer i1 = (Integer) o1;
-          //                Integer i2 = (Integer) o2;
-          //                return i2 - i1;
-          //            }
-          //        }
-          //(5) public int compare(Object o1, Object o2) 返回的值>0 还是 <0
-          //    会影响整个排序结果, 这就充分体现了 接口编程+动态绑定+匿名内部类的综合使用
-          //    将来的底层框架和源码的使用方式，会非常常见
-          //Arrays.sort(arr); // 默认排序方法
-          //定制排序
-          Arrays.sort(arr, new Comparator() {
-              @Override
-              public int compare(Object o1, Object o2) {
-                  Integer i1 = (Integer) o1;
-                  Integer i2 = (Integer) o2;
-                  return i2 - i1;
-              }
-          });
-          System.out.println("===排序后===");
-          System.out.println(Arrays.toString(arr));//
-  
-  
-  
-      }
-  }
-  ```
+```java
+Arrays.sort(arr); // 默认排序方法
+```
 
-  定制排序
+###### 定制排序
 
-  ```java
-  public class ArraysSortCustom {
-      public static void main(String[] args) {
-  
-          int[] arr = {1, -1, 8, 0, 20};
-          //bubble01(arr);
-  
-          bubble02(arr, new Comparator() {
-              @Override
-              public int compare(Object o1, Object o2) {
-                  int i1 = (Integer) o1;
-                  int i2 = (Integer) o2;
-                  return i2 - i1;// return i2 - i1;
-              }
-          });
-  
-          System.out.println("==定制排序后的情况==");
-          System.out.println(Arrays.toString(arr));
-  
-      }
-  
-      //使用冒泡完成排序
-      public static void bubble01(int[] arr) {
-          int temp = 0;
-          for (int i = 0; i < arr.length - 1; i++) {
-              for (int j = 0; j < arr.length - 1 - i; j++) {
-                  //从小到大
-                  if (arr[j] > arr[j + 1]) {
-                      temp = arr[j];
-                      arr[j] = arr[j + 1];
-                      arr[j + 1] = temp;
-                  }
-              }
-          }
-      }
-  
-      //结合冒泡 + 定制
-      public static void bubble02(int[] arr, Comparator c) {
-          int temp = 0;
-          for (int i = 0; i < arr.length - 1; i++) {
-              for (int j = 0; j < arr.length - 1 - i; j++) {
-                  //数组排序由 c.compare(arr[j], arr[j + 1])返回的值决定
-                  if (c.compare(arr[j], arr[j + 1]) > 0) {
-                      temp = arr[j];
-                      arr[j] = arr[j + 1];
-                      arr[j + 1] = temp;
-                  }
-              }
-          }
-      }
-  }
-  
-  ```
+```java
+public class ArraysMethod01 {
+    public static void main(String[] args) {
 
-  
+        Integer[] integers = {1, 20, 90};
+        //遍历数组
+//        for(int i = 0; i < integers.length; i++) {
+//            System.out.println(integers[i]);
+//        }
+        //直接使用Arrays.toString方法，显示数组
+//        System.out.println(Arrays.toString(integers));//
 
-  
+        //演示 sort方法的使用
 
-  案例分析
+        Integer arr[] = {1, -1, 7, 0, 89};
+        //进行排序
+        //解读
+        //1. 可以直接使用冒泡排序 , 也可以直接使用Arrays提供的sort方法排序
+        //2. 因为数组是引用类型，所以通过sort排序后，会直接影响到 实参 arr
+        //3. sort重载的，也可以通过传入一个接口 Comparator 实现定制排序
+        //4. 调用 定制排序 时，传入两个参数 (1) 排序的数组 arr
+        //(2) 实现了Comparator接口的匿名内部类 , 要求实现  compare方法
+        //5. 先演示效果，再解释
+        //6. 这里体现了接口编程的方式 , 看看源码，就明白
+        //   源码分析
+        //(1) Arrays.sort(arr, new Comparator()
+        //(2) 最终到 TimSort类的 private static <T> void binarySort(T[] a, int lo, int hi, int start,
+        //                                       Comparator<? super T> c)()
+        //(3) 执行到 binarySort方法的代码, 会根据动态绑定机制 c.compare()执行我们传入的
+        //    匿名内部类的 compare ()
+        //     while (left < right) {
+        //                int mid = (left + right) >>> 1;
+        //                if (c.compare(pivot, a[mid]) < 0)
+        //                    right = mid;
+        //                else
+        //                    left = mid + 1;
+        //            }
+        //(4) new Comparator() {
+        //            @Override
+        //            public int compare(Object o1, Object o2) {
+        //                Integer i1 = (Integer) o1;
+        //                Integer i2 = (Integer) o2;
+        //                return i2 - i1;
+        //            }
+        //        }
+        //(5) public int compare(Object o1, Object o2) 返回的值>0 还是 <0
+        //    会影响整个排序结果, 这就充分体现了 接口编程+动态绑定+匿名内部类的综合使用
+        //    将来的底层框架和源码的使用方式，会非常常见
+        //Arrays.sort(arr); // 默认排序方法
+        //定制排序
+        Arrays.sort(arr, new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                Integer i1 = (Integer) o1;
+                Integer i2 = (Integer) o2;
+                return i2 - i1;
+            }
+        });
+        System.out.println("===排序后===");
+        System.out.println(Arrays.toString(arr));//
 
-  ```java
-  //(2)price 从小到大
-  // Arrays.sort(books, new Comparator() {
-  // //这里是对 Book 数组排序，因此 o1 和 o2 就是 Book 对象
-  // @Override
-  // public int compare(Object o1, Object o2) {
-  // Book book1 = (Book) o1;
-  // Book book2 = (Book) o2;
-  // double priceVal = book2.getPrice() - book1.getPrice();
-  //如果发现返回结果和我们输出的不一致，就修改一下返回的 1 和 -1
-  // if(priceVal > 0) {
-  // return -1;
-  // } else if(priceVal < 0) {
-  // return 1;
-  // } else {
-  // return 0;
-  // }
-  //}
-  
-  //(3)按照书名长度从大到小
-      Arrays.sort(books, new Comparator() {
-      //这里是对 Book 数组排序，因此 o1 和 o2 就是 Book 对象
-      @Override
-      public int compare(Object o1, Object o2) {
-          Book book1 = (Book) o1;
-          Book book2 = (Book) o2;
-          //要求按照书名的长度来进行排序
-          return book2.getName().length() - book1.getName().length();
-      }
-  });
-  ```
 
-- binarySearch 通过二分查找进行查找，要求必须排好序
 
-  ```java
-  int index = Arrays.binarySearch(arr, 567);
-  ```
+    }
+}
+```
 
-  案例分析
+###### 定制排序
 
-  ```java
-  public static void main(String[] args) {
-          Integer[] arr = {1, 2, 90, 123, 567};
-          // binarySearch 通过二分搜索法进行查找，要求必须排好
-          // 解读
-          //1. 使用 binarySearch 二叉查找
-          //2. 要求该数组是有序的. 如果该数组是无序的，不能使用binarySearch
-          //3. 如果数组中不存在该元素，就返回 return -(low + 1);  // key not found.
-          int index = Arrays.binarySearch(arr, 567);
-          System.out.println("index=" + index);
-      }
-  ```
+```java
+public class ArraysSortCustom {
+    public static void main(String[] args) {
 
-  
+        int[] arr = {1, -1, 8, 0, 20};
+        //bubble01(arr);
 
-- copyOf 数组元素的复制
+        bubble02(arr, new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                int i1 = (Integer) o1;
+                int i2 = (Integer) o2;
+                return i2 - i1;// return i2 - i1;
+            }
+        });
 
-  ```java
-  Integer[] newArr = Arrays.copyOf(arr, 
-  ```
+        System.out.println("==定制排序后的情况==");
+        System.out.println(Arrays.toString(arr));
 
-  ```java
-  //copyOf 数组元素的复制
-          // 解读
-          //1. 从 arr 数组中，拷贝 arr.length个元素到 newArr数组中
-          //2. 如果拷贝的长度 > arr.length 就在新数组的后面 增加 null
-          //3. 如果拷贝长度 < 0 就抛出异常NegativeArraySizeException
-          //4. 该方法的底层使用的是 System.arraycopy()
-          Integer[] newArr = Arrays.copyOf(arr, arr.length);
-          System.out.println("==拷贝执行完毕后==");
-          System.out.println(Arrays.toString(newArr));
-  ```
+    }
 
-  
+    //使用冒泡完成排序
+    public static void bubble01(int[] arr) {
+        int temp = 0;
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = 0; j < arr.length - 1 - i; j++) {
+                //从小到大
+                if (arr[j] > arr[j + 1]) {
+                    temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
 
-- fill 数组元素的填充
+    //结合冒泡 + 定制
+    public static void bubble02(int[] arr, Comparator c) {
+        int temp = 0;
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = 0; j < arr.length - 1 - i; j++) {
+                //数组排序由 c.compare(arr[j], arr[j + 1])返回的值决定
+                if (c.compare(arr[j], arr[j + 1]) > 0) {
+                    temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
+}
 
-  ```java
-  //1. 使用 99 去填充 num 数组，可以理解成是替换原理的元素
-  Arrays.fill(num, 99);
-  ```
+```
 
-  ```java
-   //ill 数组元素的填充
-          Integer[] num = new Integer[]{9,3,2};
-          //解读
-          //1. 使用 99 去填充 num数组，可以理解成是替换原理的元素
-          Arrays.fill(num, 99);
-          System.out.println("==num数组填充后==");
-          System.out.println(Arrays.toString(num));
-  ```
+###### 案例分析
 
-  
+```java
+//(2)price 从小到大
+// Arrays.sort(books, new Comparator() {
+// //这里是对 Book 数组排序，因此 o1 和 o2 就是 Book 对象
+// @Override
+// public int compare(Object o1, Object o2) {
+// Book book1 = (Book) o1;
+// Book book2 = (Book) o2;
+// double priceVal = book2.getPrice() - book1.getPrice();
+//如果发现返回结果和我们输出的不一致，就修改一下返回的 1 和 -1
+// if(priceVal > 0) {
+// return -1;
+// } else if(priceVal < 0) {
+// return 1;
+// } else {
+// return 0;
+// }
+//}
 
-- equals 比较两个数组元素内容是否完全一致
+//(3)按照书名长度从大到小
+    Arrays.sort(books, new Comparator() {
+    //这里是对 Book 数组排序，因此 o1 和 o2 就是 Book 对象
+    @Override
+    public int compare(Object o1, Object o2) {
+        Book book1 = (Book) o1;
+        Book book2 = (Book) o2;
+        //要求按照书名的长度来进行排序
+        return book2.getName().length() - book1.getName().length();
+    }
+});
+```
 
-  ```java
-          //equals 比较两个数组元素内容是否完全一致
-          Integer[] arr2 = {1, 2, 90, 123};
-          //解读
-          //1. 如果arr 和 arr2 数组的元素一样，则方法true;
-          //2. 如果不是完全一样，就返回 false
-          boolean equals = Arrays.equals(arr, arr2);
-          System.out.println("equals=" + equals);
-  ```
+##### binarySearch 
 
-  
+> 通过二分查找进行查找，要求必须排好序
 
-- asList 将一组值，转换成 List
+```java
+int index = Arrays.binarySearch(arr, 567);
+```
 
-  ```java
-   //asList 将一组值，转换成list
-          //解读
-          //1. asList方法，会将 (2,3,4,5,6,1)数据转成一个List集合
-          //2. 返回的 asList 编译类型 List(接口)
-          //3. asList 运行类型 java.util.Arrays#ArrayList, 是Arrays类的
-          //   静态内部类 private static class ArrayList<E> extends AbstractList<E>
-          //              implements RandomAccess, java.io.Serializable
-          List asList = Arrays.asList(2,3,4,5,6,1);
-          System.out.println("asList=" + asList);
-          System.out.println("asList的运行类型" + asList.getClass());
-  ```
-  
-  
+###### 案例分析
+
+```java
+public static void main(String[] args) {
+        Integer[] arr = {1, 2, 90, 123, 567};
+        // binarySearch 通过二分搜索法进行查找，要求必须排好
+        // 解读
+        //1. 使用 binarySearch 二叉查找
+        //2. 要求该数组是有序的. 如果该数组是无序的，不能使用binarySearch
+        //3. 如果数组中不存在该元素，就返回 return -(low + 1);  // key not found.
+        int index = Arrays.binarySearch(arr, 567);
+        System.out.println("index=" + index);
+    }
+```
+
+##### copyOf 
+
+> 数组元素的复制
+
+```java
+Integer[] newArr = Arrays.copyOf(arr, 
+```
+
+```java
+//copyOf 数组元素的复制
+        // 解读
+        //1. 从 arr 数组中，拷贝 arr.length个元素到 newArr数组中
+        //2. 如果拷贝的长度 > arr.length 就在新数组的后面 增加 null
+        //3. 如果拷贝长度 < 0 就抛出异常NegativeArraySizeException
+        //4. 该方法的底层使用的是 System.arraycopy()
+        Integer[] newArr = Arrays.copyOf(arr, arr.length);
+        System.out.println("==拷贝执行完毕后==");
+        System.out.println(Arrays.toString(newArr));
+```
+
+##### fill 
+
+> 数组元素的填充
+
+```java
+//1. 使用 99 去填充 num 数组，可以理解成是替换原理的元素
+Arrays.fill(num, 99);
+```
+
+```java
+ //ill 数组元素的填充
+        Integer[] num = new Integer[]{9,3,2};
+        //解读
+        //1. 使用 99 去填充 num数组，可以理解成是替换原理的元素
+        Arrays.fill(num, 99);
+        System.out.println("==num数组填充后==");
+        System.out.println(Arrays.toString(num));
+```
+
+##### equals 
+
+> 比较两个数组元素内容是否完全一致
+
+```java
+        //equals 比较两个数组元素内容是否完全一致
+        Integer[] arr2 = {1, 2, 90, 123};
+        //解读
+        //1. 如果arr 和 arr2 数组的元素一样，则方法true;
+        //2. 如果不是完全一样，就返回 false
+        boolean equals = Arrays.equals(arr, arr2);
+        System.out.println("equals=" + equals);
+```
+
+##### asList 
+
+> 将一组值，转换成 List
+
+```java
+ //asList 将一组值，转换成list
+        //解读
+        //1. asList方法，会将 (2,3,4,5,6,1)数据转成一个List集合
+        //2. 返回的 asList 编译类型 List(接口)
+        //3. asList 运行类型 java.util.Arrays#ArrayList, 是Arrays类的
+        //   静态内部类 private static class ArrayList<E> extends AbstractList<E>
+        //              implements RandomAccess, java.io.Serializable
+        List asList = Arrays.asList(2,3,4,5,6,1);
+        System.out.println("asList=" + asList);
+        System.out.println("asList的运行类型" + asList.getClass());
+```
+
+
 
 ### System 类
 
@@ -3217,44 +3339,52 @@ public static void main(String[] args){
 
 #### System 常用方法
 
-- exit :退出当前程序
+##### exit 
 
-  ```java
-  //exit 退出当前程序
-  
-  //        System.out.println("ok1");
-  //        //解读
-  //        //1. exit(0) 表示程序退出
-  //        //2. 0 表示一个状态 , 正常的状态
-  //        System.exit(0);//
-  //        System.out.println("ok2");
-  ```
+> 退出当前程序
 
-  
+```java
+//exit 退出当前程序
 
-- arrayCopy : 复制数组元素，比较适合底层调用，一般使用 Arrays.copyOf 完成数组复制
+//        System.out.println("ok1");
+//        //解读
+//        //1. exit(0) 表示程序退出
+//        //2. 0 表示一个状态 , 正常的状态
+//        System.exit(0);//
+//        System.out.println("ok2");
+```
 
-  ```java
-   //1. 主要是搞清楚这五个参数的含义
-          //2.
-          //     源数组
-          //     * @param      src      the source array.
-          //     srcPos： 从源数组的哪个索引位置开始拷贝
-          //     * @param      srcPos   starting position in the source array.
-          //     dest : 目标数组，即把源数组的数据拷贝到哪个数组
-          //     * @param      dest     the destination array.
-          //     destPos: 把源数组的数据拷贝到 目标数组的哪个索引
-          //     * @param      destPos  starting position in the destination data.
-          //     length: 从源数组拷贝多少个数据到目标数组
-          //     * @param      length   the number of array elements to be copied.
-          System.arraycopy(src, 0, dest, 0, src.length);
-  ```
+##### arrayCopy 
 
-  
+> 复制数组元素，比较适合底层调用，一般使用 Arrays.copyOf 完成数组复制
 
-- currentTimeMillens : 返回当前时间距离 1970-1-1 的 毫秒数
+```java
+ //1. 主要是搞清楚这五个参数的含义
+        //2.
+        //     源数组
+        //     * @param      src      the source array.
+        //     srcPos： 从源数组的哪个索引位置开始拷贝
+        //     * @param      srcPos   starting position in the source array.
+        //     dest : 目标数组，即把源数组的数据拷贝到哪个数组
+        //     * @param      dest     the destination array.
+        //     destPos: 把源数组的数据拷贝到 目标数组的哪个索引
+        //     * @param      destPos  starting position in the destination data.
+        //     length: 从源数组拷贝多少个数据到目标数组
+        //     * @param      length   the number of array elements to be copied.
+        System.arraycopy(src, 0, dest, 0, src.length);
+```
 
-- gc :  运行垃圾回收机制 System.gc();
+##### currentTimeMillens 
+
+> 返回当前时间距离 1970-1-1 的 毫秒数
+
+##### gc 
+
+>  运行垃圾回收机制 System.gc();
+
+---
+
+> ##### 代码
 
 ```java
 public static void main(String[] args) {
@@ -3292,19 +3422,27 @@ public static void main(String[] args) {
 
 ---
 
-> - **BigInteger 适合存放比较大的整型**
-> - **BigDecimal 适合存放 精度更高的浮点型**
+- #### BigInteger
+
+  > 适合存放比较大的整型
+
+- #### BigDecimal 
+
+  > 适合存放 精度更高的浮点型
 
 
 
 #### 常用方法
 
----
+- ##### add  加
 
-- add  加
-- substract  减
-- multiply  乘
-- divide 除
+- ##### substract  减
+
+- ##### multiply  乘
+
+- ##### divide 除
+
+> ##### 代码
 
 ```java
 public static void main(String[] args) {
@@ -3358,11 +3496,19 @@ public static void main(String[] args) {
 
 #### 第一代日期类
 
-1. Date :精确到毫秒，代表特定的瞬间
+##### Date :
 
-2. SimpleDateFormat ： 格式和解析日期的类
+> 精确到毫秒，代表特定的瞬间
 
-   SimpleDateFormat 格式化和解析日期的具体类，他允许进行格式化（日期 - > 文本）、解析（文本 -> 日期）和规范化
+
+
+##### SimpleDateFormat 
+
+> 格式化和解析日期的具体类，他允许进行格式化（日期 - > 文本）、解析（文本 -> 日期）和规范化
+
+
+
+> ##### 代码
 
 ```java
 public class Date01 {
@@ -3396,92 +3542,133 @@ public class Date01 {
 
 #### 第二代日期类
 
-1. 第二代日期类 ，主要就是 Calendar 类（日历）
+##### 基本介绍
 
-   ```java
-   public abstract class Calendar extends Object implements Serializable,Cloneable,Comparabale<Calendar>
-   ```
+> ​	1.主要就是 Calendar 类（日历）
+>
+> ```java
+> public abstract class Calendar extends Object implements Serializable,Cloneable,Comparabale<Calendar>
+> ```
+>
+> 
+>
+> ​	2.Calendar 类是一个抽象类，它为特定瞬间与一组诸如 YEAR,MONTH，DAY_OF_MONTH,HOUR 等日历字段之间的转换提供了一些方法，并为操作日历字段（例如获得下星期的日期）提供了一些方法。
+>
+> ```java
+> public static void main(String[] args) {
+> 
+>     //1. Calendar 是一个抽象类， 并且构造器是 private
+>     //2. 可以通过 getInstance() 来获取实例
+>     //3. 提供大量的方法和字段提供给程序员
+>     //4. Calendar 没有提供对应的格式化的类，因此需要程序员自己组合来输出(灵活)
+>     //5. 如果我们需要按照 24 小时进制来获取时间， Calendar.HOUR ==改成=> Calendar.HOUR_OF_DAY
+>     Calendar c = Calendar.getInstance(); //创建日历类对象//比较简单，自由
+>     System.out.println("c=" + c);
+>     //2.获取日历对象的某个日历字段
+>     System.out.println("年：" + c.get(Calendar.YEAR));
+>     // 这里为什么要 + 1, 因为 Calendar 返回月时候，是按照 0 开始编号
+>     System.out.println("月：" + (c.get(Calendar.MONTH) + 1));
+>     System.out.println("日：" + c.get(Calendar.DAY_OF_MONTH));
+>     System.out.println("小时：" + c.get(Calendar.HOUR));
+>     System.out.println("分钟：" + c.get(Calendar.MINUTE));
+>     System.out.println("秒：" + c.get(Calendar.SECOND));
+>     //Calender 没有专门的格式化方法，所以需要程序员自己来组合显示
+>     System.out.println(c.get(Calendar.YEAR) + "-" + (c.get(Calendar.MONTH) + 1) + "-" +
+>     c.get(Calendar.DAY_OF_MONTH) +
+>     " " + c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND) );
+> }
+> ```
+>
+> 
 
-2. Calendar 类是一个抽象类，它为特定瞬间与一组诸如 YEAR,MONTH，DAY_OF_MONTH,HOUR 等日历字段之间的转换提供了一些方法，并为操作日历字段（例如获得下星期的日期）提供了一些方法。
 
-   ```java
-   public static void main(String[] args) {
-   
-       //1. Calendar 是一个抽象类， 并且构造器是 private
-       //2. 可以通过 getInstance() 来获取实例
-       //3. 提供大量的方法和字段提供给程序员
-       //4. Calendar 没有提供对应的格式化的类，因此需要程序员自己组合来输出(灵活)
-       //5. 如果我们需要按照 24 小时进制来获取时间， Calendar.HOUR ==改成=> Calendar.HOUR_OF_DAY
-       Calendar c = Calendar.getInstance(); //创建日历类对象//比较简单，自由
-       System.out.println("c=" + c);
-       //2.获取日历对象的某个日历字段
-       System.out.println("年：" + c.get(Calendar.YEAR));
-       // 这里为什么要 + 1, 因为 Calendar 返回月时候，是按照 0 开始编号
-       System.out.println("月：" + (c.get(Calendar.MONTH) + 1));
-       System.out.println("日：" + c.get(Calendar.DAY_OF_MONTH));
-       System.out.println("小时：" + c.get(Calendar.HOUR));
-       System.out.println("分钟：" + c.get(Calendar.MINUTE));
-       System.out.println("秒：" + c.get(Calendar.SECOND));
-       //Calender 没有专门的格式化方法，所以需要程序员自己来组合显示
-       System.out.println(c.get(Calendar.YEAR) + "-" + (c.get(Calendar.MONTH) + 1) + "-" +
-       c.get(Calendar.DAY_OF_MONTH) +
-       " " + c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND) );
-   }
-   ```
+
+#### 第三代日期类：
+
+##### 前面两代日期类的不足分析
+
+> **JDK 1.0 中包含了一个java.util.Date 类，但是它的大多数方法已经在 JDk 1.1 引入Calendar 类之后被弃用了。而 Calendar 类 存在的问题是：**
 
 
 
-#### 第三代日期类
+###### 可变性：
 
-- 前面两代日期类的不足分析：
+> 像日期和时间这样的类应该是不可变的
 
-  **JDK 1.0 中包含了一个java.util.Date 类，但是它的大多数方法已经在 JDk 1.1 引入Calendar 类之后被弃用了。而 Calendar 类 存在的问题是：	**
+###### 偏移性:
 
-  1. 可变性：像日期和时间这样的类应该是不可变的
-  2. 偏移性：Date 中年份是从 1900 开始的，而月份都从 0 开始
-  3. 格式化：格式化只对 Date 有用，Calendar 则不行
-  4. 此外，它们也不是线程安全的；不能处理闰秒等（每隔2天，多出 1 s)
+> Date 中年份是从 1900 开始的，而月份都从 0 开始
 
+###### 格式化：
+
+> 格式化只对 Date 有用，Calendar 则不行
+
+###### 提示：
+
+> 它们也不是线程安全的；不能处理闰秒等（每隔2天，多出 1 s)
+
+
+
+
+
+#####   LocalDate、LocalTime、LocalDateTime
+
+> LocalDate （日期/年月日）、LocalTime(时间/十分秒) 、LocalDateTime（日期时间/年月日时分秒） JDK 8 加入
+
+
+
+###### LocalDate 
+
+> 只包括日期，可以获取日期字段
+
+
+
+###### LocalTime
+
+> 只包括时间，可以获取时间字段
+
+
+
+###### LocalDateTime 
+
+> 包括日期 + 时间，可以获取日期 + 时间字段
+
+
+
+> ##### 代码
+
+```java
+public static void main(String[] args) {
+    //第三代日期
+
+    //1. 使用 now() 返回表示当前日期时间的 对象
+    LocalDateTime ldt = LocalDateTime.now(); //LocalDate.now();//LocalTime.now()
+    System.out.println(ldt);
     
-
-- LocalDate （日期/年月日）、LocalTime(时间/十分秒) 、LocalDateTime（日期时间/年月日时分秒） JDK 8 加入
-
-  - LocalDate 只包括日期，可以获取日期字段
-  - LocalTime 只包括时间，可以获取时间字段
-  - LocalDateTime 包括日期 + 时间，可以获取日期 + 时间字段
-
-  ```java
-  public static void main(String[] args) {
-      //第三代日期
-  
-      //1. 使用 now() 返回表示当前日期时间的 对象
-      LocalDateTime ldt = LocalDateTime.now(); //LocalDate.now();//LocalTime.now()
-      System.out.println(ldt);
-      
-      //2. 使用 DateTimeFormatter 对象来进行格式化
-      // 创建 DateTimeFormatter 对象
-      DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-      String format = dateTimeFormatter.format(ldt);
-      System.out.println("格式化的日期=" + format);
-      System.out.println("年=" + ldt.getYear());
-      System.out.println("月=" + ldt.getMonth());
-      System.out.println("月=" + ldt.getMonthValue());
-      System.out.println("日=" + ldt.getDayOfMonth());
-      System.out.println("时=" + ldt.getHour());
-      System.out.println("分=" + ldt.getMinute());
-      System.out.println("秒=" + ldt.getSecond());
-      LocalDate now = LocalDate.now(); //可以获取年月日
-      LocalTime now2 = LocalTime.now();//获取到时分秒
-      
-      //提供 plus 和 minus 方法可以对当前时间进行加或者减
-      //看看 890 天后，是什么时候 把 年月日-时分秒
-      LocalDateTime localDateTime = ldt.plusDays(890);
-      System.out.println("890 天后=" + dateTimeFormatter.format(localDateTime));
-      //看看在 3456 分钟前是什么时候，把 年月日-时分秒输出
-      LocalDateTime localDateTime2 = ldt.minusMinutes(3456);
-      System.out.println("3456 分钟前 日期=" + dateTimeFormatter.format(localDateTime2));
-  }
-  ```
+    //2. 使用 DateTimeFormatter 对象来进行格式化
+    // 创建 DateTimeFormatter 对象
+    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    String format = dateTimeFormatter.format(ldt);
+    System.out.println("格式化的日期=" + format);
+    System.out.println("年=" + ldt.getYear());
+    System.out.println("月=" + ldt.getMonth());
+    System.out.println("月=" + ldt.getMonthValue());
+    System.out.println("日=" + ldt.getDayOfMonth());
+    System.out.println("时=" + ldt.getHour());
+    System.out.println("分=" + ldt.getMinute());
+    System.out.println("秒=" + ldt.getSecond());
+    LocalDate now = LocalDate.now(); //可以获取年月日
+    LocalTime now2 = LocalTime.now();//获取到时分秒
+    
+    //提供 plus 和 minus 方法可以对当前时间进行加或者减
+    //看看 890 天后，是什么时候 把 年月日-时分秒
+    LocalDateTime localDateTime = ldt.plusDays(890);
+    System.out.println("890 天后=" + dateTimeFormatter.format(localDateTime));
+    //看看在 3456 分钟前是什么时候，把 年月日-时分秒输出
+    LocalDateTime localDateTime2 = ldt.minusMinutes(3456);
+    System.out.println("3456 分钟前 日期=" + dateTimeFormatter.format(localDateTime2));
+}
+```
 
 
 

@@ -1203,32 +1203,28 @@ PriorityQueue<Integer> heap = new Priority<>();
 >        prePrintNodes(head.left);
 >       prePrintNodes(head.right);
 >      }
->   ```
+>    ```
+>    
+>   **非递归遍历**
 >   ```java
->
->    > **非递归遍历**
->
->    ---
-> 
->    > ```java
->    > public static void pre(Node head) {
->   >     System.out.print("pre-order: ");
->    >     if (head != null) {
->   >         Stack<Node> stack = new Stack<Node>();
->    >         stack.add(head);
->    >         while (!stack.isEmpty()) {
->    >             head = stack.pop();
->    >             System.out.print(head.value + " ");
->    >             if (head.right != null) {
->   >                 stack.push(head.right);
->    >             }
->   >             if (head.left != null) {
->    >                 stack.push(head.left);
->   >             }
->    >         }
->   >     }
->    >     System.out.println();
->   > }
+> public static void pre(Node head) {
+>  	System.out.print("pre-order: ");
+>      if (head != null) {
+>         Stack<Node> stack = new Stack<Node>();
+>         stack.add(head);
+>         while (!stack.isEmpty()) {
+> 	         head = stack.pop();
+>              System.out.print(head.value + " ");
+>              if (head.right != null) {
+>              	stack.push(head.right);
+>              }
+>           	 if(head.left != null) {
+>                  stack.push(head.left);
+>             }
+>          }
+>     }
+>      System.out.println();
+> }
 >   ```
 > 
 > ​       **2.中序遍历**
@@ -1252,13 +1248,13 @@ PriorityQueue<Integer> heap = new Priority<>();
 >       System.out.println(head.value);
 >       inPrintNodes(head.right);
 >   }
->```
+> ```
 > 
->
 > 
->    > **非递归遍历**
 > 
-> ---
+>   > **非递归遍历**
+> 
+>---
 > 
 >    ```java
 > public static void in(Node cur) {
@@ -1299,19 +1295,19 @@ PriorityQueue<Integer> heap = new Priority<>();
 >        if(head == null){
 >           return;
 >        }
->
+> 
 >       posPrintNodes(head.left);
 >       posPrintNodes(head.right);
 >       System.out.println(head.value);
->   }
+>  }
 >    ```
->
->    > **非递归遍历**
->
-> ---
 > 
+>    > **非递归遍历**
+> 
+> ---
+>
 >    ```java
->    public static void pos1(Node head) {
+>   public static void pos1(Node head) {
 >        System.out.print("pos-order: ");
 >        if (head != null) {
 >            Stack<Node> s1 = new Stack<Node>();

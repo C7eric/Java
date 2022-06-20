@@ -8,7 +8,7 @@
 
 
 
-## **面向对象OOP**
+## 面向对象OOP
 
 ### 类变量
 
@@ -258,7 +258,7 @@ public static void main(String [] args){}
 > 1. 修饰符可选，要写的话，也只能写 static
 >2. 代码块分为两类，使用 static 修饰的叫 静态代码块，没有 static 修饰的，叫普通代码块/非静态代码块
 > 3. 逻辑语句可以为任何逻辑语句（输入，输出，方法调用，循环，判断等）
->4.  ；可以写，也可以省略 
+>4.   ；可以写，也可以省略 
 > 
 
 
@@ -1510,7 +1510,7 @@ class Person {//类
 >      public static inner getInnerInstance (){
 >          return new Inner();
 >      }
->      
+>                     
 >      Outer.Inner inner = Outer.gerInnerInstance();
 >      ```
 >    
@@ -2165,7 +2165,7 @@ class Person {//类
 
 ##### 注意事项
 
-> ###### 如果异常发生了，则异常发生后面的代码不会执行，直接进入到 catch 块
+> ###### 如果异常发生了，则异常发	生后面的代码不会执行，直接进入到 catch 块
 
 > ###### 如果异常没有发生，则顺序执行 try 的代码块，不会进入到 catch
 
@@ -3726,7 +3726,7 @@ public static void main(String[] args) {
 
 > - 可以动态保存任意多个对象，使用比较方便
 > - 提供一系列方便的操作对象的方法：add,remove,set,get
-> - 使用j集合添加，删除新元素
+> - 使用集合添加，删除新元素
 
 
 
@@ -3734,7 +3734,11 @@ public static void main(String[] args) {
 
 ---
 
-1. 
+> ###### 长度必须一开始指定，而且一旦指定不能更改
+
+> ###### 保存的必须是同一类型的元素
+
+> ###### 使用数组进行增加/删除元素的示意代码比较麻烦
 
 
 
@@ -3744,33 +3748,1271 @@ public static void main(String[] args) {
 
 ### 集合的框架体系
 
+---
+
+> Java 的集合类很多，主要分为两大类
+>
+> ![image-20220620112941131](D:\C\Java\com\csqjava\notes_\image-20220620112941131.png)
+>
+> ![image-20220620113045773](D:\C\Java\com\csqjava\notes_\image-20220620113045773.png)
+
+> ###### 代码演示：
+
+```java
+public static void main(String[] args) {
+    //解读
+    //1. 集合主要是两组(单列集合 , 双列集合)
+    //2. Collection 接口有两个重要的子接口 List Set , 他们的实现子类都是单列集合
+    //3. Map 接口的实现子类 是双列集合， 存放的 K-V
+    //4. 两张图记住
+    //Collection
+    //Map
+    ArrayList arrayList = new ArrayList();
+    arrayList.add("jack");
+    arrayList.add("tom");
+    HashMap hashMap = new HashMap();
+    hashMap.put("NO1", "北京");
+    hashMap.put("NO2", "上海");
+}
+```
+
+
+
+### Collection 
+
+---
+
+
+
+#### Collection 接口和常用方法
+
+---
+
+#### Collection 接口实现类的特点
+
+- Collection 实现子类可以存放多个元素，每个元素可以是 Object
+- 有些 Collection 的实现类，可以存放重复的元素，有些不可以
+- 有些 Collection 的实现类，有些是有序的（List),有些不是有序（Set)
+- Collection 接口没有直接实现子类，是通过它的子接口 Set 和 List 来实现的
+
+
+
+#### Collection 接口常用方法
+
+##### add
+
+> 添加单个元素
+
+```java
+    list.add("jack");
+    list.add(10);//list.add(new Integer(10))
+    list.add(true);
+    System.out.println("list=" + list);
+```
+
+
+
+##### remove 
+
+> 删除指定元素
+
+```java
+    // remove:删除指定元素
+    //list.remove(0);//删除第一个元素
+    list.remove(true);//指定删除某个元素
+    System.out.println("list=" + list);
+```
+
+
+
+##### contains
+
+> 查找元素是否存在
+
+```java
+    // contains:查找元素是否存在
+    System.out.println(list.contains("jack"));//T
+```
+
+
+
+##### size
+
+> 获取元素个数
+
+```java
+    // size:获取元素个数
+    System.out.println(list.size());//2
+```
+
+
+
+##### isEmpty
+
+> 判断是否为空
+
+```java
+    // isEmpty:判断是否为空
+    System.out.println(list.isEmpty());//F
+```
+
+
+
+##### clear
+
+> 清空
+
+```java
+    // clear:清空
+    list.clear();
+    System.out.println("list=" + list);
+```
+
+
+
+##### addAll
+
+> 添加多个元素
+
+```java
+    // addAll:添加多个元素
+    ArrayList list2 = new ArrayList();
+    list2.add("红楼梦");
+    list2.add("三国演义");
+    list.addAll(list2);
+    System.out.println("list=" + list);
+```
+
+
+
+##### contains
+
+> 查询多个元素是否存在
+
+```java
+    // containsAll:查找多个元素是否都存在
+    System.out.println(list.containsAll(list2));//T
+```
+
+
+
+##### removeAll
+
+> 移除多个元素
+
+```java
+        
+    // removeAll： 删除多个元素
+    list.add("聊斋");
+    list.removeAll(list2);
+    System.out.println("list=" + list);//[聊斋]
+```
 
 
 
 
 
+> ##### 代码示例
+
+```java
+public class CollectionMethod {
+    @SuppressWarnings({"all"})
+    public static void main(String[] args) {
+    List list = new ArrayList();
+        
+    // add:添加单个元素
+    list.add("jack");
+    list.add(10);//list.add(new Integer(10))
+    list.add(true);
+    System.out.println("list=" + list);
+        
+    // remove:删除指定元素
+    //list.remove(0);//删除第一个元素
+    list.remove(true);//指定删除某个元素
+    System.out.println("list=" + list);
+        
+    // contains:查找元素是否存在
+    System.out.println(list.contains("jack"));//T
+        
+    // size:获取元素个数
+    System.out.println(list.size());//2
+        
+    // isEmpty:判断是否为空
+    System.out.println(list.isEmpty());//F
+        
+    // clear:清空
+    list.clear();
+    System.out.println("list=" + list);
+        
+    // addAll:添加多个元素
+    ArrayList list2 = new ArrayList();
+    list2.add("红楼梦");
+    list2.add("三国演义");
+    list.addAll(list2);
+    System.out.println("list=" + list);
+        
+    // containsAll:查找多个元素是否都存在
+    System.out.println(list.containsAll(list2));//T
+        
+    // removeAll： 删除多个元素
+    list.add("聊斋");
+    list.removeAll(list2);
+    System.out.println("list=" + list);//[聊斋]
+    // 说明： 以 ArrayList 实现类来演示.
+}
+```
 
 
 
 
 
+#### Collection 接口遍历元素方式
+
+#### Iterator遍历
+
+##### 基本介绍
+
+> ###### Iterator 对象称为迭代器，主要用于遍历 Collection 集合中的元素
+
+> ###### 所有实现了 Collection 接口的集合类都有一个 iterator() 方法，用以返回一个实现了 Iterator 接口的对象，即可以返回一个迭代器
+
+> ###### Iterator 的结构
+
+> ###### Iterator 只用于遍历集合，Iterator 本身并不存放对象
+
+
+
+##### 迭代器的执行原理
+
+```java
+Iterator iterator = coll.iterator(); // 得到一个集合迭代器
+// hasNext(); 判断是否还有下一个元素
+while(iterator.hasNext()){
+    // next() 作用 
+    // 1.下移
+    // 2.将下移以后集合位置上的元素返回
+    System.out.println(iterator.next());
+}
+```
+
+
+
+##### Iterator 接口的方法
+
+###### hasNext()
+
+> Returns true if the iteration has more elements
+
+###### next()
+
+> Returns the next elements in the iteration
+
+###### remove()
+
+> Removes from the underlying collection the last lelment returned by the iterator (optional operation)
+
+
+
+> ###### 提示
+
+在调用 iterator.next() 方法之前必须要调用 iterator.hasNext() 进行检测，若不调用，且下一条记录无效，直接调用next() 会抛出 NoSuchElementException 异常
+
+
+
+> ###### 代码示例
+
+```java
+public class CollectionIterator {
+    @SuppressWarnings({"all"})
+    public static void main(String[] args) {
+
+        Collection col = new ArrayList();
+
+        col.add(new Book("三国演义", "罗贯中", 10.1));
+        col.add(new Book("小李飞刀", "古龙", 5.1));
+        col.add(new Book("红楼梦", "曹雪芹", 34.6));
+
+
+        //System.out.println("col=" + col);
+        //遍历 col集合
+        //1. 先得到 col 对应的 迭代器
+        Iterator iterator = col.iterator();
+        //2. 使用while循环遍历
+//        while (iterator.hasNext()) {//判断是否还有数据
+//            //返回下一个元素，类型是Object
+//            Object obj = iterator.next();
+//            System.out.println("obj=" + obj);
+//        }
+        //快捷键，快速生成 while => itit
+        //显示所有的快捷键的的快捷键 ctrl + j
+        while (iterator.hasNext()) {
+            Object obj = iterator.next();
+            System.out.println("obj=" + obj);
+
+        }
+        //3. 当退出while循环后 , 这时iterator迭代器，指向最后的元素
+        //   iterator.next();//NoSuchElementException
+        //4. 如果希望再次遍历，需要重置我们的迭代器
+        iterator = col.iterator();
+        System.out.println("===第二次遍历===");
+        while (iterator.hasNext()) {
+            Object obj = iterator.next();
+            System.out.println("obj=" + obj);
+
+        }
+
+    }
+}
+
+class Book {
+    private String name;
+    private String author;
+    private double price;
+
+    public Book(String name, String author, double price) {
+        this.name = name;
+        this.author = author;
+        this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", price=" + price +
+                '}';
+    }
+}
+
+```
+
+
+
+#### for 循环增强遍历
+
+> 增强 for 循环，可以代替 iterator 迭代器，特点：增强for 就是 简化版的 iterator,本质一样。智能用于遍历集合或数组
+
+
+
+##### 基本语法
+
+```java
+for(元素类型 元素名 : 集合名或数组名){
+    //访问元素
+}
+```
+
+
+
+> ##### 代码示例
+
+```java
+public class CollectionExercise {
+    @SuppressWarnings({"all"})
+    public static void main(String[] args) {
+        List list = new ArrayList();
+        list.add(new Dog("小黑", 3));
+        list.add(new Dog("大黄", 100));
+        list.add(new Dog("大壮", 8));
+
+
+        //先使用for增强
+        for (Object dog : list) {
+            System.out.println("dog=" + dog);
+        }
+
+        //使用迭代器
+        System.out.println("===使用迭代器来遍历===");
+        Iterator iterator = list.iterator();
+        while (iterator.hasNext()) {
+            Object dog =  iterator.next();
+            System.out.println("dog=" + dog);
+
+        }
+
+    }
+}
+/**
+ * 创建  3个 Dog {name, age}  对象，放入到 ArrayList 中，赋给 List 引用
+ * 用迭代器和增强for循环两种方式来遍历
+ * 重写Dog 的toString方法， 输出name和age
+ */
+class Dog {
+    private String name;
+    private int age;
+
+    public Dog(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Dog{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+}
+```
+
+
+
+### List
+
+---
+
+
+
+#### List 接口和常用方法
+
+##### 基本介绍
+
+- List 集合类中元素有序（即添加顺序和取出顺序一致）、且可重复
+- List 集合类中的每个元素都有对应的顺序索引，即支持索引
+- List 容器中的元素都对应一个整数型的序号，记载其在容器中的位置，可以根据序号存取容器中的元素
+- JDK API 中List 的实现类有
+  - AbstractList
+  - AbstractSequentialList
+  - **ArrayList**
+  - AttributeList
+  - CopyOrWriteArrayList
+  - **LinkedList**
+  - RoleList
+  - RoleUnresolveList
+  - **Stack**
+  - **Vector**
 
 
 
 
 
+##### List 接口常用方法
+
+###### add();
+
+> void add(int index, Object ele):在index位置插入ele元素
+
+
+
+###### addAll();
+
+> boolean addAll(int index, Collection eles):从index位置开始将eles中的所有元素添加进来
+
+
+
+###### get();
+
+> Object get(int index):获取指定index位置的元素
+
+
+
+###### indexOf();
+
+> int indexOf(Object obj):返回obj在集合中首次出现的位置
+
+
+
+###### lastIndexOf();
+
+> int lastIndexOf(Object obj):返回obj在当前集合中末次出现的位置
+
+
+
+###### remove();
+
+> Object remove(int index):移除指定index位置的元素，并返回此元素
+
+
+
+###### set();
+
+> Object set(int index, Object ele):设置指定index位置的元素为ele , 相当于是替换.
+
+
+
+###### subList();
+
+> List subList(int fromIndex, int toIndex):返回从fromIndex到toIndex位置的子集合
+
+
+
+> ###### 代码示例
+
+```java
+public class ListMethod {
+    @SuppressWarnings({"all"})
+    public static void main(String[] args) {
+        List list = new ArrayList();
+        list.add("张三丰");
+        list.add("贾宝玉");
+//        void add(int index, Object ele):在index位置插入ele元素
+        //在index = 1的位置插入一个对象
+        list.add(1, "csq");
+        System.out.println("list=" + list);
+//        boolean addAll(int index, Collection eles):从index位置开始将eles中的所有元素添加进来
+        List list2 = new ArrayList();
+        list2.add("jack");
+        list2.add("tom");
+        list.addAll(1, list2);
+        System.out.println("list=" + list);
+//        Object get(int index):获取指定index位置的元素
+        //说过
+//        int indexOf(Object obj):返回obj在集合中首次出现的位置
+        System.out.println(list.indexOf("tom"));//2
+//        int lastIndexOf(Object obj):返回obj在当前集合中末次出现的位置
+        list.add("csq");
+        System.out.println("list=" + list);
+        System.out.println(list.lastIndexOf("csq"));
+//        Object remove(int index):移除指定index位置的元素，并返回此元素
+        list.remove(0);
+        System.out.println("list=" + list);
+//        Object set(int index, Object ele):设置指定index位置的元素为ele , 相当于是替换.
+        list.set(1, "玛丽");
+        System.out.println("list=" + list);
+//        List subList(int fromIndex, int toIndex):返回从fromIndex到toIndex位置的子集合
+        // 注意返回的子集合 fromIndex <= subList < toIndex
+        List returnlist = list.subList(0, 2);
+        System.out.println("returnlist=" + returnlist);
+
+    }
+}
+
+```
+
+
+
+#### List 的遍历元素方式
+
+##### iterator 迭代器
+
+```java
+Iterator iter = new col.iterator();
+while(iter.hasNext()){
+    Object 0 = iter.next();
+}
+```
+
+
+
+##### 增强 for 
+
+```java
+for(Object o : col){
+    //
+}
+```
+
+
+
+##### 普通 for
+
+```java
+for(int i = 0;i < list.size();++i){
+    
+    Object o = list.get(i);
+    System.out.println(object);
+}
+```
+
+> ##### 代码示例
+
+```java
+public class ListFor {
+    @SuppressWarnings({"all"})
+    public static void main(String[] args) {
+
+        //List 接口的实现子类 Vector LinkedList
+        //List list = new ArrayList();
+        //List list = new Vector();
+        List list = new LinkedList();
+
+        list.add("jack");
+        list.add("tom");
+        list.add("鱼香肉丝");
+        list.add("北京烤鸭子");
+
+        //遍历
+        //1. 迭代器
+        Iterator iterator = list.iterator();
+        while (iterator.hasNext()) {
+            Object obj =  iterator.next();
+            System.out.println(obj);
+
+        }
+
+        System.out.println("=====增强for=====");
+        //2. 增强for
+        for (Object o : list) {
+            System.out.println("o=" + o);
+        }
+
+        System.out.println("=====普通for====");
+        //3. 使用普通for
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println("对象=" + list.get(i));
+        }
+    }
+}
+```
+
+
+
+> ##### 说明：
+
+使用 LinkedList 完成 使用方式和 ArrayList 一样
+
+
+
+#### ArrayList 底层结构和源码分析
+
+##### ArrayList 注意事项 
+
+> ###### permits all elements ， including null ，ArrayList 可以加入 null ，并且多个
+
+> ###### ArrayList 是由 数组来实现数据存储的
+
+> ###### ArrayList 基本等同于 Vector ，除了 ArrayList 是线程不安全的（执行效率高），在多线程情况下，不建议使用 ArrayList 
+
+
+
+##### ArrayList 的底层操作机制
+
+> ###### ArrayList 中维护了一个Object 类型的数组 elementData 
+
+
+
+> ###### 当创建 ArrayList 对象时，如果使用的无参构造器，则初始 elemenData 容量为0，第一次添加，则扩容 elementData 为 10，如需要再次扩容，则扩容 elementData 为 1.5 倍
+
+
+
+> ###### 如果使用的是指定大小的构造器，则初始 elementData 容量为指定大小，如果需要再次扩容，则直接扩容elementData 为 1.5 倍
 
 
 
 
 
+#### Vector 底层结构和源码分析
+
+##### 基本介绍
+
+> ###### Vector 类的定义说明
+
+```java
+public class Vector<E>
+extends AbstractList<E>
+implements List<E>,RandomAccess,Cloneable,Serializable
+```
+
+
+
+> ###### Vector 底层也是一个对象数组， protected Object[] elementData
+
+
+
+> ###### Vector 是线程同步的，即线程安全，Vector 类的操作方法带有 synchronized
+
+```java
+public synchronized E get (int index){
+    if(index >= elementCount){
+        throw new ArrayIndexOutOfBoundsException(index);
+    }
+    return elementData;
+}
+```
+
+
+
+> ###### 在开发中，需要线程同步安全时，考虑使用 Vector
+
+
+
+> ###### 代码示例
+
+```java
+@SuppressWarnings({"all"})
+public class Vector_ {
+    public static void main(String[] args) {
+        //无参构造器
+        //有参数的构造
+        Vector vector = new Vector(8);
+        for (int i = 0; i < 10; i++) {
+            vector.add(i);
+        }
+        vector.add(100);
+        System.out.println("vector=" + vector);
+        //解读源码
+        //1. new Vector() 底层
+        /*
+            public Vector() {
+                this(10);
+            }
+         补充：如果是  Vector vector = new Vector(8);
+            走的方法:
+            public Vector(int initialCapacity) {
+                this(initialCapacity, 0);
+            }
+            
+         2. vector.add(i)
+         2.1  //下面这个方法就添加数据到vector集合
+            public synchronized boolean add(E e) {
+                modCount++;
+                ensureCapacityHelper(elementCount + 1);
+                elementData[elementCount++] = e;
+                return true;
+            }
+            
+          2.2  //确定是否需要扩容 条件 ： minCapacity - elementData.length>0
+            private void ensureCapacityHelper(int minCapacity) {
+                // overflow-conscious code
+                if (minCapacity - elementData.length > 0)
+                    grow(minCapacity);
+            }
+            
+          2.3 //如果 需要的数组大小 不够用，就扩容 , 扩容的算法
+              //newCapacity = oldCapacity + ((capacityIncrement > 0) ?
+              //                             capacityIncrement : oldCapacity);
+              //就是扩容两倍.
+            private void grow(int minCapacity) {
+                // overflow-conscious code
+                int oldCapacity = elementData.length;
+                int newCapacity = oldCapacity + ((capacityIncrement > 0) ?
+                                                 capacityIncrement : oldCapacity);
+                if (newCapacity - minCapacity < 0)
+                    newCapacity = minCapacity;
+                if (newCapacity - MAX_ARRAY_SIZE > 0)
+                    newCapacity = hugeCapacity(minCapacity);
+                elementData = Arrays.copyOf(elementData, newCapacity);
+            }
+         */
+
+    }
+}
+
+```
+
+
+
+##### Vector 和 ArrayList 的比较
+
+|           | 底层结构         | 版本   | 线程安全（同步）效率 | 扩容参数                                                     |
+| --------- | ---------------- | ------ | -------------------- | ------------------------------------------------------------ |
+| ArrayList | 可变数组         | JDK1.2 | 不安全，效率高       | 如果有参构造 1.5 倍                                                         如果是无参  第一次10  第二次开始 1.5 倍 |
+| Vector    | 可变数组Object[] | Jdk1.0 | 安全。效率不高       | 如果是无参，默认10，满后就按 2 倍扩容         如果指定大小，则每次直接按 2 倍 扩容 |
+
+
+
+#### LinkedList 底层结构
+
+##### LinkedList 全面说明
+
+- LinkedList 底层实现了双向链表  和  双端队列特点
+- 可以添加任意元素（元素可以重复），包括 null
+- 线程不安全，没有实现同步
 
 
 
 
 
+##### LinkedList 的底层操作机制
+
+- LinkedList 底层维护了一个双向链表
+- LinedList 中维护了两个属性 first 和 last 分别指向 首节点和尾节点
+- 每个节点（Node对象)，里面又维护了 prev,next,item 三个属性，其中通过prev 指向前一个，通过 next 指向下一个，最终实现了双向链表
+- 所以 LinkedList 的元素添加和删除，不是通过数组完成的，相对来说效率较高
+
+> ###### 代码示例
+
+```java
+public class LinkedList01 {
+    public static void main(String[] args) {
+        //模拟一个简单的双向链表
+
+        Node jack = new Node("jack");
+        Node tom = new Node("tom");
+        Node hsp = new Node("老韩");
+
+        //连接三个结点，形成双向链表
+        //jack -> tom -> hsp
+        jack.next = tom;
+        tom.next = hsp;
+        //hsp -> tom -> jack
+        hsp.pre = tom;
+        tom.pre = jack;
+
+        Node first = jack;//让first引用指向jack,就是双向链表的头结点
+        Node last = hsp; //让last引用指向hsp,就是双向链表的尾结点
 
 
+        //演示，从头到尾进行遍历
+        System.out.println("===从头到尾进行遍历===");
+        while (true) {
+            if(first == null) {
+                break;
+            }
+            //输出first 信息
+            System.out.println(first);
+            first = first.next;
+        }
+
+        //演示，从尾到头的遍历
+        System.out.println("====从尾到头的遍历====");
+        while (true) {
+            if(last == null) {
+                break;
+            }
+            //输出last 信息
+            System.out.println(last);
+            last = last.pre;
+        }
+
+        //演示链表的添加对象/数据，是多么的方便
+        //要求，是在 tom --------- 直接，插入一个对象 smith
+
+        //1. 先创建一个 Node 结点，name 就是 smith
+        Node smith = new Node("smith");
+        //下面就把 smith 加入到双向链表了
+        smith.next = hsp;
+        smith.pre = tom;
+        hsp.pre = smith;
+        tom.next = smith;
+
+        //让first 再次指向jack
+        first = jack;//让first引用指向jack,就是双向链表的头结点
+
+        System.out.println("===从头到尾进行遍历===");
+        while (true) {
+            if(first == null) {
+                break;
+            }
+            //输出first 信息
+            System.out.println(first);
+            first = first.next;
+        }
+
+        last = hsp; //让last 重新指向最后一个结点
+        //演示，从尾到头的遍历
+        System.out.println("====从尾到头的遍历====");
+        while (true) {
+            if(last == null) {
+                break;
+            }
+            //输出last 信息
+            System.out.println(last);
+            last = last.pre;
+        }
+
+
+    }
+}
+
+//定义一个Node 类，Node 对象 表示双向链表的一个结点
+class Node {
+    public Object item; //真正存放数据
+    public Node next; //指向后一个结点
+    public Node pre; //指向前一个结点
+    public Node(Object name) {
+        this.item = name;
+    }
+    public String toString() {
+        return "Node name=" + item;
+    }
+}
+```
+
+
+
+##### LinkedList 的 CRUD 案例
+
+```java
+@SuppressWarnings({"all"})
+public class LinkedListCRUD {
+    public static void main(String[] args) {
+
+        LinkedList linkedList = new LinkedList();
+        linkedList.add(1);
+        linkedList.add(2);
+        linkedList.add(3);
+        System.out.println("linkedList=" + linkedList);
+
+        //演示一个删除结点的
+        linkedList.remove(); // 这里默认删除的是第一个结点
+        //linkedList.remove(2);
+
+        System.out.println("linkedList=" + linkedList);
+
+        //修改某个结点对象
+        linkedList.set(1, 999);
+        System.out.println("linkedList=" + linkedList);
+
+        //得到某个结点对象
+        //get(1) 是得到双向链表的第二个对象
+        Object o = linkedList.get(1);
+        System.out.println(o);//999
+
+        //因为LinkedList 是 实现了List接口, 遍历方式
+        System.out.println("===LinkeList遍历迭代器====");
+        Iterator iterator = linkedList.iterator();
+        while (iterator.hasNext()) {
+            Object next =  iterator.next();
+            System.out.println("next=" + next);
+
+        }
+
+        System.out.println("===LinkeList遍历增强for====");
+        for (Object o1 : linkedList) {
+            System.out.println("o1=" + o1);
+        }
+        System.out.println("===LinkeList遍历普通for====");
+        for (int i = 0; i < linkedList.size(); i++) {
+            System.out.println(linkedList.get(i));
+        }
+
+
+        //源码阅读.
+        /* 1. LinkedList linkedList = new LinkedList();
+              public LinkedList() {}
+           2. 这时 linkeList 的属性 first = null  last = null
+           3. 执行 添加
+               public boolean add(E e) {
+                    linkLast(e);
+                    return true;
+                }
+            4.将新的结点，加入到双向链表的最后
+             void linkLast(E e) {
+                final Node<E> l = last;
+                final Node<E> newNode = new Node<>(l, e, null);
+                last = newNode;
+                if (l == null)
+                    first = newNode;
+                else
+                    l.next = newNode;
+                size++;
+                modCount++;
+            }
+
+         */
+
+        /*
+          读源码 linkedList.remove(); // 这里默认删除的是第一个结点
+          1. 执行 removeFirst
+            public E remove() {
+                return removeFirst();
+            }
+         2. 执行
+            public E removeFirst() {
+                final Node<E> f = first;
+                if (f == null)
+                    throw new NoSuchElementException();
+                return unlinkFirst(f);
+            }
+          3. 执行 unlinkFirst, 将 f 指向的双向链表的第一个结点拿掉
+            private E unlinkFirst(Node<E> f) {
+                // assert f == first && f != null;
+                final E element = f.item;
+                final Node<E> next = f.next;
+                f.item = null;
+                f.next = null; // help GC
+                first = next;
+                if (next == null)
+                    last = null;
+                else
+                    next.prev = null;
+                size--;
+                modCount++;
+                return element;
+            }
+         */
+    }
+}
+
+```
+
+
+
+##### ArrayList 和 LinkedList 比较
+
+|            | 底层结构 | 增删的效率         | 改查的效率 |
+| ---------- | -------- | ------------------ | ---------- |
+| ArrayList  | 可变数组 | 较低  数组扩容     | 较高       |
+| LinkedList | 双向链表 | 较高，通过链表追加 | 较低       |
+
+
+
+###### ArrayList 和 LinkedList 的选择
+
+- 如果我们 改查 的操作多，选择 ArrayList 
+- 如果我们 增删 的操作多，选择 LinkedList
+- 一般来说，在程序中，80%-90%都是查询，因此大部分情况下会选择 ArrayList 
+- 在有一个项目中，根据业务灵活选择，也可能这样，一个模块使用的是 ArrayList ,另一个使用的是 LinkedList ，也就是说要根据业务来进行选择
+
+
+
+### Set
+
+---
+
+
+
+#### 基本介绍
+
+- 无序（添加和取出的顺序不一致），没有索引
+- 不允许重复元素，所以最多包含有一个 null
+- JDK API 中 Set 接口的实现类
+  - 所有的超级接口
+    - Collection<E> 
+    - Iterable<E>
+  - 所有已知子接口
+    - NavigableSet<E>
+    - SortedSet<E>
+  - 所有已知实现类
+    - AbstractSet
+    - ConCurrentSkipListSet
+    - CopyOnWriteArraySet
+    - EnumSet
+    - **HashSet**
+    - JobStataReasons
+    - **LinkedHashSet**
+    - **TreeSet**
+
+
+
+#### Set 接口的常用方法
+
+> 和 List 接口一样，Set 接口也是 Collection 的子接口，因此常用方法和 Collection 接口也一致
+
+
+
+#### Set 接口的遍历方式
+
+> 同 Collection 的遍历方式一致，因为 Set 接口是 Collection 接口的子接口
+
+> ##### 可以使用迭代器
+
+> ##### 增强 for
+
+> ##### 不能使用索引的方式来获取
+
+
+
+#### Set 接口实现类 - HashSet
+
+##### HashSet 全面说明
+
+> ###### HashSet 实现了 Set 接口
+
+> ###### HashSet 实际上是 HashMap
+
+```java
+public HashSet(){
+    map = new HashMap<>();
+}
+```
+
+> ###### 可以存放 null 值，但是只能存放一个 null
+
+> ###### HashSet 不保证元素是有序的，取决于 hash 后，再确定索引的结果（即 不能保证存放元素的顺序和取出顺序一致）
+
+> ###### 不能有重复元素/对象，在前面 Set 接口使用有说明
+
+
+
+##### HashSet 底层机制说明
+
+> HashSet 底层是HashMap,HashMap底层是（数组，链表，红黑树
+
+
+
+##### HashSet 的添加元素底层实现
+
+- 先获取元素的 hash 值（hashCode 方法）
+
+- 对 hash值 进行运算，得出一个索引值 即为要存放在HashSet 中的位置号
+
+- 如果该位置上没有其他元素则直接存放。
+
+- 如果该位置上已经有其他元素，则需要进行 equals 判断
+
+  - 如果相等，则不再添加
+  - 如果不相等，则以链表的方式添加 
+
+- 过程
+
+  ```java
+  /*
+  1.HashSet底层是HashMap
+  2.
+  添加一个元素时，先得到hash值会
+  转成->索引值
+  3.找到存储数据表table,看这个索引
+  位置是否已经存放的有元素
+  4.
+  如果没有，直接加入
+  5.
+  如果有，调用equals比较，如果
+  相同，就放弃添加，如果不相同，则
+  添加到最后
+  6.
+  在Java8中，如果一条链表的元素个数
+  到达TREEIFY_THRESHOLD(默认
+  是8)，并且table的大小>=
+  MIN_TREEIFY_CAPACITY(默认64)
+  就会进行树化（红黑树）
+  */
+  ```
+
+  
+
+> ###### 代码示例
+
+```java
+@SuppressWarnings({"all"})
+public class HashSetSource {
+    public static void main(String[] args) {
+
+        HashSet hashSet = new HashSet();
+        hashSet.add("java");//到此位置，第1次add分析完毕.
+        hashSet.add("php");//到此位置，第2次add分析完毕
+        hashSet.add("java");
+        System.out.println("set=" + hashSet);
+
+        /*
+        HashSet 的源码解读
+        1. 执行 HashSet()
+            public HashSet() {
+                map = new HashMap<>();
+            }
+        2. 执行 add()
+           public boolean add(E e) {//e = "java"
+                return map.put(e, PRESENT)==null;//(static) PRESENT = new Object();
+           }
+         3.执行 put() , 该方法会执行 hash(key) 得到key对应的hash值 算法h = key.hashCode()) ^ (h >>> 16)
+             public V put(K key, V value) {//key = "java" value = PRESENT 共享
+                return putVal(hash(key), key, value, false, true);
+            }
+         4.执行 putVal
+         final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
+                   boolean evict) {
+                Node<K,V>[] tab; Node<K,V> p; int n, i; //定义了辅助变量
+                //table 就是 HashMap 的一个数组，类型是 Node[]
+                //if 语句表示如果当前table 是null, 或者 大小=0
+                //就是第一次扩容，到16个空间.
+                if ((tab = table) == null || (n = tab.length) == 0)
+                    n = (tab = resize()).length;
+
+                //(1)根据key，得到hash 去计算该key应该存放到table表的哪个索引位置
+                //并把这个位置的对象，赋给 p
+                //(2)判断p 是否为null
+                //(2.1) 如果p 为null, 表示还没有存放元素, 就创建一个Node (key="java",value=PRESENT)
+                //(2.2) 就放在该位置 tab[i] = newNode(hash, key, value, null)
+
+                if ((p = tab[i = (n - 1) & hash]) == null)
+                    tab[i] = newNode(hash, key, value, null);
+                else {
+                    //一个开发技巧提示： 在需要局部变量(辅助变量)时候，在创建
+                    Node<K,V> e; K k; //
+                    //如果当前索引位置对应的链表的第一个元素和准备添加的key的hash值一样
+                    //并且满足 下面两个条件之一:
+                    //(1) 准备加入的key 和 p 指向的Node 结点的 key 是同一个对象
+                    //(2)  p 指向的Node 结点的 key 的equals() 和准备加入的key比较后相同
+                    //就不能加入
+                    if (p.hash == hash &&
+                        ((k = p.key) == key || (key != null && key.equals(k))))
+                        e = p;
+                    //再判断 p 是不是一颗红黑树,
+                    //如果是一颗红黑树，就调用 putTreeVal , 来进行添加
+                    else if (p instanceof TreeNode)
+                        e = ((TreeNode<K,V>)p).putTreeVal(this, tab, hash, key, value);
+                    else {//如果table对应索引位置，已经是一个链表, 就使用for循环比较
+                          //(1) 依次和该链表的每一个元素比较后，都不相同, 则加入到该链表的最后
+                          //    注意在把元素添加到链表后，立即判断 该链表是否已经达到8个结点
+                          //    , 就调用 treeifyBin() 对当前这个链表进行树化(转成红黑树)
+                          //    注意，在转成红黑树时，要进行判断, 判断条件
+                          //    if (tab == null || (n = tab.length) < MIN_TREEIFY_CAPACITY(64))
+                          //            resize();
+                          //    如果上面条件成立，先table扩容.
+                          //    只有上面条件不成立时，才进行转成红黑树
+                          //(2) 依次和该链表的每一个元素比较过程中，如果有相同情况,就直接break
+
+                        for (int binCount = 0; ; ++binCount) {
+                            if ((e = p.next) == null) {
+                                p.next = newNode(hash, key, value, null);
+                                if (binCount >= TREEIFY_THRESHOLD(8) - 1) // -1 for 1st
+                                    treeifyBin(tab, hash);
+                                break;
+                            }
+                            if (e.hash == hash &&
+                                ((k = e.key) == key || (key != null && key.equals(k))))
+                                break;
+                            p = e;
+                        }
+                    }
+                    if (e != null) { // existing mapping for key
+                        V oldValue = e.value;
+                        if (!onlyIfAbsent || oldValue == null)
+                            e.value = value;
+                        afterNodeAccess(e);
+                        return oldValue;
+                    }
+                }
+                ++modCount;
+                //size 就是我们每加入一个结点Node(k,v,h,next), size++
+                if (++size > threshold)
+                    resize();//扩容
+                afterNodeInsertion(evict);
+                return null;
+            }
+         */
+
+    }
+}
+
+```
+
+
+
+##### HashSet 的扩容 和转成红黑树机制
 
 
 

@@ -1504,7 +1504,7 @@ class Person {//类
 >      public static inner getInnerInstance (){
 >          return new Inner();
 >      }
->      
+>           
 >      Outer.Inner inner = Outer.gerInnerInstance();
 >      ```
 >
@@ -5006,6 +5006,932 @@ public class HashSetSource {
 
 
 ##### HashSet 的扩容 和转成红黑树机制
+
+- HashSet 的底层是HashMap,第一次添加时，table  数组扩容到 16，临界值（threshold)是 16 * 加载因子（loadFactor) 是 0.75 = 12
+- 如果 table 数组使用到了临界值 12  ，就会扩容到 16 * 2 = 32，新的临界值就是 32 * 0.75 = 24
+- 在 Java 8 中，如果一条链条的元素个数到达 TREEIFY_THRESHOOLD（默认是 8 ），并且 table  的大小 >= MIN_TREEIFY_CAPACITY(默认 64) ，就会进行树化（红黑树），**否则仍然采用数组扩容机制）**
+
+```java
+@SuppressWarnings({"all"})
+public class HashSetIncrement {
+    public static void main(String[] args) {
+        /*
+        HashSet底层是HashMap, 第一次添加时，table 数组扩容到 16，
+        临界值(threshold)是 16*加载因子(loadFactor)是0.75 = 12
+        如果table 数组使用到了临界值 12,就会扩容到 16 * 2 = 32,
+        新的临界值就是 32*0.75 = 24, 依次类推
+
+         */
+        HashSet hashSet = new HashSet();
+//        for(int i = 1; i <= 100; i++) {
+//            hashSet.add(i);//1,2,3,4,5...100
+//        }
+        /*
+        在Java8中, 如果一条链表的元素个数到达 TREEIFY_THRESHOLD(默认是 8 )，
+        并且table的大小 >= MIN_TREEIFY_CAPACITY(默认64),就会进行树化(红黑树),
+        否则仍然采用数组扩容机制
+
+         */
+
+//        for(int i = 1; i <= 12; i++) {
+//            hashSet.add(new A(i));//
+//        }
+
+
+        /*
+            当我们向hashset增加一个元素，-> Node -> 加入table , 就算是增加了一个size++
+
+         */
+
+        for(int i = 1; i <= 7; i++) {//在table的某一条链表上添加了 7个A对象
+            hashSet.add(new A(i));//
+        }
+
+        for(int i = 1; i <= 7; i++) {//在table的另外一条链表上添加了 7个B对象
+            hashSet.add(new B(i));//
+        }
+
+
+
+    }
+}
+
+class B {
+    private int n;
+
+    public B(int n) {
+        this.n = n;
+    }
+    @Override
+    public int hashCode() {
+        return 200;
+    }
+}
+
+class A {
+    private int n;
+
+    public A(int n) {
+        this.n = n;
+    }
+    @Override
+    public int hashCode() {
+        return 100;
+    }
+}
+```
+
+
+
+#### Set 接口实现类 - LinkedHashSet
+
+##### 基本介绍
+
+- LinkedHashSet 是 HashSet 的子类
+- LinkedHashSet 底层是一个 LinkedHashMap,底层维护了一个数组 + 双向链表
+- LinkedHashSet 根据元素的 hashCode 值 来决定元素的存储位置。同时使用链表维护元素的次序，这使得元素看起来是以插入顺序保存的
+- LinkedHashSet 不允许添加重复元素
+
+
+
+##### 说明
+
+- 在 LinkedHashSet 中维护了一个 hash 表 和 一个双向链表（LinkedHashSet 有 head 和 tail)
+- 每一个节点 有 before 和 after 属性，这样可以形成双向链表
+- 在添加元素时，先求 hash 值，再求索引，确定该元素在 table 中的位置，然后将添加的元素加入到双向链表中（如果已经存在，则不添加）
+- 这样的话，我们遍历 LinkedHashSet 时，也能确保插入顺序和遍历顺序一致
+
+
+
+
+
+### Map
+
+---
+
+
+
+#### Map 接口实现类的特点
+
+- Map 与 Collection 并列存在。用于保存具有映射关系的数据： Key - Value
+- Map 中的 key 和 value 可以是任何引用类型的数据，会封装到 HashMap$Node 对象中
+- Map 中的 key 不允许重复，原因和 HashSet 一样
+- Map 中的 value 可以重复
+- Map  的 key 可以为 null,value 也可以为 null,注意 key 为 null,只能有一个，value 为 null,可以多个
+- 常用 String 类作为 Map 的 key
+- key 和 value 之间存在单向 一对一关系，即通过指定的 key 总能找到对应的 value
+- Map 存放数据的 key - value 示意图，一对 k-v 是放在一个 HashMap$Node 中的，又因为 Node 实现了 Entry 接口，有些书上也说 一对 k - v 就是一个Entry
+
+> ##### 代码示例
+
+```java
+@SuppressWarnings({"all"})
+public class Map_ {
+    public static void main(String[] args) {
+        //Map 接口实现类的特点, 使用实现类HashMap
+        //1. Map与Collection并列存在。用于保存具有映射关系的数据:Key-Value(双列元素)
+        //2. Map 中的 key 和  value 可以是任何引用类型的数据，会封装到HashMap$Node 对象中
+        //3. Map 中的 key 不允许重复，原因和HashSet 一样，前面分析过源码.
+        //4. Map 中的 value 可以重复
+        //5. Map 的key 可以为 null, value 也可以为null ，注意 key 为null,
+        //   只能有一个，value 为null ,可以多个
+        //6. 常用String类作为Map的 key
+        //7. key 和 value 之间存在单向一对一关系，即通过指定的 key 总能找到对应的 value
+        Map map = new HashMap();
+        map.put("no1", "韩顺平");//k-v
+        map.put("no2", "张无忌");//k-v
+        map.put("no1", "张三丰");//当有相同的k , 就等价于替换.
+        map.put("no3", "张三丰");//k-v
+        map.put(null, null); //k-v
+        map.put(null, "abc"); //等价替换
+        map.put("no4", null); //k-v
+        map.put("no5", null); //k-v
+        map.put(1, "赵敏");//k-v
+        map.put(new Object(), "金毛狮王");//k-v
+        // 通过get 方法，传入 key ,会返回对应的value
+        System.out.println(map.get("no2"));//张无忌
+
+        System.out.println("map=" + map);
+
+
+
+    }
+}
+
+```
+
+
+
+#### Map 接口常用方法
+
+##### remove
+
+> 根据键 删除映射关系
+
+```java
+// remove:根据键删除映射关系
+map.remove(null);
+```
+
+
+
+##### get 
+
+> 根据键获取值
+
+```java
+// get： 根据键获取值
+Object val = map.get("鹿晗");
+System.out.println("val=" + val);
+```
+
+
+
+##### size
+
+> 获取元素个数
+
+```java
+// size:获取元素个数
+System.out.println("k-v=" + map.size());
+```
+
+
+
+##### isEmpty
+
+> 判断个数是否为 0
+
+```java
+// isEmpty:判断个数是否为 0
+System.out.println(map.isEmpty());//F
+```
+
+
+
+##### clear 
+
+> 清除 k - v
+
+```java
+// clear:清除 k-v
+//map.clear();
+System.out.println("map=" + map);
+```
+
+
+
+##### containsKey
+
+> 查找键是否存在
+
+```java
+// containsKey:查找键是否存在
+System.out.println("结果=" + map.containsKey("csq"));//T
+```
+
+
+
+> ##### 代码示例
+
+```java
+@SuppressWarnings({"all"})
+public class MapMethod {
+    public static void main(String[] args) {
+        //演示map接口常用方法
+
+        Map map = new HashMap();
+        map.put("邓超", new Book("", 100));//OK
+        map.put("邓超", "孙俪");//替换-> 一会分析源码
+        map.put("王宝强", "马蓉");//OK
+        map.put("宋喆", "马蓉");//OK
+        map.put("刘令博", null);//OK
+        map.put(null, "刘亦菲");//OK
+        map.put("鹿晗", "关晓彤");//OK
+        map.put("csq", "csqq");
+
+        System.out.println("map=" + map);
+
+//        remove:根据键删除映射关系
+        map.remove(null);
+        System.out.println("map=" + map);
+//        get：根据键获取值
+        Object val = map.get("鹿晗");
+        System.out.println("val=" + val);
+//        size:获取元素个数
+        System.out.println("k-v=" + map.size());
+//        isEmpty:判断个数是否为0
+        System.out.println(map.isEmpty());//F
+//        clear:清除k-v
+        //map.clear();
+        System.out.println("map=" + map);
+//        containsKey:查找键是否存在
+        System.out.println("结果=" + map.containsKey("csq"));//T
+
+
+    }
+}
+
+class Book {
+    private String name;
+    private int num;
+
+    public Book(String name, int num) {
+        this.name = name;
+        this.num = num;
+    }
+}
+
+```
+
+
+
+#### Map 接口遍历方法
+
+> 比 List,Set 复杂点，但是基本原理都一样
+
+> ##### 代码示例
+
+```java
+@SuppressWarnings({"all"})
+public class MapFor {
+    public static void main(String[] args) {
+
+        Map map = new HashMap();
+        map.put("邓超", "孙俪");
+        map.put("王宝强", "马蓉");
+        map.put("宋喆", "马蓉");
+        map.put("刘令博", null);
+        map.put(null, "刘亦菲");
+        map.put("鹿晗", "关晓彤");
+
+        //第一组: 先取出 所有的Key , 通过Key 取出对应的Value
+        Set keyset = map.keySet();
+        //(1) 增强for
+        System.out.println("-----第一种方式-------");
+        for (Object key : keyset) {
+            System.out.println(key + "-" + map.get(key));
+        }
+        //(2) 迭代器
+        System.out.println("----第二种方式--------");
+        Iterator iterator = keyset.iterator();
+        while (iterator.hasNext()) {
+            Object key =  iterator.next();
+            System.out.println(key + "-" + map.get(key));
+        }
+
+        //第二组: 把所有的values取出
+        Collection values = map.values();
+        //这里可以使用所有的Collections使用的遍历方法
+        //(1) 增强for
+        System.out.println("---取出所有的value 增强for----");
+        for (Object value : values) {
+            System.out.println(value);
+        }
+        //(2) 迭代器
+        System.out.println("---取出所有的value 迭代器----");
+        Iterator iterator2 = values.iterator();
+        while (iterator2.hasNext()) {
+            Object value =  iterator2.next();
+            System.out.println(value);
+
+        }
+
+        //第三组: 通过EntrySet 来获取 k-v
+        Set entrySet = map.entrySet();// EntrySet<Map.Entry<K,V>>
+        //(1) 增强for
+        System.out.println("----使用EntrySet 的 for增强(第3种)----");
+        for (Object entry : entrySet) {
+            //将entry 转成 Map.Entry
+            Map.Entry m = (Map.Entry) entry;
+            System.out.println(m.getKey() + "-" + m.getValue());
+        }
+        //(2) 迭代器
+        System.out.println("----使用EntrySet 的 迭代器(第4种)----");
+        Iterator iterator3 = entrySet.iterator();
+        while (iterator3.hasNext()) {
+            Object entry =  iterator3.next();
+            //System.out.println(next.getClass());//HashMap$Node -实现-> Map.Entry (getKey,getValue)
+            //向下转型 Map.Entry
+            Map.Entry m = (Map.Entry) entry;
+            System.out.println(m.getKey() + "-" + m.getValue());
+        }
+
+
+    }
+}
+
+```
+
+
+
+
+
+#### Map 接口实现类 - HashMap
+
+##### HashMap 小结
+
+-  Map 接口的常用实现类 ： HashMap、HashTable 和 Properties
+- HashMap 是 Map 接口使用频率最高的实现类
+- HashMap 是以key - value 对的方式来存储数据（HashMap$Node 类型)
+- key 不能重复，但是值可以重复，允许使用 null 键 和 null 值
+- 如果添加相同的key ，则会覆盖原来的 key - val ，等同于修改（key 不会替换，val 会替换）
+- 与 HashSet 一样，不保证映射的顺序，因为底层是以 hash 表的方式来存储的。（JDK 8 的hashMap 底层  : 数组 + 链表 + 红黑树)
+- HashMap 没有实现同步，因此线程是不安全的，方法没有做同步互斥的操作，没有 synchronized
+
+
+
+##### HashMap 底层机制及源码分析
+
+> ###### 扩容机制
+
+> ###### 代码示例
+
+```java
+@SuppressWarnings({"all"})
+public class HashMapSource1 {
+    public static void main(String[] args) {
+        HashMap map = new HashMap();
+        map.put("java", 10);//ok
+        map.put("php", 10);//ok
+        map.put("java", 20);//替换value
+
+        System.out.println("map=" + map);//
+
+        /*解读HashMap的源码+图解
+        1. 执行构造器 new HashMap()
+           初始化加载因子 loadfactor = 0.75
+           HashMap$Node[] table = null
+        2. 执行put 调用 hash方法，计算 key的 hash值 (h = key.hashCode()) ^ (h >>> 16)
+            public V put(K key, V value) {//K = "java" value = 10
+                return putVal(hash(key), key, value, false, true);
+            }
+         3. 执行 putVal
+         final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
+                   boolean evict) {
+                Node<K,V>[] tab; Node<K,V> p; int n, i;//辅助变量
+                //如果底层的table 数组为null, 或者 length =0 , 就扩容到16
+                if ((tab = table) == null || (n = tab.length) == 0)
+                    n = (tab = resize()).length;
+                //取出hash值对应的table的索引位置的Node, 如果为null, 就直接把加入的k-v
+                //, 创建成一个 Node ,加入该位置即可
+                if ((p = tab[i = (n - 1) & hash]) == null)
+                    tab[i] = newNode(hash, key, value, null);
+                else {
+                    Node<K,V> e; K k;//辅助变量
+                // 如果table的索引位置的key的hash相同和新的key的hash值相同，
+                 // 并 满足(table现有的结点的key和准备添加的key是同一个对象  || equals返回真)
+                 // 就认为不能加入新的k-v
+                    if (p.hash == hash &&
+                        ((k = p.key) == key || (key != null && key.equals(k))))
+                        e = p;
+                    else if (p instanceof TreeNode)//如果当前的table的已有的Node 是红黑树，就按照红黑树的方式处理
+                        e = ((TreeNode<K,V>)p).putTreeVal(this, tab, hash, key, value);
+                    else {
+                        //如果找到的结点，后面是链表，就循环比较
+                        for (int binCount = 0; ; ++binCount) {//死循环
+                            if ((e = p.next) == null) {//如果整个链表，没有和他相同,就加到该链表的最后
+                                p.next = newNode(hash, key, value, null);
+                                //加入后，判断当前链表的个数，是否已经到8个，到8个，后
+                                //就调用 treeifyBin 方法进行红黑树的转换
+                                if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st
+                                    treeifyBin(tab, hash);
+                                break;
+                            }
+                            if (e.hash == hash && //如果在循环比较过程中，发现有相同,就break,就只是替换value
+                                ((k = e.key) == key || (key != null && key.equals(k))))
+                                break;
+                            p = e;
+                        }
+                    }
+                    if (e != null) { // existing mapping for key
+                        V oldValue = e.value;
+                        if (!onlyIfAbsent || oldValue == null)
+                            e.value = value; //替换，key对应value
+                        afterNodeAccess(e);
+                        return oldValue;
+                    }
+                }
+                ++modCount;//每增加一个Node ,就size++
+                if (++size > threshold[12-24-48])//如size > 临界值，就扩容
+                    resize();
+                afterNodeInsertion(evict);
+                return null;
+            }
+
+              5. 关于树化(转成红黑树)
+              //如果table 为null ,或者大小还没有到 64，暂时不树化，而是进行扩容.
+              //否则才会真正的树化 -> 剪枝
+              final void treeifyBin(Node<K,V>[] tab, int hash) {
+                int n, index; Node<K,V> e;
+                if (tab == null || (n = tab.length) < MIN_TREEIFY_CAPACITY)
+                    resize();
+
+            }
+         */
+
+
+    }
+}
+
+```
+
+
+
+> ###### 模拟HashMap 触发扩容、树化情况
+
+```java
+@SuppressWarnings({"all"})
+public class HashMapSource2 {
+    public static void main(String[] args) {
+
+
+        HashMap hashMap = new HashMap();
+        for(int i = 1; i <= 12; i++) {
+            hashMap.put(i, "hello");
+        }
+
+        hashMap.put("aaa", "bbb");
+
+        System.out.println("hashMap=" + hashMap);//12个 k-v
+
+        //布置一个任务，自己设计代码去验证，table 的扩容
+        //0 -> 16(12) -> 32(24) -> 64(64*0.75=48)-> 128 (96) ->
+        //自己设计程序，验证-》 增强自己阅读源码能力. 看别人代码.
+    }
+}
+
+class A  {
+    private int num;
+
+    public A(int num) {
+        this.num = num;
+    }
+
+    //所有的A对象的hashCode都是100
+//    @Override
+//    public int hashCode() {
+//        return 100;
+//    }
+
+    @Override
+    public String toString() {
+        return "\nA{" +
+                "num=" + num +
+                '}';
+    }
+}
+
+```
+
+
+
+#### Map 接口实现类 - HashTable
+
+##### 基本介绍
+
+- 存放的元素是键值对 ： 即 K - V
+- HashTable 的键和值都不能为 null ，否则会抛出 NullPointerException
+- HashTable 使用方法和 HashMap 一样
+- HashTable 是线程安全的（synchronized)，hashMap 是线程不安全的
+
+
+
+##### HashMap 和 HashTable 对比
+
+|           | 版本 | 线程安全（同步） | 效率 | 允许null键null值 |
+| --------- | ---- | ---------------- | ---- | ---------------- |
+| HashMap   | 1.2  | 不安全           | 高   | 可以             |
+| HashTable | 1.0  | 安全             | 较低 | 不可以           |
+
+
+
+#### Map 接口实现类 - Properties
+
+##### 基本介绍
+
+- Properties 类 继承自 HashTable 类 并且实现了 Map 接口，也是使用一种 键值对的形式来保存数据的
+- 他的使用特点和 HashTable 类似
+- Properties 还可以用于 从 xxx.properties 文件中，加载数据到 Properties 类对象，并进行读取和修改
+- xxx.properties 文件 通畅作为配置文件
+
+
+
+##### 基本使用
+
+```java
+@SuppressWarnings({"all"})
+public class Properties_ {
+    public static void main(String[] args) {
+
+        //解读
+        //1. Properties 继承  Hashtable
+        //2. 可以通过 k-v 存放数据，当然key 和 value 不能为 null
+        //增加
+        Properties properties = new Properties();
+        //properties.put(null, "abc");//抛出 空指针异常
+        //properties.put("abc", null); //抛出 空指针异常
+        properties.put("john", 100);//k-v
+        properties.put("lucy", 100);
+        properties.put("lic", 100);
+        properties.put("lic", 88);//如果有相同的key ， value被替换
+
+        System.out.println("properties=" + properties);
+
+        //通过k 获取对应值
+        System.out.println(properties.get("lic"));//88
+
+        //删除
+        properties.remove("lic");
+        System.out.println("properties=" + properties);
+
+        //修改
+        properties.put("john", "约翰");
+        System.out.println("properties=" + properties);
+
+        
+
+
+    }
+}
+
+```
+
+
+
+### 总结
+
+---
+
+> **在开发中，选择什么集合实现类，主要取决于 业务操作点，然后根据集合实现类特性进行选择**
+
+
+
+#### 开发中如何选择集合实现类
+
+- 先判断存储的类型（一组对象【单列】 或 一组键值对【双列】）
+  - 一组对象【单列】： Collection 接口
+    - 允许重复：List
+      - 增删多：LinkedList【底层维护了一个双向链表】
+      - 改查多：ArrayList 【底层维护 Object 类型的动态数组】
+    - 不允许重复：Set
+      - 无序：HashSet 【底层是 HashMap,维护了一个哈希表 即：数组+链表+红黑树
+      - 排序：TreeSet
+      - 插入和取出顺序一致：LinkedHashSet 【维护 数组 + 双向链表】
+  - 一组键值对[双列] ： Map
+    - 键无序：HashMap 【底层是 哈希表 JDK 7 ： 数组 + 链表 + 红黑树】
+    - 键排序：TreeMap 
+    - 键插入和取出顺序一致 ： LinkedHashMap
+    - 读取文件 ：Properties
+
+> ##### TreeSet代码示例
+
+```java
+@SuppressWarnings({"all"})
+public class TreeSet_ {
+    public static void main(String[] args) {
+
+        //解读
+        //1. 当我们使用无参构造器，创建TreeSet时，仍然是无序的
+        //2. 老师希望添加的元素，按照字符串大小来排序
+        //3. 使用TreeSet 提供的一个构造器，可以传入一个比较器(匿名内部类)
+        //   并指定排序规则
+        //4. 简单看看源码
+        //解读
+        /*
+        1. 构造器把传入的比较器对象，赋给了 TreeSet的底层的 TreeMap的属性this.comparator
+
+         public TreeMap(Comparator<? super K> comparator) {
+                this.comparator = comparator;
+            }
+         2. 在 调用 treeSet.add("tom"), 在底层会执行到
+
+             if (cpr != null) {//cpr 就是我们的匿名内部类(对象)
+                do {
+                    parent = t;
+                    //动态绑定到我们的匿名内部类(对象)compare
+                    cmp = cpr.compare(key, t.key);
+                    if (cmp < 0)
+                        t = t.left;
+                    else if (cmp > 0)
+                        t = t.right;
+                    else //如果相等，即返回0,这个Key就没有加入
+                        return t.setValue(value);
+                } while (t != null);
+            }
+         */
+
+//        TreeSet treeSet = new TreeSet();
+        TreeSet treeSet = new TreeSet(new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                //下面 调用String的 compareTo方法进行字符串大小比较
+                //如果老韩要求加入的元素，按照长度大小排序
+                //return ((String) o2).compareTo((String) o1);
+                return ((String) o1).length() - ((String) o2).length();
+            }
+        });
+        //添加数据.
+        treeSet.add("jack");
+        treeSet.add("tom");//3
+        treeSet.add("sp");
+        treeSet.add("a");
+        treeSet.add("abc");//3
+
+
+        System.out.println("treeSet=" + treeSet);
+
+    }
+}
+
+```
+
+
+
+> ##### TreeMap 代码示例
+
+```java
+@SuppressWarnings({"all"})
+public class TreeMap_ {
+    public static void main(String[] args) {
+
+        //使用默认的构造器，创建TreeMap, 是无序的(也没有排序)
+        /*
+            要求：按照传入的 k(String) 的大小进行排序
+         */
+//        TreeMap treeMap = new TreeMap();
+        TreeMap treeMap = new TreeMap(new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                //按照传入的 k(String) 的大小进行排序
+                //按照K(String) 的长度大小排序
+                //return ((String) o2).compareTo((String) o1);
+                return ((String) o2).length() - ((String) o1).length();
+            }
+        });
+        treeMap.put("jack", "杰克");
+        treeMap.put("tom", "汤姆");
+        treeMap.put("kristina", "克瑞斯提诺");
+        treeMap.put("smith", "斯密斯");
+        treeMap.put("hsp", "韩顺平");//加入不了
+
+        System.out.println("treemap=" + treeMap);
+
+        /*
+
+            解读源码：
+            1. 构造器. 把传入的实现了 Comparator接口的匿名内部类(对象)，传给给TreeMap的comparator
+             public TreeMap(Comparator<? super K> comparator) {
+                this.comparator = comparator;
+            }
+            2. 调用put方法
+            2.1 第一次添加, 把k-v 封装到 Entry对象，放入root
+            Entry<K,V> t = root;
+            if (t == null) {
+                compare(key, key); // type (and possibly null) check
+
+                root = new Entry<>(key, value, null);
+                size = 1;
+                modCount++;
+                return null;
+            }
+            2.2 以后添加
+            Comparator<? super K> cpr = comparator;
+            if (cpr != null) {
+                do { //遍历所有的key , 给当前key找到适当位置
+                    parent = t;
+                    cmp = cpr.compare(key, t.key);//动态绑定到我们的匿名内部类的compare
+                    if (cmp < 0)
+                        t = t.left;
+                    else if (cmp > 0)
+                        t = t.right;
+                    else  //如果遍历过程中，发现准备添加Key 和当前已有的Key 相等，就不添加
+                        return t.setValue(value);
+                } while (t != null);
+            }
+         */
+
+    }
+}
+
+```
+
+
+
+
+
+### Collections 工具类
+
+---
+
+
+
+#### 工具类介绍
+
+- Collections 是一个操作 Set 、List 和 Map 等集合的工具类
+- Collections 中提供了一系列静态的方法对集合元素进行排序、查询和修改等操作
+
+
+
+#### 排序操作
+
+##### reverse(List)
+
+> 反转 List 中元素的顺序
+
+```java
+// reverse(List)： 反转 List 中元素的顺序
+Collections.reverse(list);
+```
+
+
+
+##### shuffle(List)
+
+> 对 List 集合元素进行随机排序
+
+```java
+// shuffle(List)： 对 List 集合元素进行随机排序
+```
+
+
+
+##### sort(List)
+
+> 根据元素的自然顺序对指定 List 集合元素按升序排序
+
+```java
+// sort(List)： 根据元素的自然顺序对指定 List 集合元素按升序排序
+Collections.sort(list);
+```
+
+
+
+##### sort(List,Comparator)
+
+> 根据指定的 Comparator 产生的顺序对 List 集合元素进行排序
+
+```java
+// sort(List， Comparator)： 根据指定的 Comparator 产生的顺序对 List 集合元素进行排序
+//我们希望按照 字符串的长度大小排序
+Collections.sort(list, new Comparator() {
+@Override
+public int compare(Object o1, Object o2) {
+//可以加入校验代码.
+return ((String) o2).length() - ((String) o1).length();
+}
+});
+System.out.println("字符串长度大小排序=" + list);
+// swap(List， int， int)： 将指定 list 集合中的 i 处元素和 j 处元素进行交换
+```
+
+
+
+##### swap(List,int,int)
+
+> 将指定 List 集合中的 i 处 元素 和 j 处 元素进行交换
+
+```java
+// swap(List， int， int)： 将指定 list 集合中的 i 处元素和 j 处元素进行交换
+//比如
+Collections.swap(list, 0, 1);
+System.out.println("交换后的情况");
+System.out.println("list=" + list);
+```
+
+
+
+#### 查找、替换操作
+
+##### Object max(Collection)
+
+> 根据元素的自然顺序，返回给定集合中的最大元素
+
+```java
+//Object max(Collection)： 根据元素的自然顺序， 返回给定集合中的最大元素
+System.out.println("自然顺序最大元素=" + Collections.max(list));
+```
+
+
+
+##### Object max(Collection,Comparator)
+
+> 根据 Comparator 指定的顺序，返回给定集合中的最大元素
+
+```java
+//Object max(Collection， Comparator)： 根据 Comparator 指定的顺序， 返回给定集合中的最大元素
+//比如， 我们要返回长度最大的元素
+Object maxObject = Collections.max(list, new Comparator() {
+    @Override
+    public int compare(Object o1, Object o2) {
+    return ((String)o1).length() - ((String)o2).length();
+    }
+});
+    System.out.println("长度最大的元素=" + maxObject);
+```
+
+
+
+##### Object min(Collection
+
+> 根据元素的自然顺序，返回给定集合中的最小元素
+
+
+
+
+
+##### Object min(Collection,Comparator)
+
+> 根据 Comparator 指定的顺序，返回给定集合中的最小元素
+
+
+
+
+
+##### int frequency(Collection,Object)
+
+> 返回指定集合中指定元素的出现次数
+
+```java
+//int frequency(Collection， Object)： 返回指定集合中指定元素的出现次数
+System.out.println("tom 出现的次数=" + Collections.frequency(list, "tom"));
+```
+
+
+
+##### void copy(List dest,List src)
+
+> 将 src 中的内容复制到 dest 中
+
+```java
+    //void copy(List dest,List src)： 将 src 中的内容复制到 dest 中
+    ArrayList dest = new ArrayList();
+    //为了完成一个完整拷贝， 我们需要先给 dest 赋值， 大小和 list.size()一样
+    for(int i = 0; i < list.size(); i++) {
+        dest.add("");
+    } //
+    拷贝
+    Collections.copy(dest, list);
+    System.out.println("dest=" + dest);
+```
+
+
+
+##### boolean replaceAll(List list,Onject oldVal,Object newVal)
+
+> 使用新值替换 List 对象的所有旧值
+
+```java
+//boolean replaceAll(List list， Object oldVal， Object newVal)： 使用新值替换 List 对象的所有旧值
+//如果 list 中， 有 tom 就替换成 汤姆
+Collections.replaceAll(list, "tom", "汤姆");
+```
+
+
+
+
+
+
 
 
 

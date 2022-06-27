@@ -1504,7 +1504,7 @@ class Person {//类
 >      public static inner getInnerInstance (){
 >          return new Inner();
 >      }
->                          
+>                               
 >      Outer.Inner inner = Outer.gerInnerInstance();
 >      ```
 >
@@ -6728,7 +6728,7 @@ public class JUnit_ {
 
   - ##### 多线程
 
-     			同一时刻，可以执行多个线程，比如：一个qq进程，可以同时打开多个聊天窗口，一个迅雷进程，可以同时下载多个文件
+     		​			同一时刻，可以执行多个线程，比如：一个qq进程，可以同时打开多个聊天窗口，一个迅雷进程，可以同时下载多个文件
 
   - ##### 并发
 
@@ -6751,8 +6751,547 @@ public class JUnit_ {
 - 继承 Thread 类，重写 run 方法
 - 实现 Runnable 接口，重写 run 方法
 
+
+
+
+
+#### 继承 Thread 类
+
+##### 说明
+
+- 当一个类继承了 Thread 类， 该类就可以当做线程使用
+-  我们会重写 run 方法， 写上自己的业务代码
+- run Thread 类 实现了 Runnable 接口的 run 方法  
+
 > ##### 代码示例
 
+```java
+public class Thread01 {
+    public static void main(String[] args) throws InterruptedException {
+
+        //创建Cat对象，可以当做线程使用
+        Cat cat = new Cat();
+
+        //源码
+        /*
+            (1)
+            public synchronized void start() {
+                start0();
+            }
+            (2)
+            //start0() 是本地方法，是JVM调用, 底层是c/c++实现
+            //真正实现多线程的效果， 是start0(), 而不是 run
+            private native void start0();
+
+         */
+
+        cat.start();//启动线程-> 最终会执行cat的run方法
+
+
+
+        //cat.run();//run方法就是一个普通的方法, 没有真正的启动一个线程，就会把run方法执行完毕，才向下执行
+        //说明: 当main线程启动一个子线程 Thread-0, 主线程不会阻塞, 会继续执行
+        //这时 主线程和子线程是交替执行..
+        System.out.println("主线程继续执行" + Thread.currentThread().getName());//名字main
+        for(int i = 0; i < 60; i++) {
+            System.out.println("主线程 i=" + i);
+            //让主线程休眠
+            Thread.sleep(1000);
+        }
+
+    }
+}
+
+//说明
+//1. 当一个类继承了 Thread 类， 该类就可以当做线程使用
+//2. 我们会重写 run方法，写上自己的业务代码
+//3. run Thread 类 实现了 Runnable 接口的run方法
+/*
+    @Override
+    public void run() {
+        if (target != null) {
+            target.run();
+        }
+    }
+ */
+
+
+
+class Cat extends Thread {
+
+    int times = 0;
+    @Override
+    public void run() {//重写run方法，写上自己的业务逻辑
+
+        while (true) {
+            //该线程每隔1秒。在控制台输出 “喵喵, 我是小猫咪”
+            System.out.println("喵喵, 我是小猫咪" + (++times) + " 线程名=" + Thread.currentThread().getName());
+            //让该线程休眠1秒 ctrl+alt+t
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if(times == 80) {
+                break;//当times 到80, 退出while, 这时线程也就退出..
+            }
+        }
+    }
+}
+```
+
+
+
+
+
+#### 实现 Runnable 接口
+
+##### 说明
+
+- java 是单继承的，在某些情况下下一个类可能已经继承了某个父类，这时在用继承 Thread 类方法来创建线程显然已经不可能了
+- java 设计者们提供了另外一个方式来创建线程，就是通过实现 Runnable 接口来创建线程
+
+> ##### 代码示例
+
+```java
+public class Thread02 {
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        //dog.start(); 这里不能调用start
+        //创建了Thread对象，把 dog对象(实现Runnable),放入Thread
+        Thread thread = new Thread(dog);
+        thread.start();
+
+//        Tiger tiger = new Tiger();//实现了 Runnable
+//        ThreadProxy threadProxy = new ThreadProxy(tiger);
+//        threadProxy.start();
+    }
+}
+
+class Animal {
+}
+
+class Tiger extends Animal implements Runnable {
+
+    @Override
+    public void run() {
+        System.out.println("老虎嗷嗷叫....");
+    }
+}
+
+//线程代理类 , 模拟了一个极简的Thread类
+class ThreadProxy implements Runnable {//你可以把Proxy类当做 ThreadProxy
+
+    private Runnable target = null;//属性，类型是 Runnable
+
+    @Override
+    public void run() {
+        if (target != null) {
+            target.run();//动态绑定（运行类型Tiger）
+        }
+    }
+
+    public ThreadProxy(Runnable target) {
+        this.target = target;
+    }
+
+    public void start() {
+        start0();//这个方法时真正实现多线程方法
+    }
+
+    public void start0() {
+        run();
+    }
+}
+
+
+class Dog implements Runnable { //通过实现Runnable接口，开发线程
+
+    int count = 0;
+
+    @Override
+    public void run() { //普通方法
+        while (true) {
+            System.out.println("小狗汪汪叫..hi" + (++count) + Thread.currentThread().getName());
+
+            //休眠1秒
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            if (count == 10) {
+                break;
+            }
+        }
+    }
+}
+```
+
+
+
+#### 继承 Thread 类 和 实现 Runnable 接口的区别
+
+- 从 java 的设计来看，通过继承 Thread 类 或 实现 Runnable 接口来创建线程本质上没有区别，从 jdk 帮助文档我们可以看到 Thread 类 本身就实现了 Runnable 接口
+- 实现 Runnable 接口方式更加适合多个线程共享一个资源的情况，并且避免了 单继承的限制，建议使用 Runnable 
+
+
+
+### 线程终止
+
+---
+
+
+
+#### 基本说明
+
+- 当线程完成任务后，会自动退出
+- 还可以通过 使用变量 来控制 run 方法退出的方式停止线程，即通知方式
+
+> ##### 代码示例
+
+```java
+public class ThreadExit_ {
+    public static void main(String[] args) throws InterruptedException {
+        T t1 = new T();
+        t1.start();
+
+        //如果希望main线程去控制t1 线程的终止, 必须可以修改 loop
+        //让t1 退出run方法，从而终止 t1线程 -> 通知方式
+
+        //让主线程休眠 10 秒，再通知 t1线程退出
+        System.out.println("main线程休眠10s...");
+        Thread.sleep(10 * 1000);
+        t1.setLoop(false);
+    }
+}
+
+class T extends Thread {
+    private int count = 0;
+    //设置一个控制变量
+    private boolean loop = true;
+    @Override
+    public void run() {
+        while (loop) {
+
+            try {
+                Thread.sleep(50);// 让当前线程休眠50ms
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("T 运行中...." + (++count));
+        }
+
+    }
+
+    public void setLoop(boolean loop) {
+        this.loop = loop;
+    }
+}
+```
+
+
+
+
+
+
+
+### 线程常用方法
+
+---
+
+
+
+#### 常用方法第一组
+
+##### setName 
+
+> 设置线程名称，使之与参数 name 相同
+
+##### getName
+
+> 返回该线程的名称
+
+##### start
+
+> 使该线程开始执行；Java虚拟机底层调用该线程的 start0 方法
+
+##### run
+
+> 调用线程对象的 run 方法
+
+##### setPriority
+
+> 更改线程的优先级
+
+##### getPriority 
+
+> 获取线程的优先级
+
+##### sleep 
+
+> 在指定的毫秒数内让当前正在执行的线程休眠（暂停执行）
+
+##### interrupt
+
+> 中断线程
+
+
+
+#### 注意事项和细节
+
+- start 底层会创建新的线程，调用 run ，run 就是一个简单的方法调用，不会启动新的线程
+- 线程的优先级范围
+- interrupt ，中断线程，但并没有真正的结束线程。所以一般用于中断正在休眠线程
+- sleep ： 线程的静态方法，使当前线程休眠
+
+
+
+> ##### 代码示例
+
+```java
+public class ThreadMethod01 {
+    public static void main(String[] args) throws InterruptedException {
+        //测试相关的方法
+        T t = new T();
+        t.setName("csq");
+        t.setPriority(Thread.MIN_PRIORITY);//1
+        t.start();//启动子线程
+
+
+        //主线程打印5 hi ,然后我就中断 子线程的休眠
+        for(int i = 0; i < 5; i++) {
+            Thread.sleep(1000);
+            System.out.println("hi " + i);
+        }
+
+        System.out.println(t.getName() + " 线程的优先级 =" + t.getPriority());//1
+
+        t.interrupt();//当执行到这里，就会中断 t线程的休眠.
+
+
+
+    }
+}
+
+class T extends Thread { //自定义的线程类
+    @Override
+    public void run() {
+        while (true) {
+            for (int i = 0; i < 100; i++) {
+                //Thread.currentThread().getName() 获取当前线程的名称
+                System.out.println(Thread.currentThread().getName() + "  吃包子~~~~" + i);
+            }
+            try {
+                System.out.println(Thread.currentThread().getName() + " 休眠中~~~");
+                Thread.sleep(20000);//20秒
+            } catch (InterruptedException e) {
+                //当该线程执行到一个interrupt 方法时，就会catch 一个 异常, 可以加入自己的业务代码
+                //InterruptedException 是捕获到一个中断异常.
+                System.out.println(Thread.currentThread().getName() + "被 interrupt了");
+            }
+        }
+    }
+}
+```
+
+
+
+#### 常用方法第二组
+
+##### yield 
+
+> 线程的礼让。让出 cpu,让其他线程执行，但礼让的时间不确定，所以也不一定礼让成功
+
+##### join 
+
+> 线程的插队。插队的线程一旦成功，则肯定先执行完插入的线程所有的任务
+
+
+
+> ###### 案例
+>
+> 先执行完插入的线程所有的任务
+> 案例：main线程创建一个子线程，
+> 每隔1s输出hello,
+> 输出20次，主线程每隔1秒，输出hi,输出20次.要求：
+> 两个线程同时执行，当主线程输出5次后，就让子线程
+> 运行完毕，主线程再继续，
+
+
+
+> #### 代码示例
+
+```java
+public class ThreadMethod02 {
+    public static void main(String[] args) throws InterruptedException {
+
+        T2 t2 = new T2();
+        t2.start();
+
+        for(int i = 1; i <= 20; i++) {
+            Thread.sleep(1000);
+            System.out.println("主线程(小弟) 吃了 " + i  + " 包子");
+            if(i == 5) {
+                System.out.println("主线程(小弟) 让 子线程(老大) 先吃");
+                //join, 线程插队
+                //t2.join();// 这里相当于让t2 线程先执行完毕
+                Thread.yield();//礼让，不一定成功..
+                System.out.println("线程(老大) 吃完了 主线程(小弟) 接着吃..");
+            }
+
+        }
+    }
+}
+
+class T2 extends Thread {
+    @Override
+    public void run() {
+        for (int i = 1; i <= 20; i++) {
+            try {
+                Thread.sleep(1000);//休眠1秒
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("子线程(老大) 吃了 " + i +  " 包子");
+        }
+    }
+}
+```
+
+
+
+
+
+### 线程的生命周期
+
+---
+
+> JDK 中用 Thread.State 枚举了几种线程状态
+
+
+
+#### 线程状态
+
+- ##### NEW
+
+  尚未启动的线程处于此状态。
+
+- ##### RUNNABLE
+
+  在Java虚拟机中执行的线程处于此状态。
+
+- ##### BLOCKED
+
+  被阻塞等待监视器锁定的线程处于此状态。
+
+- ##### WAITING
+
+  正在等待另一个线程执行特定动作的线程处于此状态。
+
+- ##### TIMED WAITING
+
+  正在等待另一个线程执行动作达到指定等待时间的线程处于此状态。
+
+- ##### TERMINATED
+
+  已退出的线程处于此状态。
+
+
+
+
+
+
+
+### 线程的同步
+
+---
+
+
+
+#### Synchronized
+
+##### 线程同步机制
+
+- 在多线程编程，一些敏感数据不允许被多个线程同时访问，此时就使用同步访问技术，保证数据在任何同一时刻，最多有一个线程访问，以保证数据的完整性
+- 也可以这里理解：线程同步，即当有一个线程在对内存进行操作时，其他线程都不可以对这个内存地址进行操作，直到该线程完成操作，其他线程才能对该内存地址进行操作
+
+
+
+##### 同步具体方法 - Synchronized
+
+1. 同步代码块
+
+   **syschronized(对象) { //得到对象的锁，才能操作同步代码**
+
+   ​	**//需要被同步代码**
+
+   **}**
+
+2. synchronized 还可以放在 方法声明中，表示整个方法  - 为 同步方法
+
+   **public synchronized void m (String name){**	
+
+   ​	**// 需要被同步代码**
+
+   **}**
+
+
+
+
+
+### 分析同步原理
+
+---
+
+
+
+
+
+
+
+### 互斥锁
+
+---
+
+
+
+#### 基本介绍
+
+- Java 语言中，引入了 对象互斥锁的概念，来保证共享数据操作的完整性
+- 每个对象都对应于一个可称为 “ 互斥锁” 的标记，这个标记 用来保证在任一时刻，只能有一个线程访问该对象
+- 关键字 synchronized 来与对象的互斥锁联系。当某个对象用 synchronized 修饰时，表明该对象在任一时刻只能由一个线程访问
+- 同步的局限性：导致程序的执行效率 要降低
+- 同步方法（非静态的）的锁可以是 this ，也可以是其他对象（要求是同一个对象）
+- 同步方法（静态的）的锁为当前类本身
+
+
+
+#### 注意事项和细节
+
+- 同步方法如果没有用 static 修饰：默认锁对象为 this 
+- 如果方法使用 static 修饰，，默认锁对象：当前类.class
+- 实现的落地步骤
+  - 需要先分析上锁的代码
+  - 选择 同步代码块或者 同步方法
+  - 要求多个线程的锁对象w为同一个即可
+
+
+
+
+
+
+
+### 线程的死锁
+
+---
+
+
+
+#### 基本介绍
+
+> 多个线程都占用了对方的锁资源，但不肯相让，导致了死锁，在编程时一定要避免死锁的发生
 
 
 
@@ -6762,28 +7301,21 @@ public class JUnit_ {
 
 
 
+### 释放锁
+
+---
+
+
+
+#### 会释放锁的操作
 
 
 
 
 
+#### 不会释放锁的操作
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#### 
 
 
 

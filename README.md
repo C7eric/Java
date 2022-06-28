@@ -1504,7 +1504,7 @@ class Person {//类
 >      public static inner getInnerInstance (){
 >          return new Inner();
 >      }
->                               
+>                                    
 >      Outer.Inner inner = Outer.gerInnerInstance();
 >      ```
 >
@@ -6728,7 +6728,7 @@ public class JUnit_ {
 
   - ##### 多线程
 
-     		​			同一时刻，可以执行多个线程，比如：一个qq进程，可以同时打开多个聊天窗口，一个迅雷进程，可以同时下载多个文件
+     					同一时刻，可以执行多个线程，比如：一个qq进程，可以同时打开多个聊天窗口，一个迅雷进程，可以同时下载多个文件
 
   - ##### 并发
 
@@ -7315,7 +7315,25 @@ class T2 extends Thread {
 
 #### 不会释放锁的操作
 
-#### 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### IO 流
+
+---
+
+
 
 
 
@@ -7390,3 +7408,4 @@ class T2 extends Thread {
 
 
 
+而我【【【00

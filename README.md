@@ -1504,7 +1504,7 @@ class Person {//类
 >      public static inner getInnerInstance (){
 >          return new Inner();
 >      }
->                                    
+>                                         
 >      Outer.Inner inner = Outer.gerInnerInstance();
 >      ```
 >
@@ -8601,6 +8601,244 @@ public class Properties03 {
 
 
 ## 网络编程
+
+
+
+
+
+### 网络的相关概念
+
+---
+
+
+
+#### 网络通信
+
+##### 概念 
+
+两台设备之前通过网络实现数据传输
+
+
+
+##### 网络通信
+
+将-数据通过网络从一台设备传输到另一台设备
+
+Java.net 包下提供了一系列的类或接口，供程序员使用，完成网络通信
+
+
+
+#### 网络
+
+##### 概念
+
+两台或多台设备通过一定物理设备连接起来构成了网络
+
+
+
+##### 网络分类
+
+- 局域网：覆盖范围最小，仅仅覆盖了一个教师或一个机房
+- 城域网：覆盖范围较大，可以覆盖一整个城市
+- 广域网：覆盖范围最大，可以覆盖全国，甚至全球，万维网是广域网的代表
+
+
+
+#### ip地址
+
+##### 概念
+
+用于唯一标识网络中 的每台计算机/主机
+
+
+
+##### 注意事项和细节
+
+- 查看ip 地址 ：ipconfig
+- ip 的表示形式：点分十进制 xx.xx.xx.xx
+- 每一个十进制的范围 0 ~ 255
+- ip 地址的组成 = 网络地址 + 主机地址 。比如 192.168.16.69
+- IPv6 是互联网工程任务组设计的用于代替 IPv4 的下一代协议，其地址数量号称可以 为全世界每一粒沙子编上一个地址
+- 由于IPv4 最大的问题在于网络地址资源有限，严重制约了互联网的应用与发展。IPv6 的使用，不仅能解决网络地址资源数量的问题，而且也解决了 多种接入设备连入互联网的障碍
+
+
+
+##### IP 地址分类
+
+![image-20220629230759945](C:\Users\CSQ-PC\AppData\Roaming\Typora\typora-user-images\image-20220629230759945.png)
+
+![image-20220629230818062](C:\Users\CSQ-PC\AppData\Roaming\Typora\typora-user-images\image-20220629230818062.png)
+
+
+
+#### 域名
+
+>  www.4399.com
+
+
+
+##### 好处
+
+为了方便记忆，解决记 ip 的困难
+
+
+
+##### 概念
+
+将 IP 地址映射成 域名
+
+
+
+##### 端口号
+
+###### 概念
+
+用于标识计算机上 某个特定的网络程序
+
+
+
+###### 表示形式
+
+以整数形式，端口范围  0 ~ 65535 [2 个 字节表示端口 0 ~ 2^16 - 1]
+
+
+
+###### 注意事项和细节
+
+- 0 ~ 1024 已经被占用，比如 ssh 22,ftp 21 , smtp 25  http 80
+- 常见的网络程序端口号
+  - tomcat:8080.
+  - mysql : 3306
+  - oracle : 1521
+  - sqlserver : 1433
+
+
+
+#### 网络通信协议
+
+![image-20220629231657081](C:\Users\CSQ-PC\AppData\Roaming\Typora\typora-user-images\image-20220629231657081.png)
+
+
+
+##### 协议（TCP/IP)
+
+TCP / IP (Transmission Control Protocol / Internet Protocol) 的简写
+
+中文译名为 传输控制协议 / 因特网互联协议，又叫网络通讯协议，这个协议是 Internet 最基本的协议、Internet 国际互联网络的基础，简单的说，就是由网络层的 IP 协议 和传输层的 TCP 协议组成的
+
+
+
+| OSI 模型   | TCP/IP 模型       | TCP/IP模型各层对应协议    |
+| ---------- | ----------------- | ------------------------- |
+| 应用层     | 应用层            | HTTP、ftp、telnet、DNS... |
+| 表示层     | 应用层            | HTTP、ftp、telnet、DNS... |
+| 会话层     | 应用层            | HTTP、ftp、telnet、DNS... |
+| 传输层     | 传输层（TCP)      | TCP、UDP...               |
+| 网络层     | 网络层（IP)       | IP、ICMP、ARP...          |
+| 数据链路层 | 物理 + 数据链路层 | Link                      |
+| 物理层     | 物理 + 数据链路层 | Link                      |
+
+
+
+#### TCP/UDP
+
+##### TCP 协议 ：传输控制协议
+
+- 使用 TCP 协议之前，须先建立 TCP 连接，形成传输数据通道
+- 传输前，采用 “三次握手” 方式，是可靠的
+- TCP 协议进行通信的两个应用进程 ： 客户端 、服务端
+- 在连接中可进行大数据量的传输
+- 传输完毕，需释放已建立的连接，效率低
+
+
+
+##### UDP 协议 ： 用户数据协议
+
+- 将数据、源、目的封装成数据包，不需要建立连接
+- 每个数据包的大小限制在 64k 内，不适合传输大量数据
+- 因无需连接，故是不可靠的
+- 发送数据结束时无需释放资源（因为不是面向连接的），速度快
+- 举例：发短信
+
+
+
+### InetAddress 类
+
+---
+
+
+
+#### 相关方法
+
+##### getLocalHost
+
+> 获取本机 InetAddress 对象 
+
+
+
+##### getByName
+
+> 根据指定主机名/域名获取 IP 地址对象
+
+
+
+##### getHostName
+
+> 获取 InetAddress 对象的主机名
+
+
+
+##### getHostAddress
+
+> 获取 InetAddress 对象的地址
+
+
+
+> #### 应用案例
+
+```java
+public class API_ {
+    public static void main(String[] args) throws UnknownHostException {
+
+        //1. 获取本机的InetAddress 对象
+        InetAddress localHost = InetAddress.getLocalHost();
+        System.out.println(localHost);//DESKTOP-S4MP84S/192.168.12.1
+
+        //2. 根据指定主机名 获取 InetAddress对象
+        InetAddress host1 = InetAddress.getByName("DESKTOP-S4MP84S");
+        System.out.println("host1=" + host1);//DESKTOP-S4MP84S/192.168.12.1
+
+        //3. 根据域名返回 InetAddress对象, 比如 www.baidu.com 对应
+        InetAddress host2 = InetAddress.getByName("www.baidu.com");
+        System.out.println("host2=" + host2);//www.baidu.com / 110.242.68.4
+
+        //4. 通过 InetAddress 对象，获取对应的地址
+        String hostAddress = host2.getHostAddress();//IP 110.242.68.4
+        System.out.println("host2 对应的ip = " + hostAddress);//110.242.68.4
+
+        //5. 通过 InetAddress 对象，获取对应的主机名/或者的域名
+        String hostName = host2.getHostName();
+        System.out.println("host2对应的主机名/域名=" + hostName); // www.baidu.com
+
+    }
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 
 
 

@@ -7003,6 +7003,52 @@ class T extends Thread {
 
 
 
+#### 用户线程和守护线程
+
+- 用户线程：也叫工作线程当线程的任务执行完或通知方式结束
+- 守护线程：一般是为工作线程服务的，当所有的用户线程结束，守护线程自动结束
+- 常见的守护线程：垃圾回收机制 
+
+
+
+> ##### 代码示例
+
+```java
+public class ThreadMethod03 {
+    public static void main(String[] args) throws InterruptedException {
+        MyDaemonThread myDaemonThread = new MyDaemonThread();
+        //如果我们希望当main线程结束后，子线程自动结束
+        //,只需将子线程设为守护线程即可
+        myDaemonThread.setDaemon(true);
+        myDaemonThread.start();
+
+        for( int i = 1; i <= 10; i++) {//main线程
+            System.out.println("宝强在辛苦的工作...");
+            Thread.sleep(1000);
+        }
+    }
+}
+
+class MyDaemonThread extends Thread {
+    public void run() {
+        for (; ; ) {//无限循环
+            try {
+                Thread.sleep(1000);//休眠1000毫秒
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("马蓉和宋喆快乐聊天，哈哈哈~~~");
+        }
+    }
+} 
+```
+
+
+
+
+
+
+
 #### 常用方法第一组
 
 ##### setName 
@@ -7172,6 +7218,14 @@ class T2 extends Thread {
 
 
 
+
+
+#### 线程状态转换图
+
+![image-20220630175125221](D:\C\Java\com\out\image-20220630175125221.png)
+
+
+
 #### 线程状态
 
 - ##### NEW
@@ -7239,6 +7293,175 @@ class T2 extends Thread {
 
 
 
+> ##### 代码示例
+
+```java
+
+/**
+ * @author C7eric
+ * @version 1.0
+ * 使用多线程，模拟三个窗口同时售票100张
+ */
+public class SellTicket {
+    public static void main(String[] args) {
+
+        //测试
+//        SellTicket01 sellTicket01 = new SellTicket01();
+//        SellTicket01 sellTicket02 = new SellTicket01();
+//        SellTicket01 sellTicket03 = new SellTicket01();
+//
+//        //这里我们会出现超卖..
+//        sellTicket01.start();//启动售票线程
+//        sellTicket02.start();//启动售票线程
+//        sellTicket03.start();//启动售票线程
+
+
+//        System.out.println("===使用实现接口方式来售票=====");
+//        SellTicket02 sellTicket02 = new SellTicket02();
+//
+//        new Thread(sellTicket02).start();//第1个线程-窗口
+//        new Thread(sellTicket02).start();//第2个线程-窗口
+//        new Thread(sellTicket02).start();//第3个线程-窗口
+
+        //测试一把
+        SellTicket03 sellTicket03 = new SellTicket03();
+        new Thread(sellTicket03).start();//第1个线程-窗口
+        new Thread(sellTicket03).start();//第2个线程-窗口
+        new Thread(sellTicket03).start();//第3个线程-窗口
+
+    }
+}
+
+
+//实现接口方式, 使用synchronized实现线程同步
+class SellTicket03 implements Runnable {
+    private int ticketNum = 100;//让多个线程共享 ticketNum
+    private boolean loop = true;//控制run方法变量
+    Object object = new Object();
+
+
+    //同步方法（静态的）的锁为当前类本身
+    //解读
+    //1. public synchronized static void m1() {} 锁是加在 SellTicket03.class
+    //2. 如果在静态方法中，实现一个同步代码块.
+    /*
+        synchronized (SellTicket03.class) {
+            System.out.println("m2");
+        }
+     */
+    public synchronized static void m1() {
+
+    }
+    public static  void m2() {
+        synchronized (SellTicket03.class) {
+            System.out.println("m2");
+        }
+    }
+
+    //说明
+    //1. public synchronized void sell() {} 就是一个同步方法
+    //2. 这时锁在 this对象
+    //3. 也可以在代码块上写 synchronize ,同步代码块, 互斥锁还是在this对象
+    public /*synchronized*/ void sell() { //同步方法, 在同一时刻， 只能有一个线程来执行sell方法
+
+        synchronized (/*this*/ object) {
+            if (ticketNum <= 0) {
+                System.out.println("售票结束...");
+                loop = false;
+                return;
+            }
+
+            //休眠50毫秒, 模拟
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            System.out.println("窗口 " + Thread.currentThread().getName() + " 售出一张票"
+                    + " 剩余票数=" + (--ticketNum));//1 - 0 - -1  - -2
+        }
+    }
+
+    @Override
+    public void run() {
+        while (loop) {
+
+            sell();//sell方法是一共同步方法
+        }
+    }
+}
+
+//使用Thread方式
+// new SellTicket01().start()
+// new SellTicket01().start();
+class SellTicket01 extends Thread {
+
+    private static int ticketNum = 100;//让多个线程共享 ticketNum
+
+//    public void m1() {
+//        synchronized (this) {
+//            System.out.println("hello");
+//        }
+//    }
+
+    @Override
+    public void run() {
+
+
+        while (true) {
+
+            if (ticketNum <= 0) {
+                System.out.println("售票结束...");
+                break;
+            }
+
+            //休眠50毫秒, 模拟
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            System.out.println("窗口 " + Thread.currentThread().getName() + " 售出一张票"
+                    + " 剩余票数=" + (--ticketNum));
+
+        }
+    }
+}
+
+
+//实现接口方式
+class SellTicket02 implements Runnable {
+    private int ticketNum = 100;//让多个线程共享 ticketNum
+
+    @Override
+    public void run() {
+        while (true) {
+
+            if (ticketNum <= 0) {
+                System.out.println("售票结束...");
+                break;
+            }
+
+            //休眠50毫秒, 模拟
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            System.out.println("窗口 " + Thread.currentThread().getName() + " 售出一张票"
+                    + " 剩余票数=" + (--ticketNum));//1 - 0 - -1  - -2
+
+        }
+    }
+}
+
+```
+
+
+
 
 
 ### 分析同步原理
@@ -7279,6 +7502,169 @@ class T2 extends Thread {
 
 
 
+> ##### 代码示例
+
+```java
+public class SellTicket {
+    public static void main(String[] args) {
+
+        //测试
+//        SellTicket01 sellTicket01 = new SellTicket01();
+//        SellTicket01 sellTicket02 = new SellTicket01();
+//        SellTicket01 sellTicket03 = new SellTicket01();
+//
+//        //这里我们会出现超卖..
+//        sellTicket01.start();//启动售票线程
+//        sellTicket02.start();//启动售票线程
+//        sellTicket03.start();//启动售票线程
+
+
+//        System.out.println("===使用实现接口方式来售票=====");
+//        SellTicket02 sellTicket02 = new SellTicket02();
+//
+//        new Thread(sellTicket02).start();//第1个线程-窗口
+//        new Thread(sellTicket02).start();//第2个线程-窗口
+//        new Thread(sellTicket02).start();//第3个线程-窗口
+
+        //测试一把
+        SellTicket03 sellTicket03 = new SellTicket03();
+        new Thread(sellTicket03).start();//第1个线程-窗口
+        new Thread(sellTicket03).start();//第2个线程-窗口
+        new Thread(sellTicket03).start();//第3个线程-窗口
+
+    }
+}
+
+
+//实现接口方式, 使用synchronized实现线程同步
+class SellTicket03 implements Runnable {
+    private int ticketNum = 100;//让多个线程共享 ticketNum
+    private boolean loop = true;//控制run方法变量
+    Object object = new Object();
+
+
+    //同步方法（静态的）的锁为当前类本身
+    // 解读
+    //1. public synchronized static void m1() {} 锁是加在 SellTicket03.class
+    //2. 如果在静态方法中，实现一个同步代码块.
+    /*
+        synchronized (SellTicket03.class) {
+            System.out.println("m2");
+        }
+     */
+    public synchronized static void m1() {
+
+    }
+    public static  void m2() {
+        synchronized (SellTicket03.class) {
+            System.out.println("m2");
+        }
+    }
+
+    //说明
+    //1. public synchronized void sell() {} 就是一个同步方法
+    //2. 这时锁在 this对象
+    //3. 也可以在代码块上写 synchronize ,同步代码块, 互斥锁还是在this对象
+    public /*synchronized*/ void sell() { //同步方法, 在同一时刻， 只能有一个线程来执行sell方法
+
+        synchronized (/*this*/ object) {
+            if (ticketNum <= 0) {
+                System.out.println("售票结束...");
+                loop = false;
+                return;
+            }
+
+            //休眠50毫秒, 模拟
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            System.out.println("窗口 " + Thread.currentThread().getName() + " 售出一张票"
+                    + " 剩余票数=" + (--ticketNum));//1 - 0 - -1  - -2
+        }
+    }
+
+    @Override
+    public void run() {
+        while (loop) {
+
+            sell();//sell方法是一共同步方法
+        }
+    }
+}
+
+//使用Thread方式
+// new SellTicket01().start()
+// new SellTicket01().start();
+class SellTicket01 extends Thread {
+
+    private static int ticketNum = 100;//让多个线程共享 ticketNum
+
+//    public void m1() {
+//        synchronized (this) {
+//            System.out.println("hello");
+//        }
+//    }
+
+    @Override
+    public void run() {
+
+
+        while (true) {
+
+            if (ticketNum <= 0) {
+                System.out.println("售票结束...");
+                break;
+            }
+
+            //休眠50毫秒, 模拟
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            System.out.println("窗口 " + Thread.currentThread().getName() + " 售出一张票"
+                    + " 剩余票数=" + (--ticketNum));
+
+        }
+    }
+}
+
+
+//实现接口方式
+class SellTicket02 implements Runnable {
+    private int ticketNum = 100;//让多个线程共享 ticketNum
+
+    @Override
+    public void run() {
+        while (true) {
+
+            if (ticketNum <= 0) {
+                System.out.println("售票结束...");
+                break;
+            }
+
+            //休眠50毫秒, 模拟
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            System.out.println("窗口 " + Thread.currentThread().getName() + " 售出一张票"
+                    + " 剩余票数=" + (--ticketNum));//1 - 0 - -1  - -2
+
+        }
+    }
+}
+
+```
+
+
+
 
 
 
@@ -7295,6 +7681,65 @@ class T2 extends Thread {
 
 
 
+> ##### 代码示例
+
+```java
+/**
+ * @author C7eric
+ * @version 1.0
+ * 模拟线程死锁
+ */
+public class DeadLock_ {
+    public static void main(String[] args) {
+        //模拟死锁现象
+        DeadLockDemo A = new DeadLockDemo(true);
+        A.setName("A线程");
+        DeadLockDemo B = new DeadLockDemo(false);
+        B.setName("B线程");
+        A.start();
+        B.start();
+    }
+}
+
+
+//线程
+class DeadLockDemo extends Thread {
+    static Object o1 = new Object();// 保证多线程，共享一个对象,这里使用static
+    static Object o2 = new Object();
+    boolean flag;
+
+    public DeadLockDemo(boolean flag) {//构造器
+        this.flag = flag;
+    }
+
+    @Override
+    public void run() {
+
+        //下面业务逻辑的分析
+        //1. 如果flag 为 T, 线程A 就会先得到/持有 o1 对象锁, 然后尝试去获取 o2 对象锁
+        //2. 如果线程A 得不到 o2 对象锁，就会Blocked
+        //3. 如果flag 为 F, 线程B 就会先得到/持有 o2 对象锁, 然后尝试去获取 o1 对象锁
+        //4. 如果线程B 得不到 o1 对象锁，就会Blocked
+        if (flag) {
+            synchronized (o1) {//对象互斥锁, 下面就是同步代码
+                System.out.println(Thread.currentThread().getName() + " 进入1");
+                synchronized (o2) { // 这里获得li对象的监视权
+                    System.out.println(Thread.currentThread().getName() + " 进入2");
+                }
+                
+            }
+        } else {
+            synchronized (o2) {
+                System.out.println(Thread.currentThread().getName() + " 进入3");
+                synchronized (o1) { // 这里获得li对象的监视权
+                    System.out.println(Thread.currentThread().getName() + " 进入4");
+                }
+            }
+        }
+    }
+}
+```
+
 
 
 
@@ -7309,15 +7754,88 @@ class T2 extends Thread {
 
 #### 会释放锁的操作
 
-
+- 当前线程的同步方法、同步代码块执行结束
+  案例：上厕所，完事出来
+- 当前线程在同步代码块、同步方法中遇到break、return。.
+  案例：没有正常的完事，经理叫他修改bug,不得已出来
+- 当前线程在同步代码块、
+  同步方法中出现了未处理的Error?或Exception,导致异常结束
+  案例：没有正常的完事，发现忘带纸，不得已出来
+- 当前线程在同步代码块、同步方法中执行了线程对象的wait0方法，当前线程暂停，并释
+  放锁。
+  案例：没有正常完事，觉得需要酝酿下，所以出来等会再进去
 
 
 
 #### 不会释放锁的操作
 
+- 线程执行同步代码块或同步方法时，
+
+  程序调用Thread.sleep()、Thread.yield()方法暂停当前线程的执行，不会释放锁
+
+  案例：上厕所，太困了，在坑位上眯了一会
+
+  
+
+- 线程执行同步代码块时，其他线程调用了该线程的suspend0方法将该线程挂起，该线程不会释放锁。
+
+  提示：应尽量避免使用suspend()和resume0来控制线程，方法不再推荐使用
 
 
 
+> ##### 案例
+
+```java
+public class Homework02 {
+    public static void main(String[] args) {
+        T t = new T();
+        Thread thread1 = new Thread(t);
+        thread1.setName("t1");
+        Thread thread2 = new Thread(t);
+        thread2.setName("t2");
+        thread1.start();
+        thread2.start();
+    }
+}
+
+//编程取款的线程
+//1.因为这里涉及到多个线程共享资源，所以我们使用实现Runnable方式
+//2. 每次取出 1000
+class T implements  Runnable {
+    private int money = 10000;
+
+    @Override
+    public void run() {
+        while (true) {
+
+            //解读
+            //1. 这里使用 synchronized 实现了线程同步
+            //2. 当多个线程执行到这里时，就会去争夺 this对象锁
+            //3. 哪个线程争夺到(获取)this对象锁，就执行 synchronized 代码块, 执行完后，会释放this对象锁
+            //4. 争夺不到this对象锁，就blocked ，准备继续争夺
+            //5. this对象锁是非公平锁.
+
+            synchronized (this) {//
+                //判断余额是否够
+                if (money < 1000) {
+                    System.out.println("余额不足");
+                    break;
+                }
+
+                money -= 1000;
+                System.out.println(Thread.currentThread().getName() + " 取出了1000 当前余额=" + money);
+            }
+
+            //休眠1s
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+```
 
 
 
@@ -7384,6 +7902,23 @@ class T2 extends Thread {
 
 > 根据路径构建一个 File 对象
 
+```java
+//方式1 new File(String pathname)
+    @Test
+    public void create01() {
+        String filePath = "e:\\news1.txt";
+        File file = new File(filePath);
+
+        try {
+            file.createNewFile();
+            System.out.println("文件创建成功");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+```
+
 
 
 
@@ -7392,6 +7927,26 @@ class T2 extends Thread {
 
 > 根据父目录文件 + 子路径构建
 
+```java
+//方式2 new File(File parent,String child) //根据父目录文件+子路径构建
+    //e:\\news2.txt
+    @Test
+    public  void create02() {
+        File parentFile = new File("e:\\");
+        String fileName = "news2.txt";
+        //这里的file对象，在java程序中，只是一个对象
+        //只有执行了createNewFile 方法，才会真正的，在磁盘创建该文件
+        File file = new File(parentFile, fileName);
+
+        try {
+            file.createNewFile();
+            System.out.println("创建成功~");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+```
+
 
 
 
@@ -7399,6 +7954,24 @@ class T2 extends Thread {
 ##### new File(String parent,String child)
 
 >  根据父目录 + 子路径 构建
+
+```java
+//方式3 new File(String parent,String child) //根据父目录+子路径构建
+    @Test
+    public void create03() {
+        //String parentPath = "e:\\";
+        String parentPath = "e:\\";
+        String fileName = "news4.txt";
+        File file = new File(parentPath, fileName);
+
+        try {
+            file.createNewFile();
+            System.out.println("创建成功~");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+```
 
 
 

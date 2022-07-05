@@ -10500,7 +10500,7 @@ class Student {//类
 
 ```java
 /**
- * @author C
+ * @author Cs7eric
  * @version 1.0
  * 演示通过反射调用方法
  */
@@ -10569,9 +10569,779 @@ class Boss {//类
 
 
 
+## Java 8
+
+### Java 8 新特性
+
+---
+
+- 速度更快
+- 代码更少（增加了新的语法：Lambda表达式）
+- 引入强大的 `Stream APl`
+- 便于并行
+- 最大化减少空指针异常：`Optional`
+- `Nashorn` 引擎，允许在JVM上运行 `JS` 应用
+- 并行流就是把一个内容分成多个数据块，并用不同的线程分别处理每个数据块的流。相比较串行的流，并行的流可以很大程度上提高程序的执行效率。
+- Java 8中将并行进行了优化，我们可以很容易的对数据进行并行操作。`Stream API` 可以声明性地通过 `parallel()` 与 `sequential()` 在并行流与顺序流之间进行切换
 
 
 
+### Lambda 表达式
+
+---
+
+
+
+#### Lambda 表达式概述
+
+Lambda 是一个匿名函数，可以把 Lambda 表达式理解为是一段可以传递的代码（将代码像数据一样进行传递）。使用它可以写出更简洁、更灵活的代码。作为一种更紧凑的代码风格，使 Java 的语言表达能力得到了提升
+
+
+
+#### 使用 Lambda 表达式 前后的差异
+
+##### 调用 Runnable 接口
+
+```java
+@Test
+public void test1(){
+    //未使用Lambda表达式的写法
+    Runnable r1 = new Runnable() {
+        @Override
+        public void run() {
+            System.out.println("hello Lambda!");
+        }
+    };
+    r1.run();
+
+    System.out.println("========================");
+    //Lamdba表达式写法
+    Runnable r2 = () -> System.out.println("hi Lambda!");
+    r2.run();
+}
+```
+
+
+
+##### 使用Comparator接口
+
+```java
+@Test
+public void test2(){
+    //未使用Lambda表达式的写法
+    Comparator<Integer> com1 = new Comparator<Integer>() {
+        @Override
+        public int compare(Integer o1, Integer o2) {
+            return Integer.compare(o1,o2);
+        }
+    };
+
+    int compare1 = com1.compare(12, 32);
+    System.out.println(compare1);//-1
+    System.out.println("===================");
+
+    //Lambda表达式的写法
+    Comparator<Integer> com2 = (o1,o2) -> Integer.compare(o1,o2);
+
+    int compare2 = com2.compare(54, 21);
+    System.out.println(compare2);//1
+    System.out.println("===================");
+
+    //方法引用
+    Comparator<Integer> cpm3 = Integer::compareTo;
+    int compare3 = cpm3.compare(12, 12);
+    System.out.println(compare3);//0
+}
+```
+
+
+
+#### Lambda 表达式用法
+
+##### 基本语法
+
+1.举例： `(o1,o2) -> Integer.compare(o1,o2);`
+
+2.格式：
+
+- `->` ：lambda 操作符 或 箭头操作符
+- `->` 左边：lambda 形参列表 （其实就是接口中的抽象方法的形参列表）
+- `->` 右边：lambda 体（其实就是重写的抽象方法的方法体）
+
+
+
+##### Lambda 表达式使用
+
+###### 格式一：无参，有返回值
+
+```java
+Runnable r1 = () -> {System.out.println(“hello Lamdba!”)}
+```
+
+
+
+###### 格式二：Lambda 需要一个参数但是没有返回值
+
+```java
+Consumer<String> con = (String str) -> {System.out.println(str)}
+```
+
+
+
+###### 格式三：数据类型可省，因为可由编译器推断出，称为类型推断
+
+```java
+Consumer<String> con = (str) -> {System.out.println(str)}
+```
+
+
+
+###### 格式四：Lambda 若只需要一个参数，小括号可以省略
+
+```java
+Consumer<String> con = str -> {System.out.println(str)}
+```
+
+
+
+###### 格式五：Lambda 需要两个以上的参数，多条执行语句，并且可以有返回值
+
+```java
+Comparator<Integer>com = (o1,o1) -> {
+	Syste.out.println("Lamdba表达式使用");
+    return Integer.compare(o1,o2);
+}
+```
+
+
+
+###### 格式六：当Lambda 体只有一条语句时，return 和 大括号若有都可以省略
+
+```java
+Comparator<Integer>com = (o1,o1) ->	Integer.compare(o1,o2);
+```
+
+
+
+> ###### 代码示例
+
+```java
+public class LamdbaTest2 {
+    //语法格式一：无参，无返回值
+    @Test
+    public void test1() {
+        //未使用Lambda表达式
+        Runnable r1 = new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Hello Lamdba");
+            }
+        };
+        r1.run();
+        System.out.println("====================");
+        //使用Lambda表达式
+        Runnable r2 = () -> {
+            System.out.println("Hi Lamdba");
+        };
+        r2.run();
+    }
+
+    //语法格式二：Lambda 需要一个参数，但是没有返回值。
+    @Test
+    public void test2() {
+        //未使用Lambda表达式
+        Consumer<String> con = new Consumer<String>() {
+            @Override
+            public void accept(String s) {
+                System.out.println(s);
+            }
+        };
+        con.accept("你好啊Lambda！");
+        System.out.println("====================");
+        //使用Lambda表达式
+        Consumer<String> con1 = (String s) -> {
+            System.out.println(s);
+        };
+        con1.accept("我是Lambda");
+
+    }
+
+    //语法格式三：数据类型可以省略，因为可由编译器推断得出，称为“类型推断”
+    @Test
+    public void test3() {
+        //未使用Lambda表达式
+        Consumer<String> con = new Consumer<String>() {
+            @Override
+            public void accept(String s) {
+                System.out.println(s);
+            }
+        };
+        con.accept("你好啊Lambda！");
+        System.out.println("====================");
+        //使用Lambda表达式
+        Consumer<String> con1 = (s) -> {
+            System.out.println(s);
+        };
+        con1.accept("我是Lambda");
+    }
+
+    @Test
+    public void test(){
+        ArrayList<String> list = new ArrayList<>();//类型推断，用左边推断右边
+        int[] arr = {1,2,3,4};//类型推断，用左边推断右边
+    }
+
+    //语法格式四：Lambda 若只需要一个参数时，参数的小括号可以省略
+    @Test
+    public void test4() {
+        //未使用Lambda表达式
+        Consumer<String> con = new Consumer<String>() {
+            @Override
+            public void accept(String s) {
+                System.out.println(s);
+            }
+        };
+        con.accept("你好啊Lambda！");
+        System.out.println("====================");
+        //使用Lambda表达式
+        Consumer<String> con1 = s -> {
+            System.out.println(s);
+        };
+        con1.accept("我是Lambda");
+    }
+
+    //语法格式五：Lambda 需要两个或以上的参数，多条执行语句，并且可以有返回值
+    @Test
+    public void test5() {
+        //未使用Lambda表达式
+        Comparator<Integer> com1 = new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                System.out.println(o1);
+                System.out.println(o2);
+                return Integer.compare(o1, o2);
+            }
+        };
+        System.out.println(com1.compare(23, 45));
+        System.out.println("====================");
+        //使用Lambda表达式
+        Comparator<Integer> com2 = (o1, o2) -> {
+            System.out.println(o1);
+            System.out.println(o2);
+            return o1.compareTo(o2);
+        };
+        System.out.println(com2.compare(23, 12));
+    }
+
+    //语法格式六：当 Lambda 体只有一条语句时，return 与大括号若有，都可以省略
+    @Test
+    public void test6() {
+        //未使用Lambda表达式
+        Comparator<Integer> com1 = new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return Integer.compare(o1, o2);
+            }
+        };
+        System.out.println(com1.compare(23, 45));
+        System.out.println("====================");
+        //使用Lambda表达式
+        Comparator<Integer> com2 = (o1, o2) -> o1.compareTo(o2);
+
+        System.out.println(com2.compare(23, 12));
+    }
+    @Test
+    public void test7(){
+        //未使用Lambda表达式
+        Consumer<String> con1 = new Consumer<String>() {
+            @Override
+            public void accept(String s) {
+                System.out.println(s);
+            }
+        };
+        con1.accept("hi!");
+        System.out.println("====================");
+        //使用Lambda表达式
+        Consumer<String> con2 = s -> System.out.println(s);
+        con2.accept("hello");
+    }
+
+}
+```
+
+
+
+##### Lambda 表达式使用总结
+
+- `->` 左边：lambda 形参列表的参数类型可以省略(类型推断)；如果 lambda 形参列表只有一个参数，其一对 `()` 也可以省略
+- `->` 右边：lambda 体应该使用一对 `{}` 包裹；如果 lambda 体只有一条执行语句（可能是 `return` 语句），省略这一对 `{}` 和 `return` 关键字
+
+
+
+#### Lambda 表达式总结
+
+- Lambda 表达式的本质：作为函数式接口的实例
+- 如果一个接口中，只声明了一个抽象方法，则此接口就称为函数式接口。我们可以在一个接口上使用 `@FunctionalInterface` 注解，这样做可以检查它是否是一个函数式接口。
+- 因此以前用匿名实现类表示的现在都可以用 Lambda 表达式来写
+
+
+
+
+
+### 函数式接口
+
+
+
+#### 函数式接口概述
+
+---
+
+- 只包含  一个抽象方法  的接口，称为函数式接口。
+- 可以通过 Lambda 表达式来创建该接口的对象。（若 Lambda 表达式抛出一个受检异常（即：非运行时异常），那么该异常需要在目标接口的抽象方法上进行声明）。
+- 可以在一个接口上使用 `@FunctionalInterface` 注解，这样做可以检查它是否是一个函数式接口。同时 `javadoc` 也会包含一条声明，说明这个接口是一个函数式接口。
+- Lambda 表达式的本质：作为函数式接口的实例
+- 在 `java.util.function` 包下定义了Java 8的丰富的函数式接口
+
+
+
+#### 自定义函数接口
+
+> ###### 代码示例
+
+```java
+@FunctionalInterface
+public interface MyInterface {
+    void method1();
+}
+```
+
+
+
+
+
+#### Java 内置函数式接口
+
+
+
+##### 四大核心函数式接口
+
+| 函数式接口               | 参数类型 | 返回类型 | 用途                                                         |
+| ------------------------ | :------: | -------- | ------------------------------------------------------------ |
+| Consumer<T> 消费型接口   |    T     | void     | 对类型为T的对象应用操作，包含方法：void accept(T t)          |
+| Supplier<T>  供给型接口  |    无    | T        | 返回类型为 T的对象，包含方法 ： T get()                      |
+| Function<T,R> 函数型接口 |    T     | R        | 对类型为 T 的对象应用操作，并返回结果。结果是 R 类型的对象，包含方法  R apply(T t) |
+| Predicate<T>  断定型接口 |    T     | boolean  | 确定类型为 T 的对象是否满足某约束，并返回 boolean 值。包含方法 ：boolean test(T t) |
+
+
+
+> ###### 代码示例
+
+```java
+public class LambdaTest3 {
+    //    消费型接口 Consumer<T>     void accept(T t)
+    @Test
+    public void test1() {
+        //未使用Lambda表达式
+        Learn("java", new Consumer<String>() {
+            @Override
+            public void accept(String s) {
+                System.out.println("学习什么？ " + s);
+            }
+        });
+        System.out.println("====================");
+        //使用Lambda表达
+        Learn("html", s -> System.out.println("学习什么？ " + s));
+
+    }
+
+    private void Learn(String s, Consumer<String> stringConsumer) {
+        stringConsumer.accept(s);
+    }
+
+    //    供给型接口 Supplier<T>     T get()
+    @Test
+    public void test2() {
+        //未使用Lambdabiaodas
+        Supplier<String> sp = new Supplier<String>() {
+            @Override
+            public String get() {
+                return new String("我能提供东西");
+            }
+        };
+        System.out.println(sp.get());
+        System.out.println("====================");
+        //使用Lambda表达
+        Supplier<String> sp1 = () -> new String("我能通过lambda提供东西");
+        System.out.println(sp1.get());
+    }
+
+    //函数型接口 Function<T,R>   R apply(T t)
+    @Test
+    public void test3() {
+        //使用Lambda表达式
+        Employee employee = new Employee(1001, "Tom", 45, 10000);
+
+        Function<Employee, String> func1 =e->e.getName();
+        System.out.println(func1.apply(employee));
+        System.out.println("====================");
+
+        //使用方法引用
+        Function<Employee,String>func2 = Employee::getName;
+        System.out.println(func2.apply(employee));
+
+    }
+
+    //断定型接口 Predicate<T>    boolean test(T t)
+    @Test
+    public void test4() {
+        //使用匿名内部类
+        Function<Double, Long> func = new Function<Double, Long>() {
+            @Override
+            public Long apply(Double aDouble) {
+                return Math.round(aDouble);
+            }
+        };
+        System.out.println(func.apply(10.5));
+        System.out.println("====================");
+
+        //使用Lambda表达式
+        Function<Double, Long> func1 = d -> Math.round(d);
+        System.out.println(func1.apply(12.3));
+        System.out.println("====================");
+
+        //使用方法引用
+        Function<Double,Long>func2 = Math::round;
+        System.out.println(func2.apply(12.6));
+
+    }
+}
+
+作者：RealPluto
+链接：https://juejin.cn/post/6962035387787116551
+来源：稀土掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
+
+
+
+#### 其他函数接口
+
+| 函数式接口                                                   | 参数类型                   | 返回类型                  | 用途                                                         |
+| ------------------------------------------------------------ | -------------------------- | ------------------------- | ------------------------------------------------------------ |
+| BiFunction<T,U,R>                                            | T,U                        | R                         | 对参数类型为 T,U参数应用操作，返回 R 类型的结果。包含方法：R appply(T t,U u) |
+| UnaryOperator<T>  (Function 子接口)                          | T                          | T                         | 对参数类型  为T的对象进行一元运算，并返回 T 类型的结果。包含方法 为 ： T apply(T t) |
+| BinaryOperator<T>  (BiFuction 子接口)                        | T,T                        | T                         | 对类型为 T 的对象进行 二元运算，并返回 T 类型的结果。包含方法：T apply(T t1,T t2) |
+| BiConsumer<T,U>                                              | T,U                        | void                      | 对类型为 T,U 参数应用操作  包含方法： void accept(T t,U u)   |
+| BiPredicate<T,U>                                             | T,U                        | boolean                   | 包含方法 ： boolean test(T t, u)                             |
+| IntFuctoin<R>  <br />LongFuction<R>  DoubleFuncton<R>        | int <br />long<br />double | R                         | 参数分别为 int，long，double                                 |
+| ToIntFuctoin<R>  <br />ToLongFuction<R>  <br />ToDoubleFuncton<R> | T                          | int<br />long<br />double | 分别计算int，long，double 的值                               |
+
+
+
+#### 使用总结
+
+##### 何时使用 Lambda 表达式
+
+当需要对一个函数式接口实例化的时候，可以使用 Lambda 表达式
+
+
+
+##### 何时使用给定的函数式接口
+
+如果我们开发中，需要定义个函数式接口，首先看看在已有的 jdk 提供的函数式接口是否提供了能满足要求的函数式接口。如果有直接调用即可，不需要自己再自定义了
+
+
+
+
+
+### 方法的引用
+
+---
+
+#### 方法引用的概述
+
+方法引用可以看做是 Lambda 表达式深层次的表达。换句话说，方法引用就是 Lambda 表达式，也就是函数式接口的一个实例，通过方法的名字来指向一个方法。
+
+
+
+#### 使用场景
+
+当要传递给 Lambda 体的操作，已经实现的方法了，可以使用方法引用！
+
+
+
+#### 使用格式
+
+类(或对象) :: 方法名
+
+
+
+#### 使用情况
+
+- 情况1 对象 `::` 非静态方法
+- 情况2 类 `::` 静态方法
+- 情况3 类 `::` 非静态方法
+
+
+
+#### 使用要求
+
+- 要求接口中的抽象方法的形参列表和返回值类型与方法引用的方法的形参列表和返回值类型相同！（针对于情况1和情况2）
+- 当函数式接口方法的第一个参数是需要引用方法的调用者，并且第二个参数是需要引用方法的参数(或无参数)时：`ClassName::methodName`（针对于情况3）
+
+
+
+#### 使用建议
+
+如果给函数式接口提供实例，恰好满足方法引用的使用情境，就可以考虑使用方法引用给函数式接口提供实例。如果不熟悉方法引用，那么还可以使用 lambda 表达式
+
+
+
+> #### 代码示例
+
+```java
+public class MethodRefTest {
+
+    // 情况一：对象 :: 实例方法
+    //Consumer中的void accept(T t)
+    //PrintStream中的void println(T t)
+    @Test
+    public void test1() {
+        //使用Lambda表达
+        Consumer<String> con1 = str -> System.out.println(str);
+        con1.accept("中国");
+        System.out.println("====================");
+
+        //使用方法引用
+        PrintStream ps = System.out;
+        Consumer con2 = ps::println;
+        con2.accept("China");
+
+    }
+
+    //Supplier中的T get()
+    //Employee中的String getName()
+    @Test
+    public void test2() {
+        //使用Lambda表达
+        Employee emp = new Employee(1001, "Bruce", 34, 600);
+        Supplier<String> sup1 = () -> emp.getName();
+        System.out.println(sup1.get());
+        System.out.println("====================");
+
+        //使用方法引用
+        Supplier sup2 = emp::getName;
+        System.out.println(sup2.get());
+
+
+    }
+
+    // 情况二：类 :: 静态方法
+    //Comparator中的int compare(T t1,T t2)
+    //Integer中的int compare(T t1,T t2)
+    @Test
+    public void test3() {
+        //使用Lambda表达
+        Comparator<Integer> com1 = (t1, t2) -> Integer.compare(t1, t2);
+        System.out.println(com1.compare(32, 45));
+        System.out.println("====================");
+
+        //使用方法引用
+        Comparator<Integer> com2 = Integer::compareTo;
+        System.out.println(com2.compare(43, 34));
+    }
+
+    //Function中的R apply(T t)
+    //Math中的Long round(Double d)
+    @Test
+    public void test4() {
+        //使用匿名内部类
+        Function<Double, Long> func = new Function<Double, Long>() {
+            @Override
+            public Long apply(Double aDouble) {
+                return Math.round(aDouble);
+            }
+        };
+        System.out.println(func.apply(10.5));
+        System.out.println("====================");
+
+        //使用Lambda表达式
+        Function<Double, Long> func1 = d -> Math.round(d);
+        System.out.println(func1.apply(12.3));
+        System.out.println("====================");
+
+        //使用方法引用
+        Function<Double, Long> func2 = Math::round;
+        System.out.println(func2.apply(12.6));
+
+
+    }
+
+    // 情况三：类 :: 实例方法
+    // Comparator中的int comapre(T t1,T t2)
+    // String中的int t1.compareTo(t2)
+    @Test
+    public void test5() {
+        //使用Lambda表达式
+        Comparator<String> com1 = (s1, s2) -> s1.compareTo(s2);
+        System.out.println(com1.compare("abd", "aba"));
+        System.out.println("====================");
+
+        //使用方法引用
+        Comparator<String> com2 = String::compareTo;
+        System.out.println(com2.compare("abd", "abc"));
+    }
+
+    //BiPredicate中的boolean test(T t1, T t2);
+    //String中的boolean t1.equals(t2)
+    @Test
+    public void test6() {
+        //使用Lambda表达式
+        BiPredicate<String, String> pre1 = (s1, s2) -> s1.equals(s2);
+        System.out.println(pre1.test("abc", "abc"));
+        System.out.println("====================");
+
+        //使用方法引用
+        BiPredicate<String, String> pre2 = String::equals;
+        System.out.println(pre2.test("abc", "abd"));
+
+    }
+
+    // Function中的R apply(T t)
+    // Employee中的String getName();
+    @Test
+    public void test7() {
+        //使用Lambda表达式
+        Employee employee = new Employee(1001, "Tom", 45, 10000);
+
+        Function<Employee, String> func1 =e->e.getName();
+        System.out.println(func1.apply(employee));
+        System.out.println("====================");
+
+        //使用方法引用
+        Function<Employee,String>func2 = Employee::getName;
+        System.out.println(func2.apply(employee));
+    }
+}
+
+作者：RealPluto
+链接：https://juejin.cn/post/6962035387787116551
+来源：稀土掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
+
+
+
+### 构造器和数组的引用
+
+---
+
+#### 使用格式
+
+方法引用：类名 `::new`
+
+数组引用：数组类型 `[] :: new`
+
+
+
+#### 使用要求
+
+##### 构造器引用
+
+和方法引用类似，函数式接口的抽象方法的形参列表和构造器的形参列表一致。抽象方法的返回值类型即为构造器所属的类的类型
+
+
+
+##### 数组引用
+
+可以把数组看做是一个特殊的类，则写法与构造器引用一致。
+
+
+
+> ###### 构造器引用代码示例
+
+```java
+//构造器引用
+//Supplier中的T get()
+@Test
+public void test1() {
+    //使用匿名内部类
+    Supplier<Employee> sup = new Supplier<Employee>() {
+        @Override
+        public Employee get() {
+            return new Employee();
+        }
+    };
+    System.out.println(sup.get());
+    //使用Lambda表达式
+    System.out.println("====================");
+    Supplier<Employee> sup1 = () -> new Employee(1001, "Tom", 43, 13333);
+    System.out.println(sup1.get());
+
+    //使用方法引用
+    Supplier<Employee> sup2 = Employee::new;
+    System.out.println(sup2.get());
+
+}
+
+//Function中的R apply(T t)
+@Test
+public void test2() {
+    //使用Lambda表达式
+    Function<Integer, Employee> func1 = id -> new Employee(id);
+    Employee employee = func1.apply(1001);
+    System.out.println(employee);
+    System.out.println("====================");
+
+    //使用方法引用
+    Function<Integer, Employee> func2 = Employee::new;
+    Employee employee1 = func2.apply(1002);
+    System.out.println(employee1);
+
+}
+
+//BiFunction中的R apply(T t,U u)
+@Test
+public void test3() {
+    //使用Lambda表达式
+    BiFunction<Integer, String, Employee> func1 = (id, name) -> new Employee(id, name);
+    System.out.println(func1.apply(1001, "Tom"));
+    System.out.println("====================");
+
+    //使用方法引用
+    BiFunction<Integer, String, Employee> func2 = Employee::new;
+    System.out.println(func2.apply(1002, "Jarry"));
+}
+```
+
+
+
+> ###### 数组引用代码示例
+
+```java
+//Function中的R apply(T t)
+@Test
+public void test4() {
+    Function<Integer, String[]> func1 = length -> new String[length];
+    String[] arr1 = func1.apply(5);
+    System.out.println(Arrays.toString(arr1));
+
+    System.out.println("====================");
+
+    //使用方法引用
+    Function<Integer,String[]>func2=String[]::new;
+    String[] arr2 = func2.apply(10);
+    System.out.println(Arrays.toString(arr2));
+}
+```
+
+
+
+
+
+### Stream API
+
+---
 
 
 

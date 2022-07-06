@@ -11343,31 +11343,288 @@ public void test4() {
 
 ---
 
+#### Stream API 概述
+
+- `Stream` 关注的是对数据的运算，与 `CPU` 打交道;集合关注的是数据的存储，与内存打交道;
+- Java 8 提供了一套 `api` ，使用这套 `api` 可以对内存中的数据进行过滤、排序、映射、归约等操作。类似于 `sql` 对数据库中表的相关操作。
+- `Stream` 是数据渠道，用于操作数据源（集合、数组等）所生成的元素序列。**“集合讲的是数据， Stream讲的是计算！”**
 
 
 
+##### **使用注意点**
+
+-  `Stream` 自己不会存储元素。
+-  `Stream` 不会改变源对象。相反，他们会返回一个持有结果的新 `Stream`。
+- `Stream` 操作是延迟执行的。这意味着他们会等到需要结果的时候才执行。
 
 
 
+#### Stream 使用流程
+
+- Stream 的实例化
+-  一系列的中间操作（过滤、映射、...)
+-  终止操作
+
+##### 使用注意点
+
+- 一个中间操作链，对数据源的数据进行处理
+- 一旦执行终止操作，就执行中间操作链，并产生结果。之后，不会再被使用
 
 
 
+#### 使用方法 
+
+##### 步骤一 创建Stream 
+
+###### 创建方式一：通过集合
+
+Java 8的 `Collection` 接口被扩展，提供了两个获取流的方法：
+
+- `default Stream\<E> stream()` : 返回一个顺序流
+- `default Stream\<E> parallelStream()` : 返回一个并行流
 
 
 
+###### 创建方式二：通过数组
+
+Java 8中的 `Arrays` 的静态方法 `stream()` 可以获取数组流
+
+- 调用 `Arrays` 类的 `static\<T> Stream\<T> stream(T[] array)`: 返回一个流
+- 重载形式，能够处理对应基本类型的数组：
+  - `public static IntStream stream（int[] array）`
+  - `public static LongStream stream（long[] array）`
+  - `public static DoubleStream stream（double[] array）`
 
 
 
+###### 创建方式三：通过 Stream 的  of 方法
+
+可以调用Stream类静态方法of()，通过显示值创建一个流。可以用于接收任意数量的参数
+
+- `public static \<T>Stream\<T> of(T...values)`:返回一个流
 
 
 
+###### 创建方式四：创建无限流
+
+迭代: `public static\<T> Stream\<T> iterate(final T seed, final UnaryOperator\<T> f)`
+
+生成: `public static\<T> Stream\<T> generate(Supplier\<T> s)`
 
 
 
+###### 代码示例
+
+```java
+public class StreamAPITest1 {
+    //创建 Stream方式一：通过集合
+    @Test
+    public void test1() {
+        List<Employee> employees = EmployeeData.getEmployees();
+        //efault Stream<E> stream() : 返回一个顺序流
+        Stream<Employee> stream = employees.stream();
+
+        //default Stream<E> parallelStream() : 返回一个并行流
+        Stream<Employee> employeeStream = employees.parallelStream();
+    }
+
+    //创建 Stream方式二：通过数组
+    @Test
+    public void test2() {
+        int[] arrs = {1, 2, 3, 6, 2};
+        //调用Arrays类的static <T> Stream<T> stream(T[] array): 返回一个流
+        IntStream stream = Arrays.stream(arrs);
+
+        Employee e1 = new Employee(1001, "Tom");
+        Employee e2 = new Employee(1002, "Jerry");
+        Employee[] employees = {e1, e2};
+        Stream<Employee> stream1 = Arrays.stream(employees);
+    }
+
+    //创建 Stream方式三：通过Stream的of()
+    @Test
+    public void test3() {
+        Stream<Integer> integerStream = Stream.of(12, 34, 45, 65, 76);
+    }
+
+    //创建 Stream方式四：创建无限流
+    @Test
+    public void test4() {
+
+        //迭代
+        //public static<T> Stream<T> iterate(final T seed, final UnaryOperator<T> f)
+        //遍历前10个偶数
+        Stream.iterate(0, t -> t + 2).limit(10).forEach(System.out::println);
+
+        //生成
+        //public static<T> Stream<T> generate(Supplier<T> s)
+        Stream.generate(Math::random).limit(10).forEach(System.out::println);
+    }
+}
+```
 
 
 
+##### 步骤二：中间操作
 
+多个中间操作可以连接起来形成一个流水线，除非流水线上触发终止操作，否则中间操作不会执行任何的处理！而在终止操作时一次性全部处理，称为**惰性求值**。
+
+
+
+###### 筛选与切片
+
+|        方法         |                             描述                             |
+| :-----------------: | :----------------------------------------------------------: |
+| filter(predicate p) |               接受 Lambda，从流中排除某些元素                |
+|     distinct()      | 筛选，通过流所生成元素的 hashcode() 和 equals() 去除重复元素 |
+| limit(long maxSize) |                截断流，使其元素不超过给定数量                |
+|    skip(long n)     | 跳过元素，返回一个扔掉了前 n  个元素的流。若流中元素b不足 n  个，则返回一个空流，与limit() 互补 |
+
+**代码示例**
+
+```java
+//1-筛选与切片,注意执行终止操作后，Stream流就被关闭了，使用时需要再次创建Stream流
+@Test
+public void test1(){
+    List<Employee> employees = EmployeeData.getEmployees();
+    //filter(Predicate p)——接收 Lambda ， 从流中排除某些元素。
+    Stream<Employee> employeeStream = employees.stream();
+    //练习：查询员工表中薪资大于7000的员工信息
+    employeeStream.filter(e -> e.getSalary() > 7000).forEach(System.out::println);
+
+    //limit(n)——截断流，使其元素不超过给定数量。
+    employeeStream.limit(3).forEach(System.out::println);
+    System.out.println();
+
+    //skip(n) —— 跳过元素，返回一个扔掉了前 n 个元素的流。若流中元素不足 n 个，则返回一个空流。与 limit(n) 互补
+    employeeStream.skip(3).forEach(System.out::println);
+    //distinct()——筛选，通过流所生成元素的 hashCode() 和 equals() 去除重复元素
+    employees.add(new Employee(1010,"刘",56,8000));
+    employees.add(new Employee(1010,"刘",56,8000));
+    employees.add(new Employee(1010,"刘",56,8000));
+    employees.add(new Employee(1010,"刘",56,8000));
+
+    employeeStream.distinct().forEach(System.out::println);
+}
+```
+
+
+
+###### 映射
+
+|               方法               |                             描述                             |
+| :------------------------------: | :----------------------------------------------------------: |
+|          map(Functon f)          | 接受一个函数作为参数，该函数会被应用到每个元素上，并将其映射成一个新的元素 |
+| mapToDoubleQ(ToDoubleFunction f) | 接受一个函数作为参数，该函数会被应用到每个元素上，并将其映射成一个新的DoubleStream |
+|    mapToInt(ToIntFunction f)     | 接受一个函数作为参数，该函数会被应用到每个元素上，并将其映射成一个新的 IntStream |
+|   mapToLong(ToLongFunction f)    | 接受一个函数作为参数，该函数会被应用到每个元素上，并将其映射成一个新的 LongStream |
+|       flatMap(Function f)        | 接受一个函数作为参数，将流中的每个值都换成另一个流，然后把所有流连接成一个流 |
+
+**代码示例**
+
+```java
+//2-映射
+@Test
+public void test2(){
+    List<String> list = Arrays.asList("aa", "bb", "cc", "dd");
+    //map(Function f)——接收一个函数作为参数，将元素转换成其他形式或提取信息，该函数会被应用到每个元素上，并将其映射成一个新的元素。
+    list.stream().map(str -> str.toUpperCase()).forEach(System.out::println);
+
+    //练习1：获取员工姓名长度大于3的员工的姓名。
+    List<Employee> employees = EmployeeData.getEmployees();
+    Stream<String> nameStream = employees.stream().map(Employee::getName);
+    nameStream.filter(name -> name.length() >3).forEach(System.out::println);
+    System.out.println();
+    //练习2：使用map()中间操作实现flatMap()中间操作方法
+    Stream<Stream<Character>> streamStream = list.stream().map(StreamAPITest2::fromStringToStream);
+    streamStream.forEach(s ->{
+        s.forEach(System.out::println);
+    });
+    System.out.println();
+    //flatMap(Function f)——接收一个函数作为参数，将流中的每个值都换成另一个流，然后把所有流连接成一个流。
+    Stream<Character> characterStream = list.stream().flatMap(StreamAPITest2::fromStringToStream);
+    characterStream.forEach(System.out::println);
+
+}
+//将字符串中的多个字符构成的集合转换为对应的Stream的实例
+public static Stream<Character>fromStringToStream(String str){
+    ArrayList<Character> list = new ArrayList<>();
+    for (Character c :
+         str.toCharArray()) {
+        list.add(c);
+    }
+    return list.stream();
+}
+//map()和flatMap()方法类似于List中的add()和addAll()方法
+@Test
+public void test(){
+    ArrayList<Object> list1 = new ArrayList<>();
+    list1.add(1);
+    list1.add(2);
+    list1.add(3);
+    list1.add(4);
+
+    ArrayList<Object> list2 = new ArrayList<>();
+    list2.add(5);
+    list2.add(6);
+    list2.add(7);
+    list2.add(8);
+
+    list1.add(list2);
+    System.out.println(list1);//[1, 2, 3, 4, [5, 6, 7, 8]]
+    list1.addAll(list2);
+    System.out.println(list1);//[1, 2, 3, 4, [5, 6, 7, 8], 5, 6, 7, 8]
+
+}
+```
+
+
+
+###### 排序
+
+|          方法          |                描述                |
+| :--------------------: | :--------------------------------: |
+|        sorted()        |  产生一个新流，其中按自然顺序排序  |
+| sorted(Comparator com) | 产生一个新流，其中按比较器顺序排序 |
+
+**代码示例**
+
+```java
+//3-排序
+@Test
+public void test3(){
+    //sorted()——自然排序
+    List<Integer> list = Arrays.asList(12, 34, 54, 65, 32);
+    list.stream().sorted().forEach(System.out::println);
+
+    //抛异常，原因:Employee没有实现Comparable接口
+    List<Employee> employees = EmployeeData.getEmployees();
+    employees.stream().sorted().forEach(System.out::println);
+
+    //sorted(Comparator com)——定制排序
+    List<Employee> employees1 = EmployeeData.getEmployees();
+    employees1.stream().sorted((e1,e2)->{
+        int ageValue = Integer.compare(e1.getAge(), e2.getAge());
+        if (ageValue != 0){
+            return ageValue;
+        }else {
+            return -Double.compare(e1.getSalary(),e2.getSalary());
+        }
+
+    }).forEach(System.out::println);
+}
+```
+
+
+
+#### 步骤三：终止操作
+
+- 终端操作会从流的流水线生成结果。其结果可以是任何不是流的值，例如：`List`、 `Integer`，甚至是 `void`
+- 流进行了终止操作后，不能再次使用。
+
+
+
+##### 匹配和查找
 
 
 
